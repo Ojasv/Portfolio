@@ -59,7 +59,7 @@ Never edit the markup between `<!-- include:header -->` / `<!-- /include:header 
 | `accent-100…900` (500 = #968ae0) | Lines, links (`text-accent-300`), focus rings. Never a large fill. |
 | `font-serif` (Playfair Display), `font-sans` (Inter) | Display vs body |
 | `gutter`, `wrap` | Page side padding, max content width |
-| `eyebrow`, `nav-link`, `btn`, `rule`, `.prose-site` | Small caps label, nav link, outlined button, fading divider, long-form text |
+| `eyebrow`, `nav-link`, `btn`, `rule`, `.prose-site`, `.slant` | Small caps label, nav link, outlined button, fading divider, long-form text, project/journal title that slants to italic when its `group` card is hovered (put it on an inner `<span class="slant inline-block">` if the link uses a full-card `after:` overlay) |
 
 ### Up to 4K
 
