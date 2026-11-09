@@ -73,7 +73,7 @@ function journalLatest() {
   });
   return posts.map(({ href, title, date }) => {
     const inner = `<span class="eyebrow text-mist-500 md:w-40 md:shrink-0">${date}</span>
-          <span class="font-serif text-2xl leading-snug md:text-3xl">${title}</span>`;
+          <span class="${href ? 'slant ' : ''}font-serif text-2xl leading-snug md:text-3xl">${title}</span>`;
     return href
       ? `<li><a href="${href}" class="group flex flex-col gap-2 py-6 transition-colors hover:text-accent-300 md:flex-row md:items-baseline md:gap-8">
           ${inner}

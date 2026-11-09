@@ -79,6 +79,8 @@
   &[aria-current="page"] { @apply text-paper underline decoration-accent-500 underline-offset-8; }
   @media (prefers-reduced-motion: reduce) { transition: color 200ms; &:hover { transform: none; font-style: italic; } }
 }
+/* Titles that ease into an italic slant when their card/link (a .group ancestor) or the title itself is hovered.
+   Used on project and journal titles. */
 /* Outlined button: accent line, never a solid fill. */
 @utility btn {
   @apply inline-flex items-center gap-2 rounded-lg border border-accent-500 px-5 py-2.5 text-sm font-medium text-accent-200
@@ -129,4 +131,18 @@
   .back-btn:hover::before { transform: scale(1); opacity: 1; }
   .back-btn:active::before { background: var(--color-accent-800); }
   @media (prefers-reduced-motion: reduce) { .back-btn::before { transition: opacity 200ms; transform: scale(1); } }
+}
+
+/* Titles that ease into an italic slant when their card/link (a .group ancestor) or the title itself is hovered.
+   Add class="slant" to project and journal titles. */
+@layer components {
+  .slant {
+    transform-origin: bottom left;
+    transition: transform 600ms var(--ease-tide), color 500ms var(--ease-tide);
+  }
+  .group:hover .slant, .slant:hover { transform: skewX(-8deg); }
+  @media (prefers-reduced-motion: reduce) {
+    .slant { transition: color 200ms; }
+    .group:hover .slant, .slant:hover { transform: none; font-style: italic; }
+  }
 }
