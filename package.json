@@ -1,0 +1,19 @@
+{
+  "name": "ojasvapurv-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio site for ojasvapurv.com (HTML + Tailwind CSS, GitHub Pages)",
+  "scripts": {
+    "sync": "node scripts/sync-partials.mjs",
+    "css": "tailwindcss -i assets/css/input.css -o assets/css/site.css --minify",
+    "build": "npm run sync && npm run css",
+    "dev": "npm run sync && tailwindcss -i assets/css/input.css -o assets/css/site.css --watch",
+    "serve": "npx --yes serve -l 8080 ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "tailwindcss": "^4.3.5"
+  },
+  "private": true
+}

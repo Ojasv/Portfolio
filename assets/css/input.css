@@ -1,0 +1,112 @@
+/* Tailwind source. Edit this, then run `npm run build` (or `npm run dev`) to regenerate assets/css/site.css.
+   Every page links only /assets/css/site.css. Never hand-edit site.css. */
+@import "tailwindcss";
+
+/* Scan all HTML + JS in the repo for class names (node_modules is ignored automatically). */
+@source "../../**/*.html";
+@source "../js/**/*.js";
+
+@theme {
+  /* Colour tokens (Nocturne palette) → bg-ink, text-paper, text-mist-400, border-accent-500 … */
+  --color-ink: #161826;        /* page ground */
+  --color-surface: #232532;    /* cards, raised panels */
+  --color-paper: #e9e9ed;      /* primary text */
+
+  --color-mist-100: #f3f5fe;
+  --color-mist-200: #e4e7f5;
+  --color-mist-300: #cfd3e5;
+  --color-mist-400: #b2b6ca;
+  --color-mist-500: #9397ab;
+  --color-mist-600: #75798c;
+  --color-mist-700: #595d6c;
+  --color-mist-800: #3f424d;
+  --color-mist-900: #292b31;
+
+  --color-accent-100: #f5f4ff;
+  --color-accent-200: #e7e5fe;
+  --color-accent-300: #d2cefd;
+  --color-accent-400: #b5abfc;
+  --color-accent-500: #968ae0;
+  --color-accent-600: #796cbf;
+  --color-accent-700: #5d5294;
+  --color-accent-800: #423a6a;
+  --color-accent-900: #2b2741;
+
+  --color-sea: #0a6f87;        /* wave tint, sampled from the hero photo */
+
+  /* Type → font-serif (display), font-sans (body) */
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Extra breakpoints for large and 4K screens (defaults: sm 40rem, md 48rem, lg 64rem, xl 80rem, 2xl 96rem) */
+  --breakpoint-3xl: 120rem;    /* 1920px */
+  --breakpoint-4xl: 160rem;    /* 2560px (QHD) */
+  --breakpoint-5xl: 240rem;    /* 3840px (4K UHD) */
+
+  --ease-tide: cubic-bezier(0.45, 0, 0.25, 1);
+}
+
+@layer base {
+  /* Fluid root size: everything in rem (Tailwind spacing, type, max-widths) scales up on QHD/4K screens,
+     so layouts keep their proportions instead of floating in empty space. */
+  html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  @media (min-width: 120rem) { html { font-size: 112.5%; } }  /* 1920px → 18px */
+  @media (min-width: 160rem) { html { font-size: 150%; } }    /* 2560px → 24px */
+  @media (min-width: 240rem) { html { font-size: 225%; } }    /* 3840px → 36px (2× the 1920px size) */
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    @apply bg-ink text-paper font-sans antialiased;
+  }
+  ::selection { background: var(--color-accent-800); color: var(--color-accent-100); }
+  :focus-visible { outline: 2px solid var(--color-accent-500); outline-offset: 2px; }
+}
+
+/* Custom utilities: usable in HTML like any Tailwind class, and with variants (md:gutter, hover:… etc.). */
+/* Page gutter shared by header, sections and footer. Use on any full-width block. */
+@utility gutter { @apply px-6 md:px-12; }
+/* Max content width. Scales with the root font size, so it is ~1600px at 1080p and ~3600px at 4K. */
+@utility wrap { @apply mx-auto w-full max-w-[100rem]; }
+@utility eyebrow { @apply text-xs font-medium uppercase tracking-[0.2em]; }
+@utility nav-link {
+  @apply text-xs font-medium uppercase tracking-[0.2em] text-paper/80 transition-colors hover:text-paper;
+  &[aria-current="page"] { @apply text-paper underline decoration-accent-500 underline-offset-8; }
+}
+/* Outlined button: accent line, never a solid fill. */
+@utility btn {
+  @apply inline-flex items-center gap-2 rounded-lg border border-accent-500 px-5 py-2.5 text-sm font-medium text-accent-200
+         transition-colors hover:bg-accent-900 active:bg-accent-800;
+}
+/* A 1px rule that fades out at both ends. */
+@utility rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-paper) 16%, transparent) 3rem,
+    color-mix(in srgb, var(--color-paper) 16%, transparent) calc(100% - 3rem), transparent);
+}
+
+@layer components {
+  /* Long-form text (blog posts, project write-ups). */
+  .prose-site { @apply max-w-[42rem] text-base leading-relaxed text-mist-300 md:text-lg; }
+  .prose-site h2 { @apply mt-12 mb-4 font-serif text-3xl text-paper; }
+  .prose-site h3 { @apply mt-8 mb-3 text-lg font-medium text-paper; }
+  .prose-site p { @apply mb-5; }
+  .prose-site a { @apply text-accent-300 underline underline-offset-4 hover:text-accent-200; }
+  .prose-site ul { @apply mb-5 list-disc pl-5; }
+  .prose-site img, .prose-site figure { @apply my-8 rounded-lg; }
+}
+
+/* Homepage hero (see index.html). --wave-p (0 → 1) is set on #hero by wave-scroll.js. */
+@layer components {
+  .hero-title {
+    transform: translateY(calc(var(--wave-p, 0) * -10vh));
+    opacity: calc(1 - var(--wave-p, 0) * 1.8);
+  }
+  /* Touch screens have no pointer to hover with, so show the photo in colour. */
+  @media (hover: none) {
+    .hero-media { filter: none !important; }
+  }
+}
