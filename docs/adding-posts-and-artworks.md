@@ -27,3 +27,5 @@ The full-screen view is pure CSS (`:target`), with no JavaScript.
 ## Showing or hiding Visuals
 
 Visuals is optional. To hide it, delete the `Visuals` `<li>` lines in `partials/header.html` (two: desktop and mobile) and `partials/footer.html`, then run `npm run build`. Put them back to show it again. To remove the section entirely, also delete `artworks/` and `assets/img/artworks/`.
+
+> The homepage shows the newest 3 entries of the Journal list automatically after `npm run build`. Two "Coming soon" placeholder entries (marked `EDIT: placeholder post`) sit in that list until real posts replace them.

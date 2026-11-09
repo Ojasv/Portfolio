@@ -47,8 +47,8 @@ function crumbs(rel, html) {
     : `<li class="flex items-center gap-2"><a class="hover:text-accent-300" href="${c.href}">${esc(c.name)}</a><span aria-hidden="true" class="text-mist-700">/</span></li>`
   ).join('\n      ');
   return `<div class="crumbs mb-12 flex items-center gap-5 md:mb-16 md:gap-6">
-    <a href="${parent.href}" aria-label="Back to ${esc(parent.name)}" title="Back to ${esc(parent.name)}" class="group inline-flex size-14 shrink-0 items-center justify-center rounded-full border border-mist-600 text-paper transition-colors hover:border-accent-400 hover:bg-accent-900 md:size-16">
-      <svg aria-hidden="true" class="size-6 transition-transform group-hover:-translate-x-1 md:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4M10 6l-6 6 6 6"/></svg>
+    <a href="${parent.href}" aria-label="Back to ${esc(parent.name)}" title="Back to ${esc(parent.name)}" class="back-btn">
+      <svg aria-hidden="true" class="size-6 md:size-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H4M10 6l-6 6 6 6"/></svg>
     </a>
     <nav aria-label="Breadcrumb" class="min-w-0">
       <ol class="eyebrow flex min-w-0 items-center gap-2 text-mist-500">
@@ -57,6 +57,33 @@ function crumbs(rel, html) {
     </nav>
   </div>`;
 }
+
+// Homepage "Journal" list: the newest 3 entries of the post list in blog/index.html, inserted into index.html
+// between <!-- include:journal-latest --> … <!-- /include:journal-latest -->. Edit the Journal list, not the homepage.
+function journalLatest() {
+  const blog = readFileSync(join(root, 'blog/index.html'), 'utf8');
+  const list = (/<ol\b[\s\S]*?<\/ol>/.exec(blog.slice(blog.indexOf('PAGE CONTENT START'))) || [''])[0];
+  const posts = [...list.matchAll(/<article\b[\s\S]*?<\/article>/g)].slice(0, 3).map(([a]) => {
+    const href = (/<h2[\s\S]*?<a [^>]*href="([^"]+)"/.exec(a) || [])[1];
+    const title = (/<h2[^>]*>([\s\S]*?)<\/h2>/.exec(a) || [, ''])[1].replace(/<[^>]+>/g, '').trim();
+    const date = ((/<time[^>]*>([^<]*)<\/time>/.exec(a) || /<span class="eyebrow">([^<]*)<\/span>/.exec(a)) || [, ''])[1].trim();
+    // hrefs in blog/index.html are relative to /blog/; make them root-absolute again (rewritten per page below)
+    const abs = href && (href.startsWith('../') ? '/' + href.slice(3) : href.startsWith('./') ? '/blog/' + href.slice(2) : href);
+    return { href: abs, title, date };
+  });
+  return posts.map(({ href, title, date }) => {
+    const inner = `<span class="eyebrow text-mist-500 md:w-40 md:shrink-0">${date}</span>
+          <span class="font-serif text-2xl leading-snug md:text-3xl">${title}</span>`;
+    return href
+      ? `<li><a href="${href}" class="group flex flex-col gap-2 py-6 transition-colors hover:text-accent-300 md:flex-row md:items-baseline md:gap-8">
+          ${inner}
+        </a></li>`
+      : `<li class="flex flex-col gap-2 py-6 text-mist-400 md:flex-row md:items-baseline md:gap-8">
+          ${inner}
+        </li>`;
+  }).join('\n        ');
+}
+partials['journal-latest'] = journalLatest();
 
 let changed = 0;
 for (const file of walk(root)) {
