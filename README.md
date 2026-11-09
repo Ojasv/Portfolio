@@ -68,7 +68,7 @@ Case studies link to password-protected Figma prototypes. Never commit a prototy
 2. At the domain registrar, set DNS for `ojasvapurv.com`:
    - `A` records for `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - optional `AAAA` for `@`: `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
-   - `CNAME` for `www`: `ojasv-peepal.github.io`
+   - `CNAME` for `www`: `ojasv.github.io` (the GitHub account that owns the repo)
    - remove any other A/AAAA/CNAME records on `@` and `www` (e.g. registrar parking).
 3. **Settings → Pages → Custom domain**: `ojasvapurv.com` (the `CNAME` file already sets it). After the DNS check passes, tick **Enforce HTTPS** (the certificate can take up to an hour).
 4. Recommended: verify the domain under your GitHub account **Settings → Pages → Verified domains** so nobody else can claim it.
