@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Visuals · Ojasv Apurv</title>
-  <meta name="description" content="Artworks and visual explorations by Ojasv Apurv.">
+  <meta name="description" content="Artworks and visual experiments by Ojasv Apurv.">
   <link rel="canonical" href="https://ojasvapurv.com/artworks/">
   <meta name="theme-color" content="#161826">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
@@ -42,10 +42,134 @@
 <!-- /include:header -->
 
 <main id="main" class="gutter wrap pt-36 pb-24 md:pt-44 md:pb-32">
-  <!-- PAGE CONTENT START: placeholder, replaced by the Visuals page work -->
-  <p class="eyebrow text-mist-500">Visuals</p>
-  <h1 class="mt-4 max-w-4xl font-serif text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] tracking-tight">Visuals</h1>
-  <p class="mt-8 max-w-2xl text-lg text-mist-400">Coming soon.</p>
+  <!-- PAGE CONTENT START -->
+  <!-- VISUALS is optional. To hide it, remove the two "Visuals" links in partials/header.html and partials/footer.html, then npm run build. -->
+  <section class="grid gap-6 md:grid-cols-12">
+    <h1 class="eyebrow border-t border-current pt-4 md:col-span-4">Visuals</h1>
+    <p class="font-serif text-3xl leading-tight sm:text-4xl md:col-span-8 lg:col-span-7 lg:text-5xl">Paintings, photographs and experiments made away from the design file.</p>
+  </section>
+
+  <!--
+    GALLERY. Each artwork is one <li>: a thumbnail plus its full-screen view (pure CSS, no JavaScript).
+    To add one: copy a whole <li>…</li>, change the number in thumb-N / art-N, fix the neighbours' Prev/Next,
+    then change the image (twice), width/height, alt, title, medium and year. Images go in /assets/img/artworks/.
+  -->
+  <ul class="mt-16 columns-1 gap-6 sm:columns-2 lg:mt-24 lg:gap-8 xl:columns-3 4xl:columns-4">
+    <li id="thumb-1" class="mb-6 break-inside-avoid lg:mb-8">
+      <a href="#art-1" class="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-500">
+        <img src="/assets/img/artworks/placeholder-1.svg" width="1200" height="1500" alt="Tidal study, digital painting" loading="lazy" class="h-auto w-full rounded-lg bg-surface transition duration-300 group-hover:opacity-90">
+        <div class="mt-3 flex items-baseline justify-between gap-4">
+          <h2 class="font-serif text-lg group-hover:text-accent-300">Tidal study</h2>
+          <p class="eyebrow shrink-0 text-[0.625rem] text-mist-500">Digital painting · 2026</p>
+        </div>
+      </a>
+      <div id="art-1" role="dialog" aria-label="Tidal study" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center bg-ink/95 p-4 backdrop-blur target:flex sm:p-10">
+        <a href="#thumb-1" class="absolute inset-0" aria-label="Close"></a>
+        <img src="/assets/img/artworks/placeholder-1.svg" alt="Tidal study, digital painting" class="relative max-h-[80vh] w-auto max-w-full rounded-lg object-contain">
+        <div class="relative mt-4 flex w-full max-w-5xl items-center justify-between gap-4 text-mist-500">
+          <a href="#art-6" class="eyebrow p-2 hover:text-accent-300">← Prev</a>
+          <p class="text-center"><span class="font-serif text-base text-paper">Tidal study</span><br><span class="eyebrow">Digital painting · 2026</span></p>
+          <a href="#art-2" class="eyebrow p-2 hover:text-accent-300">Next →</a>
+        </div>
+        <a href="#thumb-1" class="eyebrow absolute right-4 top-4 p-2 text-mist-500 hover:text-accent-300 sm:right-8 sm:top-8">Close ✕</a>
+      </div>
+    </li>
+    <li id="thumb-2" class="mb-6 break-inside-avoid lg:mb-8">
+      <a href="#art-2" class="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-500">
+        <img src="/assets/img/artworks/placeholder-2.svg" width="1600" height="1000" alt="Night ferry, photograph" loading="lazy" class="h-auto w-full rounded-lg bg-surface transition duration-300 group-hover:opacity-90">
+        <div class="mt-3 flex items-baseline justify-between gap-4">
+          <h2 class="font-serif text-lg group-hover:text-accent-300">Night ferry</h2>
+          <p class="eyebrow shrink-0 text-[0.625rem] text-mist-500">Photograph · 2025</p>
+        </div>
+      </a>
+      <div id="art-2" role="dialog" aria-label="Night ferry" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center bg-ink/95 p-4 backdrop-blur target:flex sm:p-10">
+        <a href="#thumb-2" class="absolute inset-0" aria-label="Close"></a>
+        <img src="/assets/img/artworks/placeholder-2.svg" alt="Night ferry, photograph" class="relative max-h-[80vh] w-auto max-w-full rounded-lg object-contain">
+        <div class="relative mt-4 flex w-full max-w-5xl items-center justify-between gap-4 text-mist-500">
+          <a href="#art-1" class="eyebrow p-2 hover:text-accent-300">← Prev</a>
+          <p class="text-center"><span class="font-serif text-base text-paper">Night ferry</span><br><span class="eyebrow">Photograph · 2025</span></p>
+          <a href="#art-3" class="eyebrow p-2 hover:text-accent-300">Next →</a>
+        </div>
+        <a href="#thumb-2" class="eyebrow absolute right-4 top-4 p-2 text-mist-500 hover:text-accent-300 sm:right-8 sm:top-8">Close ✕</a>
+      </div>
+    </li>
+    <li id="thumb-3" class="mb-6 break-inside-avoid lg:mb-8">
+      <a href="#art-3" class="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-500">
+        <img src="/assets/img/artworks/placeholder-3.svg" width="1200" height="1200" alt="Bloom, generative sketch" loading="lazy" class="h-auto w-full rounded-lg bg-surface transition duration-300 group-hover:opacity-90">
+        <div class="mt-3 flex items-baseline justify-between gap-4">
+          <h2 class="font-serif text-lg group-hover:text-accent-300">Bloom</h2>
+          <p class="eyebrow shrink-0 text-[0.625rem] text-mist-500">Generative sketch · 2025</p>
+        </div>
+      </a>
+      <div id="art-3" role="dialog" aria-label="Bloom" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center bg-ink/95 p-4 backdrop-blur target:flex sm:p-10">
+        <a href="#thumb-3" class="absolute inset-0" aria-label="Close"></a>
+        <img src="/assets/img/artworks/placeholder-3.svg" alt="Bloom, generative sketch" class="relative max-h-[80vh] w-auto max-w-full rounded-lg object-contain">
+        <div class="relative mt-4 flex w-full max-w-5xl items-center justify-between gap-4 text-mist-500">
+          <a href="#art-2" class="eyebrow p-2 hover:text-accent-300">← Prev</a>
+          <p class="text-center"><span class="font-serif text-base text-paper">Bloom</span><br><span class="eyebrow">Generative sketch · 2025</span></p>
+          <a href="#art-4" class="eyebrow p-2 hover:text-accent-300">Next →</a>
+        </div>
+        <a href="#thumb-3" class="eyebrow absolute right-4 top-4 p-2 text-mist-500 hover:text-accent-300 sm:right-8 sm:top-8">Close ✕</a>
+      </div>
+    </li>
+    <li id="thumb-4" class="mb-6 break-inside-avoid lg:mb-8">
+      <a href="#art-4" class="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-500">
+        <img src="/assets/img/artworks/placeholder-4.svg" width="1200" height="1500" alt="Shoreline, gouache on paper" loading="lazy" class="h-auto w-full rounded-lg bg-surface transition duration-300 group-hover:opacity-90">
+        <div class="mt-3 flex items-baseline justify-between gap-4">
+          <h2 class="font-serif text-lg group-hover:text-accent-300">Shoreline</h2>
+          <p class="eyebrow shrink-0 text-[0.625rem] text-mist-500">Gouache on paper · 2024</p>
+        </div>
+      </a>
+      <div id="art-4" role="dialog" aria-label="Shoreline" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center bg-ink/95 p-4 backdrop-blur target:flex sm:p-10">
+        <a href="#thumb-4" class="absolute inset-0" aria-label="Close"></a>
+        <img src="/assets/img/artworks/placeholder-4.svg" alt="Shoreline, gouache on paper" class="relative max-h-[80vh] w-auto max-w-full rounded-lg object-contain">
+        <div class="relative mt-4 flex w-full max-w-5xl items-center justify-between gap-4 text-mist-500">
+          <a href="#art-3" class="eyebrow p-2 hover:text-accent-300">← Prev</a>
+          <p class="text-center"><span class="font-serif text-base text-paper">Shoreline</span><br><span class="eyebrow">Gouache on paper · 2024</span></p>
+          <a href="#art-5" class="eyebrow p-2 hover:text-accent-300">Next →</a>
+        </div>
+        <a href="#thumb-4" class="eyebrow absolute right-4 top-4 p-2 text-mist-500 hover:text-accent-300 sm:right-8 sm:top-8">Close ✕</a>
+      </div>
+    </li>
+    <li id="thumb-5" class="mb-6 break-inside-avoid lg:mb-8">
+      <a href="#art-5" class="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-500">
+        <img src="/assets/img/artworks/placeholder-5.svg" width="1600" height="1000" alt="Low light, photograph" loading="lazy" class="h-auto w-full rounded-lg bg-surface transition duration-300 group-hover:opacity-90">
+        <div class="mt-3 flex items-baseline justify-between gap-4">
+          <h2 class="font-serif text-lg group-hover:text-accent-300">Low light</h2>
+          <p class="eyebrow shrink-0 text-[0.625rem] text-mist-500">Photograph · 2024</p>
+        </div>
+      </a>
+      <div id="art-5" role="dialog" aria-label="Low light" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center bg-ink/95 p-4 backdrop-blur target:flex sm:p-10">
+        <a href="#thumb-5" class="absolute inset-0" aria-label="Close"></a>
+        <img src="/assets/img/artworks/placeholder-5.svg" alt="Low light, photograph" class="relative max-h-[80vh] w-auto max-w-full rounded-lg object-contain">
+        <div class="relative mt-4 flex w-full max-w-5xl items-center justify-between gap-4 text-mist-500">
+          <a href="#art-4" class="eyebrow p-2 hover:text-accent-300">← Prev</a>
+          <p class="text-center"><span class="font-serif text-base text-paper">Low light</span><br><span class="eyebrow">Photograph · 2024</span></p>
+          <a href="#art-6" class="eyebrow p-2 hover:text-accent-300">Next →</a>
+        </div>
+        <a href="#thumb-5" class="eyebrow absolute right-4 top-4 p-2 text-mist-500 hover:text-accent-300 sm:right-8 sm:top-8">Close ✕</a>
+      </div>
+    </li>
+    <li id="thumb-6" class="mb-6 break-inside-avoid lg:mb-8">
+      <a href="#art-6" class="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-500">
+        <img src="/assets/img/artworks/placeholder-6.svg" width="1200" height="1200" alt="Signal, ink and digital" loading="lazy" class="h-auto w-full rounded-lg bg-surface transition duration-300 group-hover:opacity-90">
+        <div class="mt-3 flex items-baseline justify-between gap-4">
+          <h2 class="font-serif text-lg group-hover:text-accent-300">Signal</h2>
+          <p class="eyebrow shrink-0 text-[0.625rem] text-mist-500">Ink and digital · 2023</p>
+        </div>
+      </a>
+      <div id="art-6" role="dialog" aria-label="Signal" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center bg-ink/95 p-4 backdrop-blur target:flex sm:p-10">
+        <a href="#thumb-6" class="absolute inset-0" aria-label="Close"></a>
+        <img src="/assets/img/artworks/placeholder-6.svg" alt="Signal, ink and digital" class="relative max-h-[80vh] w-auto max-w-full rounded-lg object-contain">
+        <div class="relative mt-4 flex w-full max-w-5xl items-center justify-between gap-4 text-mist-500">
+          <a href="#art-5" class="eyebrow p-2 hover:text-accent-300">← Prev</a>
+          <p class="text-center"><span class="font-serif text-base text-paper">Signal</span><br><span class="eyebrow">Ink and digital · 2023</span></p>
+          <a href="#art-1" class="eyebrow p-2 hover:text-accent-300">Next →</a>
+        </div>
+        <a href="#thumb-6" class="eyebrow absolute right-4 top-4 p-2 text-mist-500 hover:text-accent-300 sm:right-8 sm:top-8">Close ✕</a>
+      </div>
+    </li>
+  </ul>
   <!-- PAGE CONTENT END -->
 </main>
 

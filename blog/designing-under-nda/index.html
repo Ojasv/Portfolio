@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Designing under NDA: showing work you can't show · Ojasv Apurv</title>
+  <meta name="description" content="How I share the thinking behind confidential projects without exposing what the client keeps private.">
+  <link rel="canonical" href="https://ojasvapurv.com/blog/designing-under-nda/">
+  <meta property="og:type" content="article">
+  <meta name="theme-color" content="#161826">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
+
+<!-- include:header -->
+<header id="site-header" data-hover-include class="site-header fixed inset-x-0 top-0 z-50 transition-colors duration-500">
+  <div class="gutter wrap flex items-center justify-between py-5 md:py-6">
+    <a href="/" class="font-serif text-2xl tracking-tighter text-paper" aria-label="Ojasv Apurv, home">OJASV APURV</a>
+    <nav aria-label="Primary" class="hidden md:block">
+      <ul class="flex items-center gap-10 lg:gap-12">
+        <li><a class="nav-link" data-nav="projects" href="/projects/">Work</a></li>
+        <li><a class="nav-link" data-nav="artworks" href="/artworks/">Visuals</a></li>
+        <li><a class="nav-link" data-nav="blog" aria-current="page" href="/blog/">Journal</a></li>
+        <li><a class="nav-link" data-nav="about" href="/about/">Profile</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="eyebrow md:hidden" aria-controls="mobile-nav" aria-expanded="false" data-menu-toggle>Menu</button>
+  </div>
+  <nav id="mobile-nav" aria-label="Primary" class="gutter hidden border-t border-paper/10 bg-ink/95 pb-8 backdrop-blur md:hidden" data-menu>
+    <ul class="flex flex-col gap-6 pt-6">
+      <li><a class="nav-link text-sm" data-nav="projects" href="/projects/">Work</a></li>
+      <li><a class="nav-link text-sm" data-nav="artworks" href="/artworks/">Visuals</a></li>
+      <li><a class="nav-link text-sm" data-nav="blog" aria-current="page" href="/blog/">Journal</a></li>
+      <li><a class="nav-link text-sm" data-nav="about" href="/about/">Profile</a></li>
+    </ul>
+  </nav>
+</header>
+<!-- /include:header -->
+
+<main id="main" class="gutter wrap pt-36 pb-24 md:pt-44 md:pb-32">
+  <!-- PAGE CONTENT START -->
+  <article>
+    <header class="mx-auto max-w-4xl">
+      <a href="/blog/" class="eyebrow text-mist-500 hover:text-accent-300">← All posts</a>
+      <div class="mt-10 flex flex-wrap items-center gap-3 text-mist-500">
+        <time class="eyebrow" datetime="2026-11-09">9 Nov 2026</time>
+        <span aria-hidden="true">·</span>
+        <span class="eyebrow">4 min read</span>
+        <span class="eyebrow rounded-full border border-accent-800 px-2.5 py-0.5 text-[0.625rem] text-accent-300">Process</span>
+      </div>
+      <h1 class="mt-5 font-serif text-4xl leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">Designing under NDA: showing work you can't show</h1>
+      <p class="mt-6 font-serif text-xl italic leading-relaxed text-mist-400 sm:text-2xl">Most of my best work sits behind a confidentiality agreement. Here is how I talk about it anyway.</p>
+    </header>
+
+    <!-- Cover image (optional; delete this <figure> if the post has none). Images go in /assets/img/blog/. -->
+    <figure class="mx-auto mt-12 max-w-6xl">
+      <img src="/assets/img/blog/designing-under-nda-cover.svg" alt="Abstract blue gradient placeholder cover" class="aspect-[16/9] w-full rounded-lg bg-surface object-cover">
+    </figure>
+
+    <!-- POST BODY: plain <p>, <h2>, <h3>, <ul>/<li>, <a>, <img>. .prose-site styles them. -->
+    <div class="prose-site mx-auto mt-12">
+      <p>This is a sample post so you can see how the template looks. Replace it with your own writing, or delete this folder (and its card on the Journal page) once your first real post is up.</p>
+      <h2>Lead with the problem, not the pixels</h2>
+      <p>A client can keep its screens private, but the shape of the problem is usually safe to describe: who the users were, what got in their way, and what changed once the work shipped.</p>
+      <blockquote class="my-8 border-l-2 border-accent-500 pl-6 font-serif text-2xl italic text-paper">The process is the portfolio. The screens are just evidence.</blockquote>
+      <h2>Let the prototype do the rest</h2>
+      <p>For readers who need the detail, each project page links to a password-protected Figma prototype. I share the password on request, so it never lives in a public repository.</p>
+      <ul>
+        <li>Describe the context and constraints in words.</li>
+        <li>Show redrawn or blurred visuals where they help.</li>
+        <li>Offer the full prototype privately.</li>
+      </ul>
+    </div>
+
+    <footer class="mx-auto mt-20 max-w-[42rem]">
+      <div class="rule"></div>
+      <a href="/blog/" class="eyebrow mt-8 inline-block text-mist-500 hover:text-accent-300">← Back to the Journal</a>
+    </footer>
+  </article>
+  <!-- PAGE CONTENT END -->
+</main>
+
+<!-- include:footer -->
+<footer class="site-footer border-t border-paper/10 bg-ink">
+  <div class="gutter wrap grid gap-10 py-16 md:grid-cols-12 md:py-20">
+    <div class="md:col-span-6">
+      <p class="eyebrow text-mist-500">Let's talk</p>
+      <p class="mt-4 font-serif text-3xl leading-tight md:text-4xl">Have a product that needs a human touch?</p>
+      <!-- TODO: replace with the contact address you want public -->
+      <a class="btn mt-8" href="mailto:hello@ojasvapurv.com">hello@ojasvapurv.com</a>
+    </div>
+    <nav aria-label="Footer" class="md:col-span-3 md:col-start-8">
+      <ul class="flex flex-col gap-3 text-sm text-mist-400">
+        <li><a class="hover:text-paper" href="/projects/">Work</a></li>
+        <li><a class="hover:text-paper" href="/artworks/">Visuals</a></li>
+        <li><a class="hover:text-paper" href="/blog/">Journal</a></li>
+        <li><a class="hover:text-paper" href="/about/">Profile</a></li>
+      </ul>
+    </nav>
+    <ul class="flex flex-col gap-3 text-sm text-mist-400 md:col-span-2">
+      <!-- TODO: add your real profile URLs -->
+      <li><a class="hover:text-paper" href="https://www.linkedin.com/" rel="me noopener" target="_blank">LinkedIn</a></li>
+      <li><a class="hover:text-paper" href="https://github.com/ojasv-Peepal" rel="me noopener" target="_blank">GitHub</a></li>
+    </ul>
+  </div>
+  <div class="gutter wrap pb-10 text-xs text-mist-600">© <span data-year>2026</span> Ojasv Apurv</div>
+</footer>
+<!-- /include:footer -->
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>
