@@ -42,6 +42,20 @@
 <!-- /include:header -->
 
 <main id="main" class="gutter wrap pt-36 pb-24 md:pt-44 md:pb-32">
+  <!-- crumbs -->
+  <div class="crumbs mb-12 flex flex-wrap items-center gap-x-6 gap-y-4 md:mb-16">
+    <a href="../" class="group inline-flex items-center gap-3 rounded-full border border-mist-600 py-2 pr-5 pl-3 text-sm font-medium text-paper transition-colors hover:border-accent-400 hover:bg-accent-900">
+      <svg aria-hidden="true" class="size-4 transition-transform group-hover:-translate-x-0.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8H3M7 4 3 8l4 4"/></svg>
+      Back to Home
+    </a>
+    <nav aria-label="Breadcrumb" class="min-w-0">
+      <ol class="eyebrow flex min-w-0 items-center gap-2 text-mist-500">
+      <li class="flex items-center gap-2"><a class="hover:text-accent-300" href="../">Home</a><span aria-hidden="true" class="text-mist-700">/</span></li>
+      <li class="min-w-0"><span aria-current="page" class="block truncate text-paper">Profile</span></li>
+      </ol>
+    </nav>
+  </div>
+  <!-- /crumbs -->
   <!-- PAGE CONTENT START -->
   <!-- Intro -->
   <section class="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-12">
@@ -139,8 +153,7 @@
     <div class="md:col-span-6">
       <p class="eyebrow text-mist-500">Let's talk</p>
       <p class="mt-4 font-serif text-3xl leading-tight md:text-4xl">Have a product that needs a human touch?</p>
-      <!-- TODO: replace with the contact address you want public -->
-      <a class="btn mt-8" href="mailto:hello@ojasvapurv.com">hello@ojasvapurv.com</a>
+      <a class="btn mt-8" href="mailto:ux@ojasvapurv.com">ux@ojasvapurv.com</a>
     </div>
     <nav aria-label="Footer" class="md:col-span-3 md:col-start-8">
       <ul class="flex flex-col gap-3 text-sm text-mist-400">
