@@ -1,6 +1,9 @@
 # ojasvapurv.com
 
-Portfolio site for Ojasv Apurv. Plain HTML + Tailwind CSS, hosted on GitHub Pages at **https://ojasvapurv.com**.
+Portfolio site for Ojasv Apurv. Plain HTML + Tailwind CSS on GitHub Pages.
+
+- Preview (now): **https://ojasv.github.io/Portfolio/**
+- Final: **https://ojasvapurv.com** (to be connected when the site is finished)
 
 ## Structure
 
@@ -19,10 +22,10 @@ assets/js/site.js       Menu toggle, header background on scroll, footer year (e
 assets/js/wave-scroll.js, shore-scroll.js   Homepage hero animation
 assets/img/<section>/   Images, grouped by section
 scripts/sync-partials.mjs   Copies partials into every page
-CNAME, .nojekyll        GitHub Pages config
+CNAME (later), .nojekyll   GitHub Pages config
 ```
 
-All links and asset paths are root-absolute (`/assets/...`, `/projects/`), so pages work at any folder depth.
+Write links and asset paths root-absolute (`/assets/...`, `/projects/`) in pages and partials. `npm run sync` (part of `npm run build`) rewrites them to relative paths (`../assets/...`) so the same files work on the github.io preview sub-path and on the custom domain. Paths built in JavaScript must be relative to the page.
 
 ## Working on it
 
@@ -64,11 +67,15 @@ Case studies link to password-protected Figma prototypes. Never commit a prototy
 
 ## Hosting (GitHub Pages + ojasvapurv.com)
 
-1. Repo **Settings → Pages**: Source "Deploy from a branch", branch `main`, folder `/ (root)`.
+Pages deploys from branch `main`, folder `/ (root)`. While the site is being built it is served at https://ojasv.github.io/Portfolio/ and there is no `CNAME` file.
+
+To switch to the custom domain later:
+
+1. Add a `CNAME` file at the repo root containing `ojasvapurv.com` and push it.
 2. At the domain registrar, set DNS for `ojasvapurv.com`:
    - `A` records for `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - optional `AAAA` for `@`: `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
    - `CNAME` for `www`: `ojasv.github.io` (the GitHub account that owns the repo)
    - remove any other A/AAAA/CNAME records on `@` and `www` (e.g. registrar parking).
-3. **Settings → Pages → Custom domain**: `ojasvapurv.com` (the `CNAME` file already sets it). After the DNS check passes, tick **Enforce HTTPS** (the certificate can take up to an hour).
+3. **Settings → Pages → Custom domain**: `ojasvapurv.com`. After the DNS check passes, tick **Enforce HTTPS** (the certificate can take up to an hour).
 4. Recommended: verify the domain under your GitHub account **Settings → Pages → Verified domains** so nobody else can claim it.

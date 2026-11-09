@@ -11,13 +11,13 @@
   <meta property="og:image" content="https://ojasvapurv.com/assets/img/home/hero-1200.jpg">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#161826">
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="preload" as="image" href="/assets/img/home/hero-2400.jpg"
-        imagesrcset="/assets/img/home/hero-1200.jpg 1200w, /assets/img/home/hero-2400.jpg 2400w, /assets/img/home/hero-3600.jpg 3600w" imagesizes="100vw">
+  <link rel="stylesheet" href="./assets/css/site.css">
+  <link rel="preload" as="image" href="./assets/img/home/hero-2400.jpg"
+        imagesrcset="./assets/img/home/hero-1200.jpg 1200w, ./assets/img/home/hero-2400.jpg 2400w, ./assets/img/home/hero-3600.jpg 3600w" imagesizes="100vw">
 </head>
 <body data-header="overlay">
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -25,23 +25,23 @@
 <!-- include:header -->
 <header id="site-header" data-hover-include class="site-header fixed inset-x-0 top-0 z-50 transition-colors duration-500">
   <div class="gutter wrap flex items-center justify-between py-5 md:py-6">
-    <a href="/" class="font-serif text-2xl tracking-tighter text-paper" aria-label="Ojasv Apurv, home">OJASV APURV</a>
+    <a href="./" class="font-serif text-2xl tracking-tighter text-paper" aria-label="Ojasv Apurv, home">OJASV APURV</a>
     <nav aria-label="Primary" class="hidden md:block">
       <ul class="flex items-center gap-10 lg:gap-12">
-        <li><a class="nav-link" data-nav="projects" href="/projects/">Work</a></li>
-        <li><a class="nav-link" data-nav="artworks" href="/artworks/">Visuals</a></li>
-        <li><a class="nav-link" data-nav="blog" href="/blog/">Journal</a></li>
-        <li><a class="nav-link" data-nav="about" href="/about/">Profile</a></li>
+        <li><a class="nav-link" data-nav="projects" href="./projects/">Work</a></li>
+        <li><a class="nav-link" data-nav="artworks" href="./artworks/">Visuals</a></li>
+        <li><a class="nav-link" data-nav="blog" href="./blog/">Journal</a></li>
+        <li><a class="nav-link" data-nav="about" href="./about/">Profile</a></li>
       </ul>
     </nav>
     <button type="button" class="eyebrow md:hidden" aria-controls="mobile-nav" aria-expanded="false" data-menu-toggle>Menu</button>
   </div>
   <nav id="mobile-nav" aria-label="Primary" class="gutter hidden border-t border-paper/10 bg-ink/95 pb-8 backdrop-blur md:hidden" data-menu>
     <ul class="flex flex-col gap-6 pt-6">
-      <li><a class="nav-link text-sm" data-nav="projects" href="/projects/">Work</a></li>
-      <li><a class="nav-link text-sm" data-nav="artworks" href="/artworks/">Visuals</a></li>
-      <li><a class="nav-link text-sm" data-nav="blog" href="/blog/">Journal</a></li>
-      <li><a class="nav-link text-sm" data-nav="about" href="/about/">Profile</a></li>
+      <li><a class="nav-link text-sm" data-nav="projects" href="./projects/">Work</a></li>
+      <li><a class="nav-link text-sm" data-nav="artworks" href="./artworks/">Visuals</a></li>
+      <li><a class="nav-link text-sm" data-nav="blog" href="./blog/">Journal</a></li>
+      <li><a class="nav-link text-sm" data-nav="about" href="./about/">Profile</a></li>
     </ul>
   </nav>
 </header>
@@ -62,7 +62,7 @@
               I bridge the gap between functional design and user's delight. With a background in product design and a
               focus on user experience, I create digital products that feel intuitive yet distinctly human.
             </p>
-            <a class="btn mt-10" href="/about/">More about me</a>
+            <a class="btn mt-10" href="./about/">More about me</a>
           </div>
         </div>
       </div>
@@ -70,16 +70,16 @@
       <!-- Photo + waves. Greyscale until the pointer is over the hero or the header; colour on touch screens. -->
       <div data-hover-color="#heroStage" class="hero-media pointer-events-none absolute inset-0 z-[2] grayscale">
         <img id="heroImg"
-             src="/assets/img/home/hero-2400.jpg"
-             srcset="/assets/img/home/hero-1200.jpg 1200w, /assets/img/home/hero-2400.jpg 2400w, /assets/img/home/hero-3600.jpg 3600w"
+             src="./assets/img/home/hero-2400.jpg"
+             srcset="./assets/img/home/hero-1200.jpg 1200w, ./assets/img/home/hero-2400.jpg 2400w, ./assets/img/home/hero-3600.jpg 3600w"
              sizes="100vw" alt="Ojasv surfing a breaking wave" fetchpriority="high"
              class="absolute inset-0 h-full w-full object-cover">
         <canvas data-shore-scroll data-trigger="#hero" data-range="0.3,1"
-                data-image="/assets/img/home/hero-2400.jpg" data-replace="#heroImg" data-bg="#161826"
+                data-image="./assets/img/home/hero-2400.jpg" data-replace="#heroImg" data-bg="#161826"
                 data-foam="1" data-speed="1" data-idle="true"
                 class="absolute inset-0 block h-full w-full" aria-hidden="true"></canvas>
         <canvas data-wave-scroll data-trigger="#hero" data-range="0,0.4"
-                data-texture="/assets/img/home/water-texture.jpg" data-texture-top="0.5" data-image-aspect="2.3256"
+                data-texture="./assets/img/home/water-texture.jpg" data-texture-top="0.5" data-image-aspect="2.3256"
                 data-foam-focus="0.7,0.16,0.32" data-layers="5" data-amplitude="0.9" data-rise="0.6"
                 data-speed="1" data-idle="true" data-foam="1"
                 class="absolute inset-0 block h-full w-full" aria-hidden="true"></canvas>
@@ -99,32 +99,32 @@
   <section class="gutter wrap py-24 md:py-32" aria-labelledby="work-title">
     <div class="mb-12 flex items-end justify-between gap-6">
       <h2 id="work-title" class="font-serif text-4xl md:text-5xl">Selected work</h2>
-      <a class="nav-link hidden sm:inline" href="/projects/">All projects</a>
+      <a class="nav-link hidden sm:inline" href="./projects/">All projects</a>
     </div>
     <ul class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
       <li>
-        <a href="/projects/" class="group block">
+        <a href="./projects/" class="group block">
           <div class="aspect-[4/3] rounded-lg bg-surface transition-colors group-hover:bg-mist-900"></div>
           <p class="eyebrow mt-5 text-mist-500">Case study</p>
           <h3 class="mt-2 text-xl font-medium group-hover:text-accent-300">Project title</h3>
         </a>
       </li>
       <li>
-        <a href="/projects/" class="group block">
+        <a href="./projects/" class="group block">
           <div class="aspect-[4/3] rounded-lg bg-surface transition-colors group-hover:bg-mist-900"></div>
           <p class="eyebrow mt-5 text-mist-500">Case study</p>
           <h3 class="mt-2 text-xl font-medium group-hover:text-accent-300">Project title</h3>
         </a>
       </li>
       <li class="md:max-xl:hidden">
-        <a href="/projects/" class="group block">
+        <a href="./projects/" class="group block">
           <div class="aspect-[4/3] rounded-lg bg-surface transition-colors group-hover:bg-mist-900"></div>
           <p class="eyebrow mt-5 text-mist-500">Case study</p>
           <h3 class="mt-2 text-xl font-medium group-hover:text-accent-300">Project title</h3>
         </a>
       </li>
     </ul>
-    <a class="nav-link mt-10 inline-block sm:hidden" href="/projects/">All projects</a>
+    <a class="nav-link mt-10 inline-block sm:hidden" href="./projects/">All projects</a>
   </section>
 
   <div class="gutter wrap"><div class="rule"></div></div>
@@ -133,7 +133,7 @@
     <h2 id="journal-title" class="eyebrow self-start border-t border-current pt-4 font-normal md:col-span-4">Journal</h2>
     <div class="md:col-span-7 lg:col-span-6">
       <p class="font-serif text-3xl leading-snug md:text-4xl">Notes on design, technology and the craft in between.</p>
-      <a class="btn mt-10" href="/blog/">Read the journal</a>
+      <a class="btn mt-10" href="./blog/">Read the journal</a>
     </div>
   </section>
 </main>
@@ -149,10 +149,10 @@
     </div>
     <nav aria-label="Footer" class="md:col-span-3 md:col-start-8">
       <ul class="flex flex-col gap-3 text-sm text-mist-400">
-        <li><a class="hover:text-paper" href="/projects/">Work</a></li>
-        <li><a class="hover:text-paper" href="/artworks/">Visuals</a></li>
-        <li><a class="hover:text-paper" href="/blog/">Journal</a></li>
-        <li><a class="hover:text-paper" href="/about/">Profile</a></li>
+        <li><a class="hover:text-paper" href="./projects/">Work</a></li>
+        <li><a class="hover:text-paper" href="./artworks/">Visuals</a></li>
+        <li><a class="hover:text-paper" href="./blog/">Journal</a></li>
+        <li><a class="hover:text-paper" href="./about/">Profile</a></li>
       </ul>
     </nav>
     <ul class="flex flex-col gap-3 text-sm text-mist-400 md:col-span-2">
@@ -166,15 +166,15 @@
 <!-- /include:footer -->
 
 <script>
-  // Give the WebGL photo the same resolution the <img> picked (1200 / 2400 / 3600 px) before the scripts start.
+  // Path is relative to this page. Give the WebGL photo the same resolution the <img> picked (1200 / 2400 / 3600 px) before the scripts start.
   (function () {
     var w = innerWidth * Math.min(2, devicePixelRatio || 1);
     var src = w > 2600 ? '3600' : w > 1300 ? '2400' : '1200';
-    document.querySelector('[data-shore-scroll]').dataset.image = '/assets/img/home/hero-' + src + '.jpg';
+    document.querySelector('[data-shore-scroll]').dataset.image = 'assets/img/home/hero-' + src + '.jpg';
   })();
 </script>
-<script src="/assets/js/site.js" defer></script>
-<script src="/assets/js/wave-scroll.js" defer></script>
-<script src="/assets/js/shore-scroll.js" defer></script>
+<script src="./assets/js/site.js" defer></script>
+<script src="./assets/js/wave-scroll.js" defer></script>
+<script src="./assets/js/shore-scroll.js" defer></script>
 </body>
 </html>
