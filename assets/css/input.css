@@ -32,7 +32,8 @@
   --color-accent-800: #423a6a;
   --color-accent-900: #2b2741;
 
-  --color-sea: #0a6f87;        /* wave tint, sampled from the hero photo */
+  --color-sea: #0a6f87;
+  --color-peach: #fce1bb;      /* brand: the circle behind Ojasv's portrait (bg-peach). Use sparingly, alongside the brand mark. */        /* wave tint, sampled from the hero photo */
 
   /* Type → font-serif (display), font-sans (body) */
   --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;

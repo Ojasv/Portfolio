@@ -8,6 +8,7 @@
   <link rel="canonical" href="https://ojasvapurv.com/about/">
   <meta name="theme-color" content="#161826">
   <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
@@ -73,11 +74,12 @@
     </div>
 
     <figure class="lg:col-span-4 lg:col-start-9">
-      <!-- PLACEHOLDER: replace the div with
-           <img src="../assets/img/about/portrait.jpg" alt="Portrait of Ojasv Apurv" width="1200" height="1500" class="aspect-[4/5] w-full rounded-lg object-cover grayscale transition duration-700 hover:grayscale-0"> -->
-      <div class="grid aspect-[4/5] w-full max-w-sm place-items-center rounded-lg border border-paper/10 bg-gradient-to-br from-surface to-accent-900 lg:max-w-none">
-        <span class="eyebrow text-mist-500">Portrait</span>
-      </div>
+      <!-- Brand mark (from Ojasv's brand identity): portrait over the peach circle, transparent background -->
+      <picture>
+        <source srcset="../assets/img/about/brand-mark.webp" type="image/webp">
+        <img src="../assets/img/about/brand-mark.png" width="502" height="502" alt="Portrait of Ojasv Apurv"
+             class="mx-auto block aspect-square w-full max-w-sm lg:max-w-none">
+      </picture>
     </figure>
   </section>
 
