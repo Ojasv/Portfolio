@@ -44,7 +44,12 @@
     ' float sheen=exp(-max(d,0.)*5.)*.2*pr;',
     ' vec3 g=mix(BG,shallow*.5,film)+vec3(.5,.7,.75)*sheen*.3;',
     ' float gA=clamp(film+sheen,0.,1.);',
-    ' gl_FragColor=vec4(mix(g,col,waterA),max(waterA,gA)*HAS);',
+    ' float a0=max(waterA,gA)*HAS;',
+    ' vec4 photo=vec4(mix(g,col,waterA)*a0,a0);',                         // premultiplied: renders the same in every browser
+    // wet-sand band: a second, lighter tide line trailing the retreating water (a faint veil, so text behind stays readable)
+    ' float sand=(1.-smoothstep(.9,.93,d))*smoothstep(0.,.15,P)*HAS;',
+    ' vec4 band=vec4(BG*1.2,.2)*sand;',
+    ' gl_FragColor=photo+band*(1.-photo.a);',
     '}'].join('\n');
 
   function hexRgb(c) { var m = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec((c || '').trim()); return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [.086, .094, .149]; }
@@ -72,7 +77,7 @@
   }
   function init(el) {
     if (el.__shore) return refresh(el);
-    var gl = el.getContext('webgl', { premultipliedAlpha: false, alpha: true, antialias: false });
+    var gl = el.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: false });
     if (!gl) return;
     var pr = gl.createProgram();
     gl.attachShader(pr, sh(gl, gl.VERTEX_SHADER, VS)); gl.attachShader(pr, sh(gl, gl.FRAGMENT_SHADER, FS));
