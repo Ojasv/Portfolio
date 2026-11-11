@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 339 100" width="339" height="100" role="img"><title>CEED</title>
+<!-- Redrawn from the CEED 2017 wordmark supplied as a small raster -->
+<defs><mask id="s"><rect width="339" height="100" fill="#fff"/><g fill="#000"><rect x="113" y="29" width="52" height="8" rx="4"/><rect x="113" y="63" width="52" height="8" rx="4"/><rect x="202" y="29" width="52" height="8" rx="4"/><rect x="202" y="63" width="52" height="8" rx="4"/></g></mask></defs>
+<g fill="#fff" mask="url(#s)">
+<path d="M72 0A72 50 0 0 0 72 100Z"/>
+<path d="M161 0H127A46 50 0 0 0 127 100H161Z"/>
+<path d="M250 0H216A46 50 0 0 0 216 100H250Z"/>
+<path d="M259 0H289A50 50 0 0 1 289 100H259Z"/>
+</g></svg>
