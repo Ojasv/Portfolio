@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Warehouse Pick and Place System · Ojasv Apurv</title>
-  <meta name="description" content="Case study: a robotic warehouse pick-and-place system. Ojasv designed its electronics and the ROS teaching-pendant dashboard.">
+  <meta name="description" content="Case study: a robotic arm that identifies, picks and places high-value phone boxes in a warehouse. Ojasv designed its electronics and ROS dashboard.">
   <link rel="canonical" href="https://ojasvapurv.com/projects/warehouse-pick-and-place/">
   <meta name="theme-color" content="#161826">
   <link rel="icon" href="../../assets/img/favicon-32.png" type="image/png" sizes="32x32">
@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../assets/css/site.css?v=19bfdd14">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=d0678c67">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -66,7 +66,7 @@
     <p class="eyebrow col-span-12 mb-8 self-start border-t border-current pt-4 lg:col-span-4 lg:mb-0">R&amp;D internship · Robotics</p>
     <div class="col-span-12 lg:col-span-8">
       <h1 class="font-serif text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] tracking-tight">Warehouse <span class="italic font-light">Pick and Place</span> System</h1>
-      <p class="mt-8 max-w-3xl font-serif text-xl leading-snug text-mist-300 sm:text-2xl lg:text-3xl">A robotic pick-and-place system for warehouse operations, built by a team of four interns. I designed its electronics and the ROS dashboard behind its teaching pendant.</p>
+      <p class="mt-8 max-w-3xl font-serif text-xl leading-snug text-mist-300 sm:text-2xl lg:text-3xl">A robotic arm that finds high-value phone boxes among other products, picks them without damage and places them in a mobile rack. Built by four interns; I designed its electronics and its ROS dashboard.</p>
     </div>
   </section>
 
@@ -74,9 +74,8 @@
   <dl class="grid grid-cols-2 gap-x-6 gap-y-8 pt-8 text-sm md:grid-cols-4 lg:gap-x-12">
     <div><dt class="eyebrow text-mist-500">My role</dt><dd class="mt-2">Electronics design (hardware and software), ROS dashboard UX for the teaching pendant</dd></div>
     <div><dt class="eyebrow text-mist-500">Team</dt><dd class="mt-2">4 interns</dd></div>
-    <!-- TODO(Ojasv): organisation, year and duration -->
-    <div><dt class="eyebrow text-mist-500">Timeline</dt><dd class="mt-2 text-mist-500">To confirm</dd></div>
-    <div><dt class="eyebrow text-mist-500">Stack</dt><dd class="mt-2">ROS, custom electronics</dd></div>
+    <div><dt class="eyebrow text-mist-500">Timeline</dt><dd class="mt-2">1 year · Jan 2018 to Jan 2019</dd></div>
+    <div><dt class="eyebrow text-mist-500">Stack</dt><dd class="mt-2">ROS, OpenCV, STM32, Intel NUC, Intel RealSense D435</dd></div>
   </dl>
 
   <!-- Project film (unlisted on YouTube). youtube-nocookie avoids tracking cookies until play. -->
@@ -94,8 +93,14 @@
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
       <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">01 · The brief</h2>
       <div class="prose-site col-span-12 lg:col-span-7">
-        <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">Design and build a robot that can pick items and place them where a warehouse needs them.</p>
-        <!-- TODO(Ojasv): what problem the warehouse had, what the robot had to handle (payloads, speed, accuracy), and any constraints. -->
+        <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">High-value items like iPhones were prone to pilferage in the warehouse.</p>
+        <p>The answer was to take hands out of the loop: a robotic pick-and-place system that handles the phone boxes itself, without damaging them.</p>
+        <p>To do that, the robot had to:</p>
+        <ul>
+          <li>Identify the ordered box from an array of many other products, using machine learning and image processing.</li>
+          <li>Judge the exact distance to the box with a depth camera, so the arm's kinematics could be planned accurately.</li>
+          <li>Pick the box up and place it in a mobile shelf.</li>
+        </ul>
       </div>
     </section>
 
@@ -123,41 +128,59 @@
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
       <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">03 · Electronics</h2>
-      <div class="prose-site col-span-12 lg:col-span-7">
-        <p>I designed the robot's electronics, the hardware and the software running on it.</p>
-        <!-- TODO(Ojasv): controllers, motor drivers, sensors, power, firmware, and how it talks to ROS. -->
+      <div class="col-span-12 lg:col-span-8">
+        <p class="prose-site">I designed the electronics as a distributed system: an array of small controllers, all reporting to one central computer.</p>
+        <dl class="mt-10 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:gap-x-12">
+          <div class="border-t border-mist-800 pt-4"><dt class="eyebrow text-accent-300">Actuation</dt><dd class="mt-3 leading-relaxed text-mist-300">An array of STM32 microcontrollers, driving each servo motor and the pneumatic actuator precisely.</dd></div>
+          <div class="border-t border-mist-800 pt-4"><dt class="eyebrow text-accent-300">Safety</dt><dd class="mt-3 leading-relaxed text-mist-300">Piezoelectric sensors on the arm for collision detection.</dd></div>
+          <div class="border-t border-mist-800 pt-4"><dt class="eyebrow text-accent-300">Communication</dt><dd class="mt-3 leading-relaxed text-mist-300">Every STM32 talked to the others and to the central processing unit, an Intel NUC, over RS485.</dd></div>
+          <div class="border-t border-mist-800 pt-4"><dt class="eyebrow text-accent-300">Vision</dt><dd class="mt-3 leading-relaxed text-mist-300">An Intel RealSense D435 depth camera running on the NUC. OpenCV ran on its feed to detect the ordered item, profile its dimensions and give a confidence score.</dd></div>
+        </dl>
       </div>
-    </section>
-
-    <section aria-label="Electronics visuals" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-12">
-      <figure>
-        <div class="flex aspect-[4/3] items-center justify-center rounded-lg bg-surface text-sm text-mist-500">Image: circuit or board</div>
-        <figcaption class="mt-3 text-xs text-mist-500">Caption</figcaption>
-      </figure>
-      <figure>
-        <div class="flex aspect-[4/3] items-center justify-center rounded-lg bg-surface text-sm text-mist-500">Image: wiring or assembly</div>
-        <figcaption class="mt-3 text-xs text-mist-500">Caption</figcaption>
-      </figure>
     </section>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">04 · Teaching pendant</h2>
-      <div class="prose-site col-span-12 lg:col-span-7">
-        <p>Operators teach the robot its pick and place positions from a pendant. I designed the experience of the ROS dashboard behind it.</p>
-        <!-- TODO(Ojasv): who used it, what they needed to do, key screens and decisions. -->
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">04 · ROS dashboard</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <p class="prose-site">The dashboard was the operator's window into the robot. It showed the live camera feed with detections, and ran the arm in three modes.</p>
+        <ol class="mt-10 grid gap-6 sm:grid-cols-3">
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <p class="font-serif text-3xl text-accent-300">1</p>
+            <p class="mt-3 text-paper">Teaching pendant mode</p>
+            <p class="mt-2 text-sm leading-relaxed text-mist-400">The motors stay off while an operator moves the arm by hand. Optical encoders record the motion for picking up an object.</p>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <p class="font-serif text-3xl text-accent-300">2</p>
+            <p class="mt-3 text-paper">Test mode</p>
+            <p class="mt-2 text-sm leading-relaxed text-mist-400">For testing the kinematic models before the arm runs on its own.</p>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <p class="font-serif text-3xl text-accent-300">3</p>
+            <p class="mt-3 text-paper">Operational mode</p>
+            <p class="mt-2 text-sm leading-relaxed text-mist-400">Independent operation, driven by the ordered item and its location in the warehouse.</p>
+          </li>
+        </ol>
       </div>
     </section>
-
-    <figure>
-      <div class="flex aspect-[16/9] items-center justify-center rounded-lg bg-surface text-sm text-mist-500">Image: ROS dashboard screens</div>
-      <figcaption class="mt-3 text-xs text-mist-500">Caption</figcaption>
-    </figure>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
       <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">05 · Outcome</h2>
       <div class="prose-site col-span-12 lg:col-span-7">
-        <!-- TODO(Ojasv): what the finished system could do, and what you took away from it. -->
-        <p>The team delivered a working pick-and-place system, shown in the video above.</p>
+        <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">The finished robot could easily identify, pick and place phone boxes in the mobile rack.</p>
+        <p>We demonstrated it at Ripples 2018, the design showcase at IISc, where it drew attention from people looking to automate their warehouses.</p>
+        <p>HUL approached us for a test run in their warehouse. Their use case was also pick and place, but for a different reason: handling delicate objects like glass jars and bottles in FMCG orders, not pilferage.</p>
+        <p>The robot worked well there, with one limit: its reach in height. Our rack and arm were set up for phone boxes at defined heights. For HUL, the jars and bottles would need to be stored within a certain height, or the arm mounted on a vertical warehouse lift.</p>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">06 · What we learned</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <dl class="grid gap-x-6 gap-y-8 sm:grid-cols-3 lg:gap-x-12">
+          <div class="border-t border-mist-800 pt-4"><dt class="font-serif text-xl text-paper">Lighter and mountable</dt><dd class="mt-3 text-sm leading-relaxed text-mist-300">The arm should be lighter and easy to mount on vertical warehouse lifts or mobile warehouse robots, ideally interchangeably.</dd></div>
+          <div class="border-t border-mist-800 pt-4"><dt class="font-serif text-xl text-paper">Suction and gripper</dt><dd class="mt-3 text-sm leading-relaxed text-mist-300">Pneumatic suction lifts most articles, even slightly curved ones, but some are safer in a gripper. An interchangeable head, or two variants for different product ranges, would widen what the arm can handle.</dd></div>
+          <div class="border-t border-mist-800 pt-4"><dt class="font-serif text-xl text-paper">Scan the barcode</dt><dd class="mt-3 text-sm leading-relaxed text-mist-300">The same camera could also read barcodes. That would cut detection time with less processing, and speed up each pick and place.</dd></div>
+        </dl>
       </div>
     </section>
   </div>
