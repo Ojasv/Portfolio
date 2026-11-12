@@ -1,14 +1,14 @@
 /*! shore-scroll.js — the hero photo itself retreats up the screen like a wave sliding off wet sand (WebGL).
  * Place the canvas over the hero <img>; once the photo loads the canvas takes over drawing it, so there is no seam.
  * data-*: image (same src as the hero img), replace (selector of the img to hide once ready), trigger, range ("start,end" of
- *   trigger scroll, 0–1), bg (ground revealed, hex), foam (0–2), speed, idle (true|false).
+ *   trigger scroll, 0–1), focus-x (photo x, 0–1, kept centred when the screen is narrower than the photo), bg (ground revealed, hex), foam (0–2), speed, idle (true|false).
  */
 (function () {
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var VS = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
   var FS = [
     'precision highp float;',
-    'uniform vec2 R,IS;uniform float T,P,FO,HAS,E;uniform vec3 BG;uniform sampler2D IMG;',
+    'uniform vec2 R,IS;uniform float T,P,FO,HAS,E,FX;uniform vec3 BG;uniform sampler2D IMG;',
     'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
     'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+1.),f.x),f.y);}',
     'float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<4;i++){s+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return s;}',
@@ -23,7 +23,7 @@
     ' float near=1.-smoothstep(0.,.3,-d);',
     ' vec2 wob=vec2(fbm(a*5.+t*.12)-.5,fbm(a*5.+3.-t*.1)-.5)*(.014+.03*E)*near;',
     ' vec2 su=vec2(uv.x,uv.y+slide)+wob;float ia=IS.x/IS.y;vec2 iu=su;',
-    ' if(sa>ia){iu.y=.5+(su.y-.5)*ia/sa;}else{iu.x=.5+(su.x-.5)*sa/ia;}',
+    ' if(sa>ia){iu.y=.5+(su.y-.5)*ia/sa;}else{float hw=.5*sa/ia;iu.x=clamp(FX,hw,1.-hw)+(su.x-.5)*sa/ia;}',
     ' vec3 c0=texture2D(IMG,clamp(iu,vec2(0.,0.),vec2(1.,.998))).rgb;',
     ' float xl=.02+abs(fract(uv.x*.9+.13)*2.-1.)*.34;',                    // clear water from the photo's left side — never the subject
     ' vec3 c1=texture2D(IMG,vec2(xl,clamp(.97-fract((iu.y-.9)*1.1)*.22,0.,.998))).rgb;',
@@ -56,7 +56,7 @@
   function read(el) {
     var d = el.dataset;
     return { image: d.image || '', replace: d.replace || '', range: (d.range || '0,1').split(',').map(Number),
-      bg: hexRgb(d.bg || '#161826'), foam: +(d.foam == null ? 1 : d.foam), speed: +(d.speed || 1), idle: d.idle !== 'false' && !reduce,
+      bg: hexRgb(d.bg || '#161826'), focusX: d.focusX == null ? 0.5 : +d.focusX, foam: +(d.foam == null ? 1 : d.foam), speed: +(d.speed || 1), idle: d.idle !== 'false' && !reduce,
       trigger: (d.trigger && document.querySelector(d.trigger)) || el.parentElement };
   }
   function sh(gl, type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s)); return s; }
@@ -88,7 +88,7 @@
     var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
     [gl.TEXTURE_WRAP_S, gl.TEXTURE_WRAP_T].forEach(function (p) { gl.texParameteri(gl.TEXTURE_2D, p, gl.CLAMP_TO_EDGE); });
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    var U = {}; ['R', 'IS', 'T', 'P', 'FO', 'HAS', 'BG', 'IMG', 'E'].forEach(function (k) { U[k] = gl.getUniformLocation(pr, k); });
+    var U = {}; ['R', 'IS', 'T', 'P', 'FO', 'HAS', 'BG', 'IMG', 'E', 'FX'].forEach(function (k) { U[k] = gl.getUniformLocation(pr, k); });
     var st = { el: el, gl: gl, U: U, tex: tex, o: read(el), p: 0, clock: 0, prev: 0, visible: true, has: 0, size: [1, 1] };
     st.p = progress(st.o);
     el.__shore = st;
@@ -121,7 +121,7 @@
     st.clock += dt * ((o.idle ? 1 : 0) + st.energy * 4) * o.speed;
     gl.uniform2f(U.R, w, h); gl.uniform2f(U.IS, st.size[0], st.size[1]);
     gl.uniform1f(U.T, st.clock + 20); gl.uniform1f(U.P, st.p); gl.uniform1f(U.FO, o.foam);
-    gl.uniform1f(U.HAS, st.has); gl.uniform1f(U.E, st.energy); gl.uniform3fv(U.BG, o.bg); gl.uniform1i(U.IMG, 0);
+    gl.uniform1f(U.HAS, st.has); gl.uniform1f(U.FX, o.focusX); gl.uniform1f(U.E, st.energy); gl.uniform3fv(U.BG, o.bg); gl.uniform1i(U.IMG, 0);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     if (st.hideNext) { st.hideNext = false; var r = o.replace && document.querySelector(o.replace); if (r) r.style.visibility = 'hidden'; }
   }

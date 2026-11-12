@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="./assets/css/site.css?v=fafd297f">
+  <link rel="stylesheet" href="./assets/css/site.css?v=18b652a6">
   <link rel="preload" as="image" href="./assets/img/home/hero-2400.jpg"
         imagesrcset="./assets/img/home/hero-1200.jpg 1200w, ./assets/img/home/hero-2400.jpg 2400w, ./assets/img/home/hero-3600.jpg 3600w" imagesizes="100vw">
 </head>
@@ -75,17 +75,20 @@
              src="./assets/img/home/hero-2400.jpg"
              srcset="./assets/img/home/hero-1200.jpg 1200w, ./assets/img/home/hero-2400.jpg 2400w, ./assets/img/home/hero-3600.jpg 3600w"
              sizes="100vw" alt="Ojasv surfing a breaking wave" fetchpriority="high"
-             class="absolute inset-0 h-full w-full object-cover">
+             class="absolute inset-0 h-full w-full object-cover object-[80%_50%]">
         <canvas data-shore-scroll data-trigger="#hero" data-range="0.3,1"
                 data-image="./assets/img/home/hero-2400.jpg" data-replace="#heroImg" data-bg="#161826"
-                data-foam="1" data-speed="1" data-idle="true"
+                data-focus-x="0.72" data-foam="1" data-speed="1" data-idle="true"
                 class="absolute inset-0 block h-full w-full" aria-hidden="true"></canvas>
         <canvas data-wave-scroll data-trigger="#hero" data-range="0,0.4"
-                data-texture="./assets/img/home/water-texture.jpg" data-texture-top="0.5" data-image-aspect="2.3256"
+                data-texture="./assets/img/home/water-texture.jpg" data-texture-top="0.5" data-image-aspect="2.3256" data-photo-x="0.72"
                 data-foam-focus="0.7,0.16,0.32" data-layers="5" data-amplitude="0.9" data-rise="0.6"
                 data-speed="1" data-idle="true" data-foam="1"
                 class="absolute inset-0 block h-full w-full" aria-hidden="true"></canvas>
       </div>
+
+      <!-- Phones: the photo is centred on Ojasv, so the title sits over white foam. A soft shade keeps it readable; fades with the title. -->
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-3/5 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent opacity-[calc(1-var(--wave-p,0)*1.8)] lg:hidden" aria-hidden="true"></div>
 
       <!-- Title: drifts up and fades as --wave-p (set by wave-scroll.js) goes 0 → 1 -->
       <div class="hero-title gutter wrap pointer-events-none absolute inset-x-0 bottom-16 z-[4] text-white md:bottom-24">
@@ -192,7 +195,7 @@
   })();
 </script>
 <script src="./assets/js/site.js?v=dc30528f" defer></script>
-<script src="./assets/js/wave-scroll.js?v=58a0460c" defer></script>
-<script src="./assets/js/shore-scroll.js?v=1693d582" defer></script>
+<script src="./assets/js/wave-scroll.js?v=ef490d2c" defer></script>
+<script src="./assets/js/shore-scroll.js?v=01fe80e0" defer></script>
 </body>
 </html>

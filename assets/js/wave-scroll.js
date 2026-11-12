@@ -27,6 +27,7 @@
       texture: d.texture || '',
       texTop: +(d.textureTop == null ? 0.5 : d.textureTop),          // row (0–1) of the photo where the texture crop starts
       imgAspect: +(d.imageAspect || 2.3256),
+      photoX: d.photoX == null ? 0.5 : +d.photoX,   // photo x (0–1) kept centred when the screen is narrower than the photo (match object-position / shore-scroll data-focus-x)
       focus: (d.foamFocus || '0.7,0.16,0.32').split(',').map(Number),  // photo x (0–1) of the breaking foam, left spread, right spread                          // hero photo width / height (object-cover math)
       layers: Math.min(5, Math.max(1, +(d.layers || 3))),
       amp: +(d.amplitude || 1),
@@ -90,7 +91,7 @@
     if (fade < 0.01) { if (!st.cleared) { out.setTransform(1, 0, 0, 1, 0, 0); out.clearRect(0, 0, cv.width, cv.height); st.cleared = true; } return; }
     st.cleared = false;
     var ia = o.imgAspect, cDw, cDh; if (W / H > ia) { cDw = W; cDh = W / ia; } else { cDh = H; cDw = H * ia; }
-    var fX = (W - cDw) / 2 + o.focus[0] * cDw, sL = o.focus[1] * cDw * 1.4, sR = o.focus[2] * cDw * 1.2;
+    var fX = offX(o, W, cDw) + o.focus[0] * cDw, sL = o.focus[1] * cDw * 1.4, sR = o.focus[2] * cDw * 1.2;
     var lineY = (H - cDh) / 2 + 0.68 * cDh;                // photo's breaking foam line, on screen
     function hump(x) { var dd = x - fX, sp = dd < 0 ? sL : sR; return Math.exp(-(dd * dd) / (sp * sp)); }
 
@@ -128,7 +129,7 @@
         var ia = o.imgAspect, Dw, Dh;
         if (W / H > ia) { Dw = W; Dh = W / ia; } else { Dh = H; Dw = H * ia; }
         var s = (Dh * (1 - o.texTop)) / st.tex.height, tw = st.tex.width * s;
-        var ty = (H - Dh) / 2 + o.texTop * Dh, tx = (W - Dw) / 2;
+        var ty = (H - Dh) / 2 + o.texTop * Dh, tx = offX(o, W, Dw);
         st.pattern.setTransform(new DOMMatrix().translate(tx - ((t * (10 + 8 * k)) % tw), ty).scale(s, s));
         ctx.globalAlpha = 0.9 - 0.25 * (1 - k);
         ctx.fillStyle = st.pattern; ctx.fillRect(0, top - 2, W, H - top + 4);
@@ -168,12 +169,15 @@
     ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.stroke();
   }
 
+  // left edge of the cover-fitted photo on screen, honouring the focal point (same maths as shore-scroll.js)
+  function offX(o, W, Dw) { return Math.min(0, Math.max(W - Dw, W / 2 - o.photoX * Dw)); }
+
   // bubbly whitewater anchored in wave-space, densest where the photo's wave breaks (by the feet)
   function foam(st, ctx, xs, ys, f, ph, A, i, k, W, step) {
     var o = st.o; if (o.foam <= 0 || k < 0.5) return;
     var H = st.el.clientHeight, ia = o.imgAspect, Dw, Dh;
     if (W / H > ia) { Dw = W; Dh = W / ia; } else { Dh = H; Dw = H * ia; }
-    var fX = (W - Dw) / 2 + o.focus[0] * Dw, sL = o.focus[1] * Dw, sR = o.focus[2] * Dw;
+    var fX = offX(o, W, Dw) + o.focus[0] * Dw, sL = o.focus[1] * Dw, sR = o.focus[2] * Dw;
     function weight(x) { var dd = x - fX, sp = dd < 0 ? sL : sR; return 0.1 + 0.9 * Math.exp(-(dd * dd) / (sp * sp)); }
     function cy(x) { var u = (x + step) / step, j = Math.max(0, Math.min(ys.length - 2, Math.floor(u))), fr = Math.min(1, Math.max(0, u - j)); return ys[j] + (ys[j + 1] - ys[j]) * fr; }
     var amt = Math.min(1.1, o.foam * (0.45 + 0.75 * k));
