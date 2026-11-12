@@ -5,13 +5,17 @@
   var menu = document.querySelector('[data-menu]');
 
   if (toggle && menu) {
-    toggle.addEventListener('click', function () {
-      var open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      toggle.textContent = open ? 'Menu' : 'Close';
-      menu.classList.toggle('hidden', open);
-      header && header.classList.toggle('is-open', !open);
-    });
+    var setOpen = function (open) {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      header && header.classList.toggle('is-open', open);
+      menu.inert = !open;                       // closed menu is out of the tab order
+    };
+    setOpen(false);
+    toggle.addEventListener('click', function () { setOpen(toggle.getAttribute('aria-expanded') !== 'true'); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setOpen(false); toggle.focus(); } });
+    document.addEventListener('click', function (e) { if (header && !header.contains(e.target)) setOpen(false); });
   }
 
   // Header gets a solid ground once the page has scrolled (pages can opt out with data-header="overlay" on <body>

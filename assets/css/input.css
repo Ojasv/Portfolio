@@ -168,3 +168,45 @@
     .group:hover .slant, .slant:hover { transform: none; font-style: italic; }
   }
 }
+
+/* Mobile menu. Closed: a hamburger. Open: the three lines fold into a cross and the whole header (bar + links) becomes
+   one frosted panel, tinted with the page ink so it sits on the hero photo and on dark pages alike. A hairline and
+   rounded lower corners mark where the menu ends. */
+@layer components {
+  .menu-btn {
+    position: relative; width: 2.75rem; height: 2.75rem; margin-right: -0.625rem; color: var(--color-paper);
+  }
+  .menu-btn span {
+    position: absolute; left: 50%; top: 50%; width: 1.5rem; height: 1.5px; margin: -0.75px 0 0 -0.75rem;
+    border-radius: 1px; background: currentColor;
+    transition: transform 500ms var(--ease-tide), opacity 300ms var(--ease-tide);
+  }
+  .menu-btn span:nth-child(1) { transform: translateY(-0.4375rem); }
+  .menu-btn span:nth-child(3) { transform: translateY(0.4375rem); }
+  .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0.2); }
+  .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg); }
+
+  .mobile-nav {
+    display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden;
+    transition: grid-template-rows 500ms var(--ease-tide), opacity 400ms var(--ease-tide), visibility 0s 500ms;
+  }
+  .site-header.is-open .mobile-nav {
+    grid-template-rows: 1fr; opacity: 1; visibility: visible;
+    transition: grid-template-rows 500ms var(--ease-tide), opacity 400ms var(--ease-tide) 80ms, visibility 0s;
+  }
+  .mobile-nav li + li { border-top: 1px solid color-mix(in srgb, var(--color-paper) 10%, transparent); }
+
+  .site-header { transition: background-color 500ms var(--ease-tide), box-shadow 500ms var(--ease-tide), border-radius 500ms var(--ease-tide); }
+  @media (width < 48rem) {
+    .site-header.is-open {
+      background: linear-gradient(to bottom, color-mix(in srgb, var(--color-ink) 38%, transparent), color-mix(in srgb, var(--color-ink) 58%, transparent));
+      -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5);
+      border-radius: 0 0 1.25rem 1.25rem;
+      box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--color-paper) 22%, transparent), 0 1.25rem 2.5rem -1rem rgb(0 0 0 / 0.45);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .menu-btn span, .mobile-nav, .site-header.is-open .mobile-nav, .site-header { transition-duration: 1ms; }
+  }
+}
