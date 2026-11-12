@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../assets/css/site.css?v=40b99de4">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=531fdc65">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -184,22 +184,42 @@
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
       <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">05 · ROS dashboard</h2>
       <div class="col-span-12 lg:col-span-8">
-        <p class="prose-site">The dashboard was the operator's window into the robot. It showed the live camera feed with detections, and ran the arm in three modes.</p>
-        <ol class="mt-10 grid gap-6 sm:grid-cols-3">
-          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
-            <p class="font-serif text-3xl text-accent-300">1</p>
-            <p class="mt-3 text-paper">Teaching pendant mode</p>
-            <p class="mt-2 text-sm leading-relaxed text-mist-400">The motors stay off while an operator moves the arm by hand. Optical encoders record the motion for picking up an object.</p>
+        <p class="prose-site">The dashboard was the operator's window into the robot. It showed the live camera feed with detections, and took the arm through three modes, in order.</p>
+        <!-- Steps: numbered nodes joined by a line (vertical on phones, horizontal from sm up) -->
+        <ol class="mt-10 grid sm:grid-cols-3">
+          <li class="flex gap-5 sm:block">
+            <div class="flex flex-col items-center sm:flex-row sm:gap-2 sm:pr-2">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">1</span>
+              <span aria-hidden="true" class="w-px flex-1 bg-accent-700 sm:h-px sm:w-auto"></span>
+              <svg aria-hidden="true" class="hidden size-3 shrink-0 text-accent-500 sm:block" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2l4 4-4 4"/></svg>
+            </div>
+            <div class="pb-10 sm:pb-0 sm:pr-8 sm:pt-6">
+              <p class="eyebrow text-mist-500">Step 1</p>
+              <p class="mt-2 text-paper">Teaching pendant mode</p>
+              <p class="mt-2 text-sm leading-relaxed text-mist-400">The motors stay off while an operator moves the arm by hand. Optical encoders record the motion for picking up an object.</p>
+            </div>
           </li>
-          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
-            <p class="font-serif text-3xl text-accent-300">2</p>
-            <p class="mt-3 text-paper">Test mode</p>
-            <p class="mt-2 text-sm leading-relaxed text-mist-400">For testing the kinematic models before the arm runs on its own.</p>
+          <li class="flex gap-5 sm:block">
+            <div class="flex flex-col items-center sm:flex-row sm:gap-2 sm:pr-2">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">2</span>
+              <span aria-hidden="true" class="w-px flex-1 bg-accent-700 sm:h-px sm:w-auto"></span>
+              <svg aria-hidden="true" class="hidden size-3 shrink-0 text-accent-500 sm:block" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2l4 4-4 4"/></svg>
+            </div>
+            <div class="pb-10 sm:pb-0 sm:pr-8 sm:pt-6">
+              <p class="eyebrow text-mist-500">Step 2</p>
+              <p class="mt-2 text-paper">Test mode</p>
+              <p class="mt-2 text-sm leading-relaxed text-mist-400">For testing the kinematic models before the arm runs on its own.</p>
+            </div>
           </li>
-          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
-            <p class="font-serif text-3xl text-accent-300">3</p>
-            <p class="mt-3 text-paper">Operational mode</p>
-            <p class="mt-2 text-sm leading-relaxed text-mist-400">Independent operation, driven by the ordered item and its location in the warehouse.</p>
+          <li class="flex gap-5 sm:block">
+            <div class="flex flex-col items-center sm:flex-row sm:gap-2 sm:pr-2">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">3</span>
+            </div>
+            <div class="pb-0 sm:pb-0 sm:pr-8 sm:pt-6">
+              <p class="eyebrow text-mist-500">Step 3</p>
+              <p class="mt-2 text-paper">Operational mode</p>
+              <p class="mt-2 text-sm leading-relaxed text-mist-400">Independent operation, driven by the ordered item and its location in the warehouse.</p>
+            </div>
           </li>
         </ol>
       </div>
