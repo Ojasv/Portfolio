@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="./assets/css/site.css?v=73fa183a">
+  <link rel="stylesheet" href="./assets/css/site.css?v=a61f99f9">
   <link rel="preload" as="image" href="./assets/img/home/hero-2400.jpg"
         imagesrcset="./assets/img/home/hero-1200.jpg 1200w, ./assets/img/home/hero-2400.jpg 2400w, ./assets/img/home/hero-3600.jpg 3600w" imagesizes="100vw">
 </head>
@@ -74,17 +74,21 @@
 
       <!-- Photo + waves. Greyscale until the pointer is over the hero or the header; colour on touch screens. -->
       <div data-hover-color="#heroStage" class="hero-media pointer-events-none absolute inset-0 z-[2] grayscale">
-        <img id="heroImg"
+        <!-- #heroImg is only seen until the canvas below has loaded the photo. On portrait screens it mirrors the canvas:
+             photo zoomed out to 80% and centred a little left of Ojasv, sky colour filling the space above. -->
+        <div id="heroImg" class="absolute inset-0 [@media(max-aspect-ratio:4/5)]:bg-[#0682cc]">
+        <img
              src="./assets/img/home/hero-2400.jpg"
              srcset="./assets/img/home/hero-1200.jpg 1200w, ./assets/img/home/hero-2400.jpg 2400w, ./assets/img/home/hero-3600.jpg 3600w"
              sizes="100vw" alt="Ojasv surfing a breaking wave" fetchpriority="high"
-             class="absolute inset-0 h-full w-full object-cover object-[80%_50%]">
+             class="absolute inset-0 h-full w-full object-cover object-[78%_50%] [@media(max-aspect-ratio:4/5)]:top-[20%] [@media(max-aspect-ratio:4/5)]:h-4/5">
+        </div>
         <canvas data-shore-scroll data-trigger="#hero" data-range="0.3,1"
                 data-image="./assets/img/home/hero-2400.jpg" data-replace="#heroImg" data-bg="#161826"
-                data-focus-x="0.72" data-foam="1" data-speed="1" data-idle="true"
+                data-focus-x="0.69" data-portrait-zoom="0.8" data-pivot-y="1" data-foam="1" data-speed="1" data-idle="true"
                 class="absolute inset-0 block h-full w-full" aria-hidden="true"></canvas>
         <canvas data-wave-scroll data-trigger="#hero" data-range="0,0.4"
-                data-texture="./assets/img/home/water-texture.jpg" data-texture-top="0.5" data-image-aspect="2.3256" data-photo-x="0.72"
+                data-texture="./assets/img/home/water-texture.jpg" data-texture-top="0.5" data-image-aspect="2.3256" data-photo-x="0.69" data-portrait-zoom="0.8" data-pivot-y="1"
                 data-foam-focus="0.7,0.16,0.32" data-layers="5" data-amplitude="0.9" data-rise="0.6"
                 data-speed="1" data-idle="true" data-foam="1"
                 class="absolute inset-0 block h-full w-full" aria-hidden="true"></canvas>
@@ -96,7 +100,7 @@
       <!-- Title: drifts up and fades as --wave-p (set by wave-scroll.js) goes 0 → 1 -->
       <div class="hero-title gutter wrap pointer-events-none absolute inset-x-0 bottom-16 z-[4] text-white md:bottom-24">
         <p class="mb-4 text-sm uppercase tracking-[0.2em]">UX Designer &amp; Tech Enthusiast</p>
-        <h1 class="font-serif text-[clamp(3.5rem,9vw,8rem)] leading-[0.9] font-normal tracking-tighter">
+        <h1 class="font-serif text-[clamp(2.5rem,14.3vw,3.5rem)] sm:text-[clamp(3.5rem,9vw,8rem)] leading-[0.9] font-normal tracking-tighter">
           Digital<br><span class="font-light italic opacity-90">Craftsmanship</span>
         </h1>
       </div>
@@ -202,7 +206,7 @@
   })();
 </script>
 <script src="./assets/js/site.js?v=02127995" defer></script>
-<script src="./assets/js/wave-scroll.js?v=ef490d2c" defer></script>
-<script src="./assets/js/shore-scroll.js?v=01fe80e0" defer></script>
+<script src="./assets/js/wave-scroll.js?v=f70deb86" defer></script>
+<script src="./assets/js/shore-scroll.js?v=f591ecfa" defer></script>
 </body>
 </html>
