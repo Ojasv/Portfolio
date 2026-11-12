@@ -124,7 +124,8 @@
     st.clock += dt * ((o.idle ? 1 : 0) + st.energy * 4) * o.speed;
     gl.uniform2f(U.R, w, h); gl.uniform2f(U.IS, st.size[0], st.size[1]);
     gl.uniform1f(U.T, st.clock + 20); gl.uniform1f(U.P, st.p); gl.uniform1f(U.FO, o.foam);
-    gl.uniform1f(U.HAS, st.has); gl.uniform1f(U.FX, o.focusX); gl.uniform1f(U.Z, w / h < 0.8 ? o.zoom : 1); gl.uniform1f(U.PY, o.pivotY); gl.uniform1f(U.E, st.energy); gl.uniform3fv(U.BG, o.bg); gl.uniform1i(U.IMG, 0);
+    gl.uniform1f(U.HAS, st.has); var fk = Math.min(1, Math.max(0, (w / h - 0.8) / 0.4)); fk = fk * fk * (3 - 2 * fk);   // focal point on portrait only; photo centre again by aspect 1.2 (same as wave-scroll)
+    gl.uniform1f(U.FX, o.focusX + (0.5 - o.focusX) * fk); gl.uniform1f(U.Z, w / h < 0.8 ? o.zoom : 1); gl.uniform1f(U.PY, o.pivotY); gl.uniform1f(U.E, st.energy); gl.uniform3fv(U.BG, o.bg); gl.uniform1i(U.IMG, 0);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     if (st.hideNext) { st.hideNext = false; var r = o.replace && document.querySelector(o.replace); if (r) r.style.visibility = 'hidden'; }
   }

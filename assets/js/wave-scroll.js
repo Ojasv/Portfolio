@@ -170,13 +170,15 @@
   }
 
   // left edge of the cover-fitted photo on screen, honouring the focal point (same maths as shore-scroll.js)
-  function offX(o, W, Dw) { return Math.min(0, Math.max(W - Dw, W / 2 - o.photoX * Dw)); }
+  // the focal point only applies on portrait screens; it eases back to the photo's centre by aspect 1.2 so wide screens keep the original framing
+  function focalX(o, W, H) { var k = Math.min(1, Math.max(0, (W / H - 0.8) / 0.4)); k = k * k * (3 - 2 * k); return o.photoX + (0.5 - o.photoX) * k; }
+  function offX(o, W, H, Dw) { return Math.min(0, Math.max(W - Dw, W / 2 - focalX(o, W, H) * Dw)); }
   // where the photo sits on screen: object-cover, then on portrait screens zoomed out by o.zoom about the row o.pivotY
   function fit(o, W, H) {
     var ia = o.imgAspect, w, h; if (W / H > ia) { w = W; h = W / ia; } else { h = H; w = H * ia; }
     var y = (H - h) / 2, z = W / H < 0.8 ? o.zoom : 1;
     if (z !== 1) { w *= z; h *= z; y = o.pivotY * H * (1 - z); }
-    return { w: w, h: h, x: offX(o, W, w), y: y };
+    return { w: w, h: h, x: offX(o, W, H, w), y: y };
   }
 
   // bubbly whitewater anchored in wave-space, densest where the photo's wave breaks (by the feet)
