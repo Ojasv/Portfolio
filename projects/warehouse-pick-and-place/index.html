@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../assets/css/site.css?v=b4d8efed">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=40b99de4">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -63,10 +63,10 @@
   <!-- /crumbs -->
   <!-- PAGE CONTENT START: Warehouse Pick and Place System (R&D internship). -->
   <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-    <p class="eyebrow col-span-12 mb-8 self-start border-t border-current pt-4 lg:col-span-4 lg:mb-0">R&amp;D internship · Robotics</p>
+    <p class="eyebrow col-span-12 mb-8 self-start border-t border-current pt-4 lg:col-span-4 lg:mb-0">R&amp;D internship · Volga Instruments · Robotics</p>
     <div class="col-span-12 lg:col-span-8">
       <h1 class="font-serif text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] tracking-tight">Warehouse <span class="italic font-light">Pick and Place</span> System</h1>
-      <p class="mt-8 max-w-3xl font-serif text-xl leading-snug text-mist-300 sm:text-2xl lg:text-3xl">A robotic arm that finds high-value phone boxes among other products, picks them without damage and places them in a mobile rack. Built by four interns; I designed its electronics and its ROS dashboard.</p>
+      <p class="mt-8 max-w-3xl font-serif text-xl leading-snug text-mist-300 sm:text-2xl lg:text-3xl">Vaska is a warehouse robot whose arm finds high-value phone boxes among other products, picks them without damage and places them in a mobile rack. Built by four interns for Volga Instruments; I designed its electronics and its ROS dashboard.</p>
     </div>
   </section>
 
@@ -78,15 +78,11 @@
     <div><dt class="eyebrow text-mist-500">Stack</dt><dd class="mt-2">ROS, OpenCV, STM32, Intel NUC, Intel RealSense D435</dd></div>
   </dl>
 
-  <!-- Project film (unlisted on YouTube). youtube-nocookie avoids tracking cookies until play. -->
   <figure class="mt-16 lg:mt-24">
-    <div class="aspect-video overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800">
-      <iframe class="h-full w-full" src="https://www.youtube-nocookie.com/embed/M3NdfwcHjbY?rel=0&amp;modestbranding=1"
-              title="Warehouse Pick and Place System: project video" loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800">
+      <img src="../../assets/img/projects/warehouse-pick-and-place/cover-1400.webp" srcset="../../assets/img/projects/warehouse-pick-and-place/cover-1400.webp 1400w, ../../assets/img/projects/warehouse-pick-and-place/cover-2800.webp 2800w" sizes="100vw" width="2800" height="1575" alt="Render of Vaska, a warehouse robot: a robotic arm mounted on a mobile shelf of boxes" class="h-auto w-full">
     </div>
-    <figcaption class="mt-3 text-xs text-mist-500">The system in action.</figcaption>
+    <figcaption class="mt-3 text-xs text-mist-500">Vaska, designed for Volga Instruments Pvt. Ltd. to move objects from the shelf to the invoice counter.</figcaption>
   </figure>
 
   <div class="space-y-24 py-24 lg:space-y-36 lg:py-36">
@@ -103,6 +99,13 @@
         </ul>
       </div>
     </section>
+
+    <figure>
+        <a href="../../assets/img/projects/warehouse-pick-and-place/problem-2800.webp" target="_blank" rel="noopener" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Slide listing warehouse problems such as human error, product damage and pilferage, beside photos of existing warehouse robots">
+          <img src="../../assets/img/projects/warehouse-pick-and-place/problem-1400.webp" srcset="../../assets/img/projects/warehouse-pick-and-place/problem-1400.webp 1400w, ../../assets/img/projects/warehouse-pick-and-place/problem-2800.webp 2800w" sizes="100vw" width="2800" height="1575" alt="Slide listing warehouse problems such as human error, product damage and pilferage, beside photos of existing warehouse robots" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">The problems we mapped in the warehouse, and the robots already on the market.</figcaption>
+      </figure>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
       <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">02 · The team</h2>
@@ -135,7 +138,38 @@
     </section>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">03 · Electronics</h2>
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">03 · The concept</h2>
+      <div class="prose-site col-span-12 lg:col-span-7">
+        <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">A SCARA arm with a suction cup, riding on a mobile shelf.</p>
+        <p>Sketching explored different arm shapes and how the arm, the shelf and the moving base fit together. The final concept combines three parts: a SCARA arm with vacuum suction cups to pick the object, a mobile shelf to hold it, and a self-navigating platform underneath.</p>
+        <p>In use, the warehouse receives a purchase order and sends it to Vaska. Vaska finds the product's coordinates, travels to that spot, picks the object from the shelf and delivers it to the packaging counter.</p>
+      </div>
+    </section>
+
+    <figure>
+        <a href="../../assets/img/projects/warehouse-pick-and-place/ideation-2800.webp" target="_blank" rel="noopener" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Pencil sketches exploring SCARA arm shapes, the mobile shelf and platform, and the final concept">
+          <img src="../../assets/img/projects/warehouse-pick-and-place/ideation-1400.webp" srcset="../../assets/img/projects/warehouse-pick-and-place/ideation-1400.webp 1400w, ../../assets/img/projects/warehouse-pick-and-place/ideation-2800.webp 2800w" sizes="100vw" width="2800" height="1575" alt="Pencil sketches exploring SCARA arm shapes, the mobile shelf and platform, and the final concept" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">Ideation sketches, from arm studies to the final concept.</figcaption>
+      </figure>
+
+    <section aria-label="Final design" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-12">
+      <figure>
+        <a href="../../assets/img/projects/warehouse-pick-and-place/how-it-works-2800.webp" target="_blank" rel="noopener" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Diagram of how Vaska works, from purchase order to delivery, beside a labelled render of the final design">
+          <img src="../../assets/img/projects/warehouse-pick-and-place/how-it-works-1400.webp" srcset="../../assets/img/projects/warehouse-pick-and-place/how-it-works-1400.webp 1400w, ../../assets/img/projects/warehouse-pick-and-place/how-it-works-2800.webp 2800w" sizes="(min-width: 48rem) 50vw, 100vw" width="2800" height="1575" alt="Diagram of how Vaska works, from purchase order to delivery, beside a labelled render of the final design" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">How Vaska works, and the parts of the final design.</figcaption>
+      </figure>
+      <figure>
+        <a href="../../assets/img/projects/warehouse-pick-and-place/final-design-2800.webp" target="_blank" rel="noopener" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Render of Vaska beside a warehouse rack with a person for scale">
+          <img src="../../assets/img/projects/warehouse-pick-and-place/final-design-1400.webp" srcset="../../assets/img/projects/warehouse-pick-and-place/final-design-1400.webp 1400w, ../../assets/img/projects/warehouse-pick-and-place/final-design-2800.webp 2800w" sizes="(min-width: 48rem) 50vw, 100vw" width="2800" height="1575" alt="Render of Vaska beside a warehouse rack with a person for scale" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">Vaska at the rack. It moves to the right shelf and picks without human help.</figcaption>
+      </figure>
+    </section>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">04 · Electronics</h2>
       <div class="col-span-12 lg:col-span-8">
         <p class="prose-site">I designed the electronics as a distributed system: an array of small controllers, all reporting to one central computer.</p>
         <dl class="mt-10 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:gap-x-12">
@@ -148,7 +182,7 @@
     </section>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">04 · ROS dashboard</h2>
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">05 · ROS dashboard</h2>
       <div class="col-span-12 lg:col-span-8">
         <p class="prose-site">The dashboard was the operator's window into the robot. It showed the live camera feed with detections, and ran the arm in three modes.</p>
         <ol class="mt-10 grid gap-6 sm:grid-cols-3">
@@ -172,7 +206,57 @@
     </section>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">05 · Outcome</h2>
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">06 · Build and test</h2>
+      <div class="prose-site col-span-12 lg:col-span-7">
+        <p>My mechanical teammates tuned the arm for weight against deformation. Generative design trimmed the two aluminium arm links from 1090 g to 1030 g and from 500 g to 387 g. In validation, the lighter arm's maximum deformation was 2.5 mm, down from 3.75 mm.</p>
+        <p>Then we built it: machined parts, a working arm, and the electronics wired in.</p>
+      </div>
+    </section>
+
+    <section aria-label="Design optimisation" class="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+      <figure>
+        <a href="../../assets/img/projects/warehouse-pick-and-place/fea-baseline-2800.webp" target="_blank" rel="noopener" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Simulation of the original arm showing deformation and stress">
+          <img src="../../assets/img/projects/warehouse-pick-and-place/fea-baseline-1400.webp" srcset="../../assets/img/projects/warehouse-pick-and-place/fea-baseline-1400.webp 1400w, ../../assets/img/projects/warehouse-pick-and-place/fea-baseline-2800.webp 2800w" sizes="(min-width: 48rem) 33vw, 100vw" width="2800" height="1575" alt="Simulation of the original arm showing deformation and stress" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">The original arm: 3.75 mm maximum deformation.</figcaption>
+      </figure>
+      <figure>
+        <a href="../../assets/img/projects/warehouse-pick-and-place/generative-design-2800.webp" target="_blank" rel="noopener" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Generative design studies removing material from the two arm links">
+          <img src="../../assets/img/projects/warehouse-pick-and-place/generative-design-1400.webp" srcset="../../assets/img/projects/warehouse-pick-and-place/generative-design-1400.webp 1400w, ../../assets/img/projects/warehouse-pick-and-place/generative-design-2800.webp 2800w" sizes="(min-width: 48rem) 33vw, 100vw" width="2800" height="1575" alt="Generative design studies removing material from the two arm links" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">Generative design removes material the arm does not need.</figcaption>
+      </figure>
+      <figure>
+        <a href="../../assets/img/projects/warehouse-pick-and-place/validation-2800.webp" target="_blank" rel="noopener" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Simulation of the lightened arm showing deformation and stress">
+          <img src="../../assets/img/projects/warehouse-pick-and-place/validation-1400.webp" srcset="../../assets/img/projects/warehouse-pick-and-place/validation-1400.webp 1400w, ../../assets/img/projects/warehouse-pick-and-place/validation-2800.webp 2800w" sizes="(min-width: 48rem) 33vw, 100vw" width="2800" height="1575" alt="Simulation of the lightened arm showing deformation and stress" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">The lightened arm, validated: 2.5 mm maximum deformation.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-label="Prototyping photos">
+      <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-8">
+        <img src="../../assets/img/projects/warehouse-pick-and-place/prototype-1.webp" width="505" height="623" alt="Machining a part on a lathe" loading="lazy" class="aspect-[4/5] w-full rounded-lg object-cover ring-1 ring-mist-800">
+        <img src="../../assets/img/projects/warehouse-pick-and-place/prototype-2.webp" width="603" height="623" alt="The prototype arm assembled on a workbench" loading="lazy" class="aspect-[4/5] w-full rounded-lg object-cover ring-1 ring-mist-800">
+        <img src="../../assets/img/projects/warehouse-pick-and-place/prototype-3.webp" width="752" height="623" alt="Close view of the prototype arm with its motor and wiring" loading="lazy" class="aspect-[4/5] w-full rounded-lg object-cover ring-1 ring-mist-800">
+        <img src="../../assets/img/projects/warehouse-pick-and-place/prototype-4.webp" width="837" height="623" alt="Two team members smiling beside the prototype arm" loading="lazy" class="aspect-[4/5] w-full rounded-lg object-cover object-right ring-1 ring-mist-800">
+      </div>
+      <p class="mt-3 text-xs text-mist-500">Prototyping: machining parts, the assembled arm, and the team with it.</p>
+    </section>
+
+  <!-- Project film (unlisted on YouTube). youtube-nocookie avoids tracking cookies until play. -->
+    <figure>
+      <div class="aspect-video overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800">
+      <iframe class="h-full w-full" src="https://www.youtube-nocookie.com/embed/M3NdfwcHjbY?rel=0&amp;modestbranding=1"
+              title="Warehouse Pick and Place System: project video" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <figcaption class="mt-3 text-xs text-mist-500">The system in action.</figcaption>
+  </figure>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">07 · Outcome</h2>
       <div class="prose-site col-span-12 lg:col-span-7">
         <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">The finished robot could easily identify, pick and place phone boxes in the mobile rack.</p>
         <p>We demonstrated it at Ripples 2018, the design showcase at IISc, where it drew attention from people looking to automate their warehouses.</p>
@@ -182,7 +266,7 @@
     </section>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">06 · What we learned</h2>
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">08 · What we learned</h2>
       <div class="col-span-12 lg:col-span-8">
         <dl class="grid gap-x-6 gap-y-8 sm:grid-cols-3 lg:gap-x-12">
           <div class="border-t border-mist-800 pt-4"><dt class="font-serif text-xl text-paper">Lighter and mountable</dt><dd class="mt-3 text-sm leading-relaxed text-mist-300">The arm should be lighter and easy to mount on vertical warehouse lifts or mobile warehouse robots, ideally interchangeably.</dd></div>
