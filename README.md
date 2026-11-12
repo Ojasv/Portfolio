@@ -33,7 +33,7 @@ Write links and asset paths root-absolute (`/assets/...`, `/projects/`) in pages
 npm install
 npm run dev      # sync header/footer into pages, then rebuild CSS on every change
 npm run serve    # http://localhost:8080 (in a second terminal)
-npm run build    # sync + minified CSS; run before every commit
+npm run build    # sync + minified CSS + cache-busting ?v= stamps on CSS/JS links; run before every commit
 ```
 
 ### Adding a page
