@@ -34,5 +34,29 @@
     update();
   }
 
+  // Videos marked data-play-once (card thumbnails): play through once on the first hover or keyboard focus of
+  // their card, then rest on the last frame. Later hovers do nothing; a page reload starts fresh.
+  // Touch screens cannot hover, so there the video plays once when it scrolls into view.
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('video[data-play-once]').forEach(function (video) {
+    if (reduce) return;
+    var played = false;
+    var playOnce = function () {
+      if (played) return;
+      played = true;
+      var p = video.play();
+      if (p && p.catch) p.catch(function () { played = false; });
+    };
+    var card = video.closest('.group') || video;
+    card.addEventListener('mouseenter', playOnce);
+    card.addEventListener('focusin', playOnce);
+    if (matchMedia('(hover: none)').matches && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { playOnce(); io.disconnect(); }
+      }, { threshold: 0.6 });
+      io.observe(video);
+    }
+  });
+
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
