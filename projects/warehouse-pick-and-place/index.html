@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../assets/css/site.css?v=531fdc65">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=913a60b7">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -85,17 +85,37 @@
     <figcaption class="mt-3 text-xs text-mist-500">Vaska, designed for Volga Instruments Pvt. Ltd. to move objects from the shelf to the invoice counter.</figcaption>
   </figure>
 
+  <!-- Impact card -->
+  <section aria-labelledby="impact" class="mt-16 rounded-lg bg-surface/60 p-6 ring-1 ring-accent-700 sm:p-10 lg:mt-24 lg:p-14">
+    <h2 id="impact" class="eyebrow text-accent-300">Impact</h2>
+    <dl class="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-3 lg:gap-x-12">
+      <div>
+        <dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">90%+</dt>
+        <dd class="mt-4 leading-relaxed text-mist-300">Less pilferage of iPhone boxes, as tested by Volga Instruments' clients.</dd>
+      </div>
+      <div>
+        <dt class="font-serif text-2xl leading-tight text-paper lg:text-3xl">Faster to the hub</dt>
+        <dd class="mt-4 leading-relaxed text-mist-300">Less time spent scanning inside the warehouse and reporting to its sorting and distribution hub.</dd>
+      </div>
+      <div>
+        <dt class="font-serif text-2xl leading-tight text-paper lg:text-3xl">A reorganised warehouse</dt>
+        <dd class="mt-4 leading-relaxed text-mist-300">The warehouse split into two sections, one robotic and one manual. High-value items now go only through the automated section.</dd>
+      </div>
+    </dl>
+  </section>
+
   <div class="space-y-24 py-24 lg:space-y-36 lg:py-36">
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
       <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">01 · The brief</h2>
       <div class="prose-site col-span-12 lg:col-span-7">
-        <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">High-value items like iPhones were prone to pilferage in the warehouse.</p>
-        <p>The answer was to take hands out of the loop: a robotic pick-and-place system that handles the phone boxes itself, without damaging them.</p>
-        <p>To do that, the robot had to:</p>
+        <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">Small, expensive items were disappearing from the warehouse.</p>
+        <p>This was before hyper-delivery platforms. Big warehouses served a whole city or zone, independent of any one platform, with reserved shelves for many distributors and retailers. A fresh stock of iPhones would wait there until it was ordered and moved to a sorting centre.</p>
+        <p>Mobile phone boxes, gold coins and other small, costly items were stolen in a simple way. A worker hid one inside a rarely ordered product, such as a pressure cooker, and later ordered that product.</p>
+        <p>The answer was to take hands out of the loop. The robot had to:</p>
         <ul>
           <li>Identify the ordered box from an array of many other products, using machine learning and image processing.</li>
           <li>Judge the exact distance to the box with a depth camera, so the arm's kinematics could be planned accurately.</li>
-          <li>Pick the box up and place it in a mobile shelf.</li>
+          <li>Pick the box up without damage and place it in a mobile shelf.</li>
         </ul>
       </div>
     </section>
@@ -138,10 +158,105 @@
     </section>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">03 · The concept</h2>
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">03 · Design process</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <p class="prose-site">We did not start with a robot arm. We started in the warehouse, and each decision narrowed the next.</p>
+        <!-- Storyline: numbered nodes joined by a vertical line -->
+        <ol class="mt-12">
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">1</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Field visits</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We visited warehouses to learn which items were truly high-value and prone to pilferage.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>Our focus was phone boxes, but we found more items that should only be handled by automation:</p>
+                <ul class="mt-4 flex flex-wrap gap-2 text-xs"><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Luxury watches</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">CPUs</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Luxury perfumes</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Gold coins and jewellery</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Camera gear</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Compact high-end cameras</li></ul>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">2</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Grading the items</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We plotted every item by price against volume. iPhones sat right in the middle.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>Most of the items came in plain cuboid boxes with a plastic wrap. That later suited our suction mechanism well.</p>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">3</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">How to lift a box</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We brainstormed lifting mechanisms, plus the safety and handling each one needed.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>We ranked every method in a matrix for cost, efficiency, handling and time of operation. Suction came out on top.</p><p class="mt-3">Its one limit: the surface must be smooth and not perforated. So we added an image-processing model that reads surface and texture to find a safe spot to lift from.</p>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">4</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Do we need a robot at all?</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We stepped back and compared three options: manual work with better checks, people and robots working together, and full automation.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>Any gate-keeping of goods in and out would need a label on the product's own packaging, or a second layer of packaging. Labels reduce the product's sanctity. Wrapping and unwrapping can damage it, or open a new route for pilferage.</p><p class="mt-3">So we committed to a fully autonomous arm, one that could also work off-hours and collect orders accurately at the dispatch station.</p>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">5</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Choosing the actuation</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We ranked the options on cost, actuation mechanism, access to parts and spares, predictability and repeatability.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>Machine learning identified the objects, and the arm had to reach its target with a precision of a tenth of a millimetre. That ruled out some cheaper options, such as hydraulics.</p><p class="mt-3">We studied how each actuation type holds up in the long run, and looked at purpose-built robots from Kuka and ABB. We settled on high-precision electric motors, steppers and servos, for their predictable repeatability.</p>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">6</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Choosing the arm</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We weighed a vertical arm like a JCB's, a SCARA arm, an articulated arm, a delta robot and a Cartesian gantry.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>We built scaled foam-board models with off-the-shelf servo motors to copy the real working setup.</p><p class="mt-3">The team agreed on SCARA. It reached the horizontal racks with the easiest, most predictable kinematics. It was also easy to train, because it moves much like a human arm reaching to grab something.</p>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">7</span>
+            </div>
+            <div class="max-w-[42rem] pb-0">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Choosing the grip</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">Pneumatic suction lifted most boxes in our use case without a dent.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>Pneumatic, hydraulic and servo grippers all struggled to grip without concentrating pressure on the box. Suction also needed far less planning of how to grab and with how much force.</p><p class="mt-3">We used up to 4.5 kg of suction, adjusted by piezoelectric feedback. Once suction passed the weight of the box, the box rose a few millimetres, which the camera confirmed. There were no repeated gripper attempts leaving pressure marks. The arm then built about 10% more pressure to carry the box safely from the warehouse shelf to the robot's shelf.</p>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">04 · The concept</h2>
       <div class="prose-site col-span-12 lg:col-span-7">
         <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">A SCARA arm with a suction cup, riding on a mobile shelf.</p>
-        <p>Sketching explored different arm shapes and how the arm, the shelf and the moving base fit together. The final concept combines three parts: a SCARA arm with vacuum suction cups to pick the object, a mobile shelf to hold it, and a self-navigating platform underneath.</p>
+        <p>With the mechanism chosen, sketching explored arm shapes and how the arm, the shelf and the moving base fit together. The final concept combines three parts: a SCARA arm with vacuum suction cups to pick the object, a mobile shelf to hold it, and a self-navigating platform underneath.</p>
         <p>In use, the warehouse receives a purchase order and sends it to Vaska. Vaska finds the product's coordinates, travels to that spot, picks the object from the shelf and delivers it to the packaging counter.</p>
       </div>
     </section>
@@ -169,7 +284,7 @@
     </section>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">04 · Electronics</h2>
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">05 · Electronics</h2>
       <div class="col-span-12 lg:col-span-8">
         <p class="prose-site">I designed the electronics as a distributed system: an array of small controllers, all reporting to one central computer.</p>
         <dl class="mt-10 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:gap-x-12">
@@ -182,7 +297,7 @@
     </section>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">05 · ROS dashboard</h2>
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">06 · ROS dashboard</h2>
       <div class="col-span-12 lg:col-span-8">
         <p class="prose-site">The dashboard was the operator's window into the robot. It showed the live camera feed with detections, and took the arm through three modes, in order.</p>
         <!-- Steps: numbered nodes joined by a line (vertical on phones, horizontal from sm up) -->
@@ -226,7 +341,7 @@
     </section>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">06 · Build and test</h2>
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">07 · Build and test</h2>
       <div class="prose-site col-span-12 lg:col-span-7">
         <p>My mechanical teammates tuned the arm for weight against deformation. Generative design trimmed the two aluminium arm links from 1090 g to 1030 g and from 500 g to 387 g. In validation, the lighter arm's maximum deformation was 2.5 mm, down from 3.75 mm.</p>
         <p>Then we built it: machined parts, a working arm, and the electronics wired in.</p>
@@ -276,7 +391,7 @@
   </figure>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">07 · Outcome</h2>
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">08 · Outcome</h2>
       <div class="prose-site col-span-12 lg:col-span-7">
         <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">The finished robot could easily identify, pick and place phone boxes in the mobile rack.</p>
         <p>We demonstrated it at Ripples 2018, the design showcase at IISc, where it drew attention from people looking to automate their warehouses.</p>
@@ -286,7 +401,7 @@
     </section>
 
     <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">08 · What we learned</h2>
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">09 · What we learned</h2>
       <div class="col-span-12 lg:col-span-8">
         <dl class="grid gap-x-6 gap-y-8 sm:grid-cols-3 lg:gap-x-12">
           <div class="border-t border-mist-800 pt-4"><dt class="font-serif text-xl text-paper">Lighter and mountable</dt><dd class="mt-3 text-sm leading-relaxed text-mist-300">The arm should be lighter and easy to mount on vertical warehouse lifts or mobile warehouse robots, ideally interchangeably.</dd></div>
