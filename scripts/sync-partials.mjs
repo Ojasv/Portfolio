@@ -32,13 +32,20 @@ function walk(dir, out = []) {
 // <!-- crumbs --> … <!-- /crumbs -->. Generated from the folder path; the page's own name comes from its <title>.
 const sectionNames = { projects: 'Work', artworks: 'Visuals', blog: 'Journal', about: 'Profile' };
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+// Title of the page at a folder path (text before " · " in its <title>), for breadcrumbs of pages nested deeper.
+function pageTitle(folders) {
+  try {
+    const html = readFileSync(join(root, ...folders, 'index.html'), 'utf8');
+    return ((/<title>([^<]*)<\/title>/.exec(html) || [])[1] || '').split(' · ')[0].trim();
+  } catch { return ''; }
+}
 function crumbs(rel, html) {
   const parts = rel.split(sep).slice(0, -1);            // folders above index.html
   if (!parts.length || rel === '404.html') return null;
   const title = ((/<title>([^<]*)<\/title>/.exec(html) || [])[1] || '').split(' · ')[0].trim();
   const trail = [{ name: 'Home', href: '/' }];
   parts.forEach((part, i) => trail.push({
-    name: i === 0 ? (sectionNames[part] || part) : (title || part),
+    name: i === 0 ? (sectionNames[part] || part) : i === parts.length - 1 ? (title || part) : (pageTitle(parts.slice(0, i + 1)) || part),
     href: '/' + parts.slice(0, i + 1).join('/') + '/',
   }));
   const parent = trail[trail.length - 2];
