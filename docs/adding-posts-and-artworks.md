@@ -12,7 +12,7 @@ Everything is plain HTML. Copy a file or block, edit the text, run `npm run buil
 6. In `blog/index.html`, copy one `<li>…</li>` post card, paste it at the **top** of the list, and change the link, date, tag, title and summary.
 7. `npm run build`, then commit and push.
 
-`blog/designing-under-nda/` is a sample post. Delete that folder and its card once your first real post is up.
+`blog/articulating-design-decisions/` is a real post you can copy from. Republished posts end with an "Originally published on …" box linking to the original.
 
 ## Add an artwork
 
