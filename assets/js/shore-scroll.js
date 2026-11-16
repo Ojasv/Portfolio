@@ -9,7 +9,7 @@
   var VS = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
   var FS = [
     'precision highp float;',
-    'uniform vec2 R,IS;uniform float T,P,FO,HAS,E,FX,Z,PY;uniform vec3 BG;uniform sampler2D IMG;',
+    'uniform vec2 R,IS;uniform float T,P,FO,HAS,E,FX,Z,PY;uniform vec3 BG,SK0L,SK0R,SK1L,SK1R;uniform sampler2D IMG;',
     'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
     'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+1.),f.x),f.y);}',
     'float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<4;i++){s+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return s;}',
@@ -26,6 +26,10 @@
     ' vec2 su=vec2(uv.x,uv.y+slide)+wob;float ia=IS.x/IS.y;vec2 iu=su;',
     ' if(sa>ia){iu.y=.5+(su.y-.5)*ia/sa;}else{float hw=.5*sa/ia/Z;iu.x=clamp(FX,hw,1.-hw)+(su.x-.5)*sa/ia/Z;iu.y=PY+(su.y-PY)/Z;}',
     ' vec3 c0=texture2D(IMG,clamp(iu,vec2(0.,0.),vec2(1.,.998))).rgb;',
+    // above the photo's top edge (portrait zoom-out) continue the sky as a smooth gradient built from averaged sky colours
+    // (SK0* at the top edge, SK1* a little lower; L/R = left and right of the photo) instead of stretching the top row
+    ' if(iu.y<.06){float sx=clamp((iu.x-.1)/.8,0.,1.);vec3 s0=mix(SK0L,SK0R,sx),s1=mix(SK1L,SK1R,sx);',
+    '  vec3 sky=s0+(s0-s1)*clamp((.02-iu.y)/.1,-.5,4.)*.5+(h(gl_FragCoord.xy)-.5)/170.;c0=mix(sky,c0,smoothstep(-.01,.06,iu.y));}',
     ' float xl=.02+abs(fract(uv.x*.9+.13)*2.-1.)*.34;',                    // clear water from the photo's left side — never the subject
     ' vec3 c1=texture2D(IMG,vec2(xl,clamp(.97-fract((iu.y-.9)*1.1)*.22,0.,.998))).rgb;',
     ' vec3 col=mix(c0,c1,smoothstep(.9,.995,iu.y));',
@@ -73,6 +77,13 @@
       var gl = st.gl; gl.bindTexture(gl.TEXTURE_2D, st.tex);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
       st.size = [img.naturalWidth, img.naturalHeight]; st.has = 1; st.hideNext = true;
+      // average sky colours near the top of the photo, used to extend the sky smoothly above it
+      try {
+        var c = document.createElement('canvas'); c.width = 50; c.height = 50;
+        var x = c.getContext('2d'); x.drawImage(img, 0, 0, 50, 50);
+        var avg = function (x0, y0) { var d = x.getImageData(x0, y0, 10, 2).data, r = [0, 0, 0]; for (var k = 0; k < d.length; k += 4) { r[0] += d[k]; r[1] += d[k + 1]; r[2] += d[k + 2]; } return r.map(function (v) { return v / (d.length / 4) / 255; }); };
+        st.sky = [avg(0, 0), avg(40, 0), avg(0, 5), avg(40, 5)];
+      } catch (e) { st.sky = null; }
     };
     img.src = st.o.image;
   }
@@ -89,7 +100,7 @@
     var tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
     [gl.TEXTURE_WRAP_S, gl.TEXTURE_WRAP_T].forEach(function (p) { gl.texParameteri(gl.TEXTURE_2D, p, gl.CLAMP_TO_EDGE); });
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    var U = {}; ['R', 'IS', 'T', 'P', 'FO', 'HAS', 'BG', 'IMG', 'E', 'FX', 'Z', 'PY'].forEach(function (k) { U[k] = gl.getUniformLocation(pr, k); });
+    var U = {}; ['R', 'IS', 'T', 'P', 'FO', 'HAS', 'BG', 'IMG', 'E', 'FX', 'Z', 'PY', 'SK0L', 'SK0R', 'SK1L', 'SK1R'].forEach(function (k) { U[k] = gl.getUniformLocation(pr, k); });
     var st = { el: el, gl: gl, U: U, tex: tex, o: read(el), p: 0, clock: 0, prev: 0, visible: true, has: 0, size: [1, 1] };
     st.p = progress(st.o);
     el.__shore = st;
@@ -126,6 +137,7 @@
     gl.uniform1f(U.T, st.clock + 20); gl.uniform1f(U.P, st.p); gl.uniform1f(U.FO, o.foam);
     gl.uniform1f(U.HAS, st.has); var fk = Math.min(1, Math.max(0, (w / h - 0.8) / 0.4)); fk = fk * fk * (3 - 2 * fk);   // focal point on portrait only; photo centre again by aspect 1.2 (same as wave-scroll)
     gl.uniform1f(U.FX, o.focusX + (0.5 - o.focusX) * fk); gl.uniform1f(U.Z, w / h < 0.8 ? o.zoom : 1); gl.uniform1f(U.PY, o.pivotY); gl.uniform1f(U.E, st.energy); gl.uniform3fv(U.BG, o.bg); gl.uniform1i(U.IMG, 0);
+    var sk = st.sky || [o.bg, o.bg, o.bg, o.bg]; gl.uniform3fv(U.SK0L, sk[0]); gl.uniform3fv(U.SK0R, sk[1]); gl.uniform3fv(U.SK1L, sk[2]); gl.uniform3fv(U.SK1R, sk[3]);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     if (st.hideNext) { st.hideNext = false; var r = o.replace && document.querySelector(o.replace); if (r) r.style.visibility = 'hidden'; }
   }

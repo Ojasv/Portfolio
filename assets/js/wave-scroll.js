@@ -94,6 +94,7 @@
     var ft = fit(o, W, H), cDw = ft.w, cDh = ft.h;
     var fX = ft.x + o.focus[0] * cDw, sL = o.focus[1] * cDw * 1.4, sR = o.focus[2] * cDw * 1.2;
     var lineY = ft.y + 0.68 * cDh;                // photo's breaking foam line, on screen
+    var Wr = Math.max(W, H * 1.6);                 // swell length is sized for a landscape view, so tall phone screens get the same long, lazy waves instead of narrow squeezed humps
     function hump(x) { var dd = x - fX, sp = dd < 0 ? sL : sR; return Math.exp(-(dd * dd) / (sp * sp)); }
 
     for (var i = 0; i < n; i++) {
@@ -101,7 +102,7 @@
       var scale = 0.55 + 0.75 * k;                         // perspective: nearer = bigger
       var base = H * (0.9 + 0.08 * k) - H * 0.08 * o.rise * ep * (0.55 + 0.6 * k);
       var A = H * 0.045 * scale * o.amp * (1 + st.energy * 0.25);
-      var len = W * (0.38 + 0.5 * k);
+      var len = Wr * (0.38 + 0.5 * k);
       var f = Math.PI * 2 / len;
       var ph = t * (0.45 - 0.15 * k) * 1.2 + p * 7 * o.speed * (0.5 + k) + i * 2.1;   // crests travel left
       var ys = [], xs = [];
@@ -181,31 +182,68 @@
     return { w: w, h: h, x: offX(o, W, H, w), y: y };
   }
 
-  // bubbly whitewater anchored in wave-space, densest where the photo's wave breaks (by the feet)
+  // soft round sprite used for every fleck of foam (cheaper and softer than hard-edged ellipses)
+  var BLOB = null;
+  function blob() {
+    if (BLOB) return BLOB;
+    var c = document.createElement('canvas'); c.width = c.height = 48;
+    var x = c.getContext('2d'), g = x.createRadialGradient(24, 24, 0, 24, 24, 24);
+    g.addColorStop(0, FOAM + '1)'); g.addColorStop(0.6, FOAM + '0.95)'); g.addColorStop(0.88, FOAM + '0.3)'); g.addColorStop(1, FOAM + '0)');
+    x.fillStyle = g; x.fillRect(0, 0, 48, 48);
+    return (BLOB = c);
+  }
+  function vnoise(x, s) { var i = Math.floor(x), fr = x - i; fr = fr * fr * (3 - 2 * fr); return hash(i, s) * (1 - fr) + hash(i + 1, s) * fr; }
+
+  // whitewater anchored in wave-space, densest where the photo's wave breaks (by the feet).
+  // Built like real foam: a soft, uneven band along the breaking crest, then flecks in clumps of mixed sizes
+  // (many tiny, a few large) that trail down the wave face and shimmer slightly.
   function foam(st, ctx, xs, ys, f, ph, A, i, k, W, step) {
     var o = st.o; if (o.foam <= 0 || k < 0.5) return;
-    var H = st.el.clientHeight, ft = fit(o, W, H), Dw = ft.w, Dh = ft.h;
+    var H = st.el.clientHeight, ft = fit(o, W, H), Dw = ft.w;
     var fX = ft.x + o.focus[0] * Dw, sL = o.focus[1] * Dw, sR = o.focus[2] * Dw;
     function weight(x) { var dd = x - fX, sp = dd < 0 ? sL : sR; return 0.1 + 0.9 * Math.exp(-(dd * dd) / (sp * sp)); }
     function cy(x) { var u = (x + step) / step, j = Math.max(0, Math.min(ys.length - 2, Math.floor(u))), fr = Math.min(1, Math.max(0, u - j)); return ys[j] + (ys[j + 1] - ys[j]) * fr; }
-    var amt = Math.min(1.1, o.foam * (0.45 + 0.75 * k));
-    var n0 = Math.floor(ph / (Math.PI * 2)) - 1, n1 = Math.min(n0 + 12, Math.ceil((W * f + ph) / (Math.PI * 2)) + 1);
-    var per = Math.round(140 + 260 * k), size = 1.0 + 2.6 * k;
+    function breaking(n) { return Math.min(1, Math.max(0, hash(n, i * 9.7) * 1.3 - 0.15)); }
+    var amt = Math.min(1.1, o.foam * (0.45 + 0.75 * k)), TAU = Math.PI * 2, B = blob(), t = st.t2 || 0;
     ctx.save();
+
+    // 1. soft band of churned water hugging the crest, thicker and brighter where the wave is breaking
+    for (var q = 0; q < xs.length; q++) {
+      var bx = xs[q], th = bx * f + ph, cn = Math.floor(th / TAU), fr = (th - cn * TAU) / Math.PI;
+      if (fr > 1) continue;
+      var b = breaking(cn) * amt * weight(bx) * Math.pow(Math.sin(fr * Math.PI), 0.7);
+      if (b < 0.05) continue;
+      var nz = vnoise(th * 2.3, i + 3) * 0.7 + vnoise(th * 7.1 + t * 0.15, i + 11) * 0.3;
+      var bh = A * (0.08 + 0.3 * b) * (0.35 + 1.2 * nz);
+      ctx.globalAlpha = Math.min(0.5, 0.42 * b * (0.3 + 1.0 * nz));
+      for (var e = 0; e < 3; e++) {                       // a few overlapping puffs per step, so the band has a ragged edge
+        var h1 = hash(q * 3 + e, cn + i), h2 = hash(q + e * 7, cn * 5 + i), pr = bh * (0.45 + 0.8 * h1);
+        ctx.drawImage(B, bx + (h2 - 0.5) * step * 2.4 - pr * 1.3, ys[q] + bh * (h1 - 0.25) * 0.9 - pr, pr * 2.6, pr * 2);
+      }
+    }
+
+    // 2. flecks and bubbles
+    var n0 = Math.floor(ph / TAU) - 1, n1 = Math.min(n0 + 12, Math.ceil((W * f + ph) / TAU) + 1);
+    var per = Math.round(200 + 340 * k), size = 0.9 + 2.3 * k;
     for (var n = n0; n <= n1; n++) {
-      var br = Math.min(1, Math.max(0, hash(n, i * 9.7) * 1.3 - 0.15)) * amt;
+      var br = breaking(n) * amt;
       if (br < 0.04) continue;
       for (var j = 0; j < per; j++) {
-        var r1 = hash(n * 13 + j, i), r2 = hash(j, n * 7 + i), r3 = hash(j * 3 + n, i * 5);
-        var x = (Math.PI * 2 * n + Math.PI * (0.05 + 0.95 * r1) - ph) / f;
-        if (x < -10 || x > W + 10) continue;
-        var w = weight(x); if (r3 > w * 1.15) continue;        // sparse away from the break
-        var lace = r2 * r2;
-        var y = cy(x) - A * 0.12 * (1 - r2) + lace * A * (1 + 0.8 * w) * br;
-        var al = br * w * (1 - lace * 0.6) * (0.55 + 0.45 * r3);
-        var r = size * (0.5 + r3 * 1.3) * (1 - lace * 0.5);
-        ctx.fillStyle = FOAM + Math.min(0.85, al).toFixed(3) + ')';
-        ctx.beginPath(); ctx.ellipse(x, y, r * 1.5, r, 0, 0, 6.283); ctx.fill();
+        var r1 = hash(n * 13 + j, i), r2 = hash(j, n * 7 + i), r3 = hash(j * 3 + n, i * 5), r4 = hash(j * 5.3 + n * 2, i + 17);
+        var x = (TAU * n + Math.PI * (0.05 + 0.95 * r1) - ph) / f;
+        if (x < -20 || x > W + 20) continue;
+        var w = weight(x);
+        var clump = vnoise(r1 * 9 + n * 3.1, i + 5) * 0.65 + vnoise(r1 * 31 + n, i + 7) * 0.35;   // foam gathers in patches
+        if (r3 > w * 1.15 * (0.4 + 1.3 * clump)) continue;
+        var lace = r2 * r2;                                                                       // 0 at the crest → 1 trailing down the face
+        var big = Math.pow(r4, 4);                                                                // mostly small flecks, a few broad patches
+        var r = size * (0.5 + 1.1 * r3 + 3.2 * big) * (1 - lace * 0.45);
+        var stretch = 1.1 + 1.9 * hash(j, n + i * 3) * (0.4 + 0.6 * lace);                        // trailing foam smears along the wave
+        var drift = Math.sin(t * 0.5 + j * 1.7 + n) * size * 0.8;
+        var y = cy(x) - A * 0.12 * (1 - r2) + lace * A * (1 + 0.8 * w) * br + Math.cos(t * 0.4 + j) * size * 0.3;
+        var al = br * w * (1 - lace * 0.6) * (0.5 + 0.5 * r3) * (1 - 0.4 * big) * (0.8 + 0.2 * Math.sin(t * 1.1 + j * 2.3));
+        ctx.globalAlpha = Math.min(0.9, al);
+        ctx.drawImage(B, x + drift - r * stretch, y - r, r * stretch * 2, r * 2);
       }
     }
     ctx.restore();
