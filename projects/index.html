@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../assets/css/site.css?v=d5ecc883">
+  <link rel="stylesheet" href="../assets/css/site.css?v=611ff75b">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -60,7 +60,7 @@
     </nav>
   </div>
   <!-- /crumbs -->
-  <!-- PAGE CONTENT START: Work index. Add one <article> per case study (featured first). -->
+  <!-- PAGE CONTENT START: Work index. One <article> per project, in the order below. -->
   <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
     <p class="eyebrow col-span-12 mb-8 self-start border-t border-current pt-4 lg:col-span-4 lg:mb-0">Selected work</p>
     <div class="col-span-12 lg:col-span-7">
@@ -71,27 +71,19 @@
 
   <section aria-label="Projects" class="mt-16 grid grid-cols-1 gap-x-6 gap-y-16 md:grid-cols-2 lg:mt-24 lg:gap-x-12 lg:gap-y-24 3xl:grid-cols-3">
 
-    <!-- FEATURED CARD: spans the full row -->
-    <article class="group md:col-span-2 3xl:col-span-3">
-      <a href="../projects/case-study-template/" class="grid items-end gap-6 md:grid-cols-12 lg:gap-12">
-        <div class="aspect-[16/10] overflow-hidden rounded-lg bg-surface md:col-span-8">
-          <!-- <img src="../assets/img/projects/<slug>/cover-2400.jpg" srcset="../assets/img/projects/<slug>/cover-1200.jpg 1200w, ../assets/img/projects/<slug>/cover-2400.jpg 2400w, ../assets/img/projects/<slug>/cover-3600.jpg 3600w" sizes="(min-width: 48rem) 66vw, 100vw" alt="…" loading="lazy" class="h-full w-full object-cover mix-blend-lighten transition duration-700 ease-tide group-hover:scale-[1.03]"> -->
-          <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent-800 via-surface to-ink text-sm text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03]">Cover image 16:10</div>
+    <!-- 1 · VASKA: Warehouse Pick and Place -->
+    <article class="group">
+      <a href="../projects/warehouse-pick-and-place/" class="block">
+        <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface">
+          <img src="../assets/img/projects/warehouse-pick-and-place/card.webp" width="2080" height="1560" alt="Render of Vaska, a warehouse robot with an arm on a mobile shelf" loading="lazy" class="h-full w-full object-cover transition duration-700 ease-tide group-hover:scale-[1.03]">
         </div>
-        <div class="md:col-span-4">
-          <p class="eyebrow text-mist-400">2025 · Fintech · Mobile app</p>
-          <h2 class="mt-3 slant font-serif text-3xl leading-tight tracking-tight group-hover:text-accent-300 lg:text-5xl">Project title</h2>
-          <p class="mt-4 leading-relaxed text-mist-300">One or two lines on the problem and the outcome, written for a hiring manager skimming the page.</p>
-          <div class="mt-5 flex flex-wrap gap-2 text-xs">
-            <span class="rounded bg-accent-900 px-2 py-1 text-accent-300">Product design</span>
-            <span class="rounded bg-mist-900 px-2 py-1 text-mist-400">NDA · Prototype on request</span>
-          </div>
-          <p class="eyebrow mt-6 text-accent-300">Read case study <span aria-hidden="true" class="inline-block transition group-hover:translate-x-1">→</span></p>
-        </div>
+        <p class="eyebrow mt-6 text-mist-400">2018 · R&amp;D internship · Robotics</p>
+        <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">VASKA: Warehouse Pick and Place</h2>
+        <p class="mt-3 max-w-xl leading-relaxed text-mist-300">Vaska, a robot that finds, picks and places high-value phone boxes. I designed its electronics and ROS dashboard.</p>
       </a>
     </article>
 
-    <!-- STANDARD CARD: Charcoal Desk (opens a page of three projects). The video plays once on first hover (site.js, data-play-once). -->
+    <!-- 2 · Charcoal Desk (group: App, Workflow Design, Control UX) -->
     <article class="group">
       <a href="../projects/charcoal-desk/" class="block">
         <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface">
@@ -99,45 +91,78 @@
             <source src="../assets/img/projects/charcoal-desk/cover-v3.mp4" type="video/mp4">
           </video>
         </div>
-        <p class="eyebrow mt-6 text-mist-400">2019–2021 · Charcoal.inc · Red Dot winner</p>
+        <p class="eyebrow mt-6 text-mist-400">2019–2021 · Charcoal.inc · Red Dot winner · 3 projects</p>
         <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Charcoal Desk</h2>
         <p class="mt-3 max-w-xl leading-relaxed text-mist-300">A desk was just furniture. We reimagined it to help you work better.</p>
       </a>
     </article>
 
-    <!-- STANDARD CARD: Warehouse Pick and Place System -->
+    <!-- 3 · HealthAsyst -->
     <article class="group">
-      <a href="../projects/warehouse-pick-and-place/" class="block">
+      <a href="../projects/healthasyst-clinic-management/" class="block">
         <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface">
-          <img src="../assets/img/projects/warehouse-pick-and-place/card.webp" width="2080" height="1560" alt="Render of Vaska, a warehouse robot with an arm on a mobile shelf" loading="lazy" class="h-full w-full object-cover transition duration-700 ease-tide group-hover:scale-[1.03]">
+          <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-mist-900 to-accent-900 px-6 text-center font-serif text-3xl text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03] lg:text-4xl">HealthAsyst</div>
         </div>
-        <p class="eyebrow mt-6 text-mist-400">2018 · R&amp;D internship · Robotics</p>
-        <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Warehouse Pick and Place System</h2>
-        <p class="mt-3 max-w-xl leading-relaxed text-mist-300">Vaska, a robot that finds, picks and places high-value phone boxes. I designed its electronics and ROS dashboard.</p>
+        <p class="eyebrow mt-6 text-mist-400">HealthAsyst</p>
+        <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Clinic Management System</h2>
       </a>
     </article>
 
+    <!-- 4 · TopSource -->
     <article class="group">
-      <a href="../projects/case-study-template/" class="block">
+      <a href="../projects/topsource-portico-hrms/" class="block">
         <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface">
-          <div class="flex h-full w-full items-center justify-center bg-gradient-to-bl from-accent-900 via-surface to-mist-900 text-sm text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03]">Cover image 4:3</div>
+          <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-mist-900 to-accent-900 px-6 text-center font-serif text-3xl text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03] lg:text-4xl">TopSource</div>
         </div>
-        <p class="eyebrow mt-6 text-mist-400">2024 · SaaS · Design system</p>
-        <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Project title</h2>
-        <p class="mt-3 max-w-xl leading-relaxed text-mist-300">Short summary of the problem and what changed.</p>
+        <p class="eyebrow mt-6 text-mist-400">TopSource</p>
+        <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Portico HRMS System</h2>
       </a>
     </article>
 
+    <!-- 5 · Bosch (group: CLIFF, ATLAS) -->
     <article class="group">
-      <a href="../projects/case-study-template/" class="block">
+      <a href="../projects/bosch-image-data-curation/" class="block">
         <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface">
-          <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-mist-900 to-accent-800 text-sm text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03]">Cover image 4:3</div>
+          <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-mist-900 to-accent-900 px-6 text-center font-serif text-3xl text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03] lg:text-4xl">Bosch</div>
         </div>
-        <p class="eyebrow mt-6 text-mist-400">2023 · E-commerce · Research</p>
-        <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Project title</h2>
-        <p class="mt-3 max-w-xl leading-relaxed text-mist-300">Short summary of the problem and what changed.</p>
+        <p class="eyebrow mt-6 text-mist-400">Bosch · 2 projects</p>
+        <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Image Data Curation Workflow</h2>
       </a>
     </article>
+
+    <!-- 6 · TP Vision -->
+    <article class="group">
+      <a href="../projects/tp-vision-signage-display-management/" class="block">
+        <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface">
+          <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-mist-900 to-accent-900 px-6 text-center font-serif text-3xl text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03] lg:text-4xl">TP Vision</div>
+        </div>
+        <p class="eyebrow mt-6 text-mist-400">TP Vision</p>
+        <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Signage Display Management System</h2>
+      </a>
+    </article>
+
+    <!-- 7 · SAP (group: Esign-Log, PoetrySlamManager) -->
+    <article class="group">
+      <a href="../projects/sap-erp-public-cloud/" class="block">
+        <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface">
+          <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-mist-900 to-accent-900 px-6 text-center font-serif text-3xl text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03] lg:text-4xl">SAP</div>
+        </div>
+        <p class="eyebrow mt-6 text-mist-400">SAP · 2 projects</p>
+        <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">ERP Public Cloud Application</h2>
+      </a>
+    </article>
+
+    <!-- 8 · Philips (group: IST Admin, VPAM gateway, LFOD in PSC) -->
+    <article class="group">
+      <a href="../projects/philips/" class="block">
+        <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface">
+          <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-mist-900 to-accent-900 px-6 text-center font-serif text-3xl text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03] lg:text-4xl">Philips</div>
+        </div>
+        <p class="eyebrow mt-6 text-mist-400">Philips · 3 projects</p>
+        <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Philips</h2>
+      </a>
+    </article>
+
   </section>
   <!-- PAGE CONTENT END -->
 </main>
@@ -172,6 +197,6 @@
 </footer>
 <!-- /include:footer -->
 
-<script src="../assets/js/site.js?v=35f76efd" defer></script>
+<script src="../assets/js/site.js?v=650ce818" defer></script>
 </body>
 </html>

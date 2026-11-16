@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../assets/css/site.css?v=d5ecc883">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=611ff75b">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -70,34 +70,39 @@
     </div>
   </section>
 
+  <!-- The desk rising. Plays once when the whole video is in view (site.js, data-play-once="view"). No hover zoom here. -->
+  <div class="mt-16 grid grid-cols-12 gap-x-6 lg:mt-24 lg:gap-x-12">
+    <div class="col-span-12 lg:col-span-8 lg:col-start-5">
+      <div class="aspect-[4/3] w-full max-w-[110vh] overflow-hidden rounded-lg bg-surface">
+        <video data-play-once="view" muted playsinline preload="auto" poster="../../assets/img/projects/charcoal-desk/cover-v3-poster.webp" width="1600" height="1200" aria-label="The Charcoal Desk, Red Dot winner 2021, rising from sitting to standing height" class="h-full w-full object-cover">
+          <source src="../../assets/img/projects/charcoal-desk/cover-v3.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
   <section aria-label="Projects within Charcoal Desk" class="mt-16 lg:mt-24">
-    <p class="eyebrow text-mist-500">Three projects</p>
+    <h2 class="eyebrow text-mist-500">My works at Charcoal</h2>
     <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-16 md:grid-cols-3 lg:gap-x-12">
-      <!-- PROJECT 1: page at /projects/charcoal-desk/project-1/ (rename the folder and this link together) -->
       <article class="group">
-        <a href="../../projects/charcoal-desk/project-1/" class="block">
-          <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface"><div class="flex h-full w-full items-center justify-center text-sm text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03]">Cover image 4:3</div></div>
+        <a href="../../projects/charcoal-desk/app/" class="block">
+          <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface"><div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-mist-900 to-accent-900 px-6 text-center font-serif text-2xl text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03]">App</div></div>
           <p class="eyebrow mt-6 text-mist-400">Project 1 of 3</p>
-          <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Project 1</h2>
-          <p class="mt-3 max-w-xl leading-relaxed text-mist-300">Short summary of this part of the Charcoal Desk work.</p>
+          <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Charcoal Desk App</h2>
         </a>
       </article>
-      <!-- PROJECT 2: page at /projects/charcoal-desk/project-2/ (rename the folder and this link together) -->
       <article class="group">
-        <a href="../../projects/charcoal-desk/project-2/" class="block">
-          <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface"><div class="flex h-full w-full items-center justify-center text-sm text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03]">Cover image 4:3</div></div>
+        <a href="../../projects/charcoal-desk/workflow-design/" class="block">
+          <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface"><div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-mist-900 to-accent-900 px-6 text-center font-serif text-2xl text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03]">Workflow Design</div></div>
           <p class="eyebrow mt-6 text-mist-400">Project 2 of 3</p>
-          <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Project 2</h2>
-          <p class="mt-3 max-w-xl leading-relaxed text-mist-300">Short summary of this part of the Charcoal Desk work.</p>
+          <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Charcoal Desk Workflow Design</h2>
         </a>
       </article>
-      <!-- PROJECT 3: page at /projects/charcoal-desk/project-3/ (rename the folder and this link together) -->
       <article class="group">
-        <a href="../../projects/charcoal-desk/project-3/" class="block">
-          <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface"><div class="flex h-full w-full items-center justify-center text-sm text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03]">Cover image 4:3</div></div>
+        <a href="../../projects/charcoal-desk/control-ux/" class="block">
+          <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface"><div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-mist-900 to-accent-900 px-6 text-center font-serif text-2xl text-mist-500 transition duration-700 ease-tide group-hover:scale-[1.03]">Control UX</div></div>
           <p class="eyebrow mt-6 text-mist-400">Project 3 of 3</p>
-          <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Project 3</h2>
-          <p class="mt-3 max-w-xl leading-relaxed text-mist-300">Short summary of this part of the Charcoal Desk work.</p>
+          <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Charcoal Desk Control UX (Hardware)</h2>
         </a>
       </article>
     </div>
@@ -144,6 +149,6 @@
 </footer>
 <!-- /include:footer -->
 
-<script src="../../assets/js/site.js?v=35f76efd" defer></script>
+<script src="../../assets/js/site.js?v=650ce818" defer></script>
 </body>
 </html>
