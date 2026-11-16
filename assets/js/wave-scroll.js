@@ -14,7 +14,7 @@
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   // palette sampled from the hero photograph
   var TINT = [[7, 85, 113], [10, 111, 135], [36, 116, 137]];   // far → near water body
-  var FACE = 'rgba(4,72,86,', LIP = 'rgba(70,196,200,', FOAM = 'rgba(244,250,252,';
+  var FACE = 'rgba(4,72,86,', LIP = 'rgba(70,196,200,', FOAM = 'rgba(226,242,245,';   // foam: the photo's whitewater is a pale sea-tinted white, never pure white
 
   function hash(a, b) { var h = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return h - Math.floor(h); }
   function hexRgb(c) {
@@ -146,6 +146,7 @@
       sg.addColorStop(0, LIP + '0.18)'); sg.addColorStop(0.25, LIP + '0.05)');
       sg.addColorStop(0.6, FACE + (0.22 * (0.5 + k * 0.5)).toFixed(3) + ')'); sg.addColorStop(1, FACE + '0)');
       ctx.fillStyle = sg; ctx.fillRect(0, top - 2, W, A * 4 + 4);
+      crestHaze(st, ctx, xs, ys, f, ph, A, i, k, W, step);
       ctx.restore();
       // 4. feather the top edge so it melts into whatever is behind
       ctx.save(); ctx.globalCompositeOperation = 'destination-out'; ctx.lineJoin = 'round';
@@ -194,6 +195,28 @@
   }
   function vnoise(x, s) { var i = Math.floor(x), fr = x - i; fr = fr * fr * (3 - 2 * fr); return hash(i, s) * (1 - fr) + hash(i + 1, s) * fr; }
 
+  // faint haze of churned water just under a breaking crest. Drawn before the crest edge is feathered, so it fades out
+  // with the layer instead of sitting on top of it as a white stripe.
+  function crestHaze(st, ctx, xs, ys, f, ph, A, i, k, W, step) {
+    var o = st.o; if (o.foam <= 0 || k < 0.5) return;
+    var H = st.el.clientHeight, ft = fit(o, W, H), Dw = ft.w;
+    var fX = ft.x + o.focus[0] * Dw, sL = o.focus[1] * Dw, sR = o.focus[2] * Dw, TAU = Math.PI * 2, B = blob(), t = st.t2 || 0;
+    var amt = Math.min(1.1, o.foam * (0.45 + 0.75 * k));
+    ctx.save();
+    for (var q = 0; q < xs.length; q++) {
+      var bx = xs[q], th = bx * f + ph, cn = Math.floor(th / TAU), fr = (th - cn * TAU) / Math.PI;
+      if (fr > 1) continue;
+      var dd = bx - fX, sp = dd < 0 ? sL : sR, w = 0.1 + 0.9 * Math.exp(-(dd * dd) / (sp * sp));
+      var b = Math.min(1, Math.max(0, hash(cn, i * 9.7) * 1.3 - 0.15)) * amt * w * Math.pow(Math.sin(fr * Math.PI), 0.7);
+      if (b < 0.05) continue;
+      var nz = vnoise(th * 2.3, i + 3) * 0.7 + vnoise(th * 7.1 + t * 0.15, i + 11) * 0.3;
+      var bh = A * (0.25 + 0.5 * b) * (0.5 + nz);
+      ctx.globalAlpha = Math.min(0.2, 0.2 * b * (0.3 + nz));
+      ctx.drawImage(B, bx - step * 2.5, ys[q] - bh * 0.1, step * 5, bh);
+    }
+    ctx.restore();
+  }
+
   // whitewater anchored in wave-space, densest where the photo's wave breaks (by the feet).
   // Built like real foam: a soft, uneven band along the breaking crest, then flecks in clumps of mixed sizes
   // (many tiny, a few large) that trail down the wave face and shimmer slightly.
@@ -207,24 +230,9 @@
     var amt = Math.min(1.1, o.foam * (0.45 + 0.75 * k)), TAU = Math.PI * 2, B = blob(), t = st.t2 || 0;
     ctx.save();
 
-    // 1. soft band of churned water hugging the crest, thicker and brighter where the wave is breaking
-    for (var q = 0; q < xs.length; q++) {
-      var bx = xs[q], th = bx * f + ph, cn = Math.floor(th / TAU), fr = (th - cn * TAU) / Math.PI;
-      if (fr > 1) continue;
-      var b = breaking(cn) * amt * weight(bx) * Math.pow(Math.sin(fr * Math.PI), 0.7);
-      if (b < 0.05) continue;
-      var nz = vnoise(th * 2.3, i + 3) * 0.7 + vnoise(th * 7.1 + t * 0.15, i + 11) * 0.3;
-      var bh = A * (0.08 + 0.3 * b) * (0.35 + 1.2 * nz);
-      ctx.globalAlpha = Math.min(0.5, 0.42 * b * (0.3 + 1.0 * nz));
-      for (var e = 0; e < 3; e++) {                       // a few overlapping puffs per step, so the band has a ragged edge
-        var h1 = hash(q * 3 + e, cn + i), h2 = hash(q + e * 7, cn * 5 + i), pr = bh * (0.45 + 0.8 * h1);
-        ctx.drawImage(B, bx + (h2 - 0.5) * step * 2.4 - pr * 1.3, ys[q] + bh * (h1 - 0.25) * 0.9 - pr, pr * 2.6, pr * 2);
-      }
-    }
-
-    // 2. flecks and bubbles
+    // flecks and bubbles
     var n0 = Math.floor(ph / TAU) - 1, n1 = Math.min(n0 + 12, Math.ceil((W * f + ph) / TAU) + 1);
-    var per = Math.round(200 + 340 * k), size = 0.9 + 2.3 * k;
+    var per = Math.round(240 + 380 * k), size = 0.8 + 1.9 * k;
     for (var n = n0; n <= n1; n++) {
       var br = breaking(n) * amt;
       if (br < 0.04) continue;
@@ -237,12 +245,12 @@
         if (r3 > w * 1.15 * (0.4 + 1.3 * clump)) continue;
         var lace = r2 * r2;                                                                       // 0 at the crest → 1 trailing down the face
         var big = Math.pow(r4, 4);                                                                // mostly small flecks, a few broad patches
-        var r = size * (0.5 + 1.1 * r3 + 3.2 * big) * (1 - lace * 0.45);
+        var r = size * (0.45 + 1.0 * r3 + 1.9 * big) * (1 - lace * 0.45);
         var stretch = 1.1 + 1.9 * hash(j, n + i * 3) * (0.4 + 0.6 * lace);                        // trailing foam smears along the wave
         var drift = Math.sin(t * 0.5 + j * 1.7 + n) * size * 0.8;
         var y = cy(x) - A * 0.12 * (1 - r2) + lace * A * (1 + 0.8 * w) * br + Math.cos(t * 0.4 + j) * size * 0.3;
-        var al = br * w * (1 - lace * 0.6) * (0.5 + 0.5 * r3) * (1 - 0.4 * big) * (0.8 + 0.2 * Math.sin(t * 1.1 + j * 2.3));
-        ctx.globalAlpha = Math.min(0.9, al);
+        var al = 0.7 * br * w * (1 - lace * 0.6) * (0.45 + 0.55 * r3) * (1 - 0.6 * big) * (0.8 + 0.2 * Math.sin(t * 1.1 + j * 2.3));
+        ctx.globalAlpha = Math.min(0.62, al);
         ctx.drawImage(B, x + drift - r * stretch, y - r, r * stretch * 2, r * 2);
       }
     }
