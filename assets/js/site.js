@@ -34,10 +34,11 @@
     update();
   }
 
-  // Videos marked data-play-once play through once, then rest on the last frame; a page reload starts fresh.
-  //   data-play-once         (card thumbnails) on the first hover or keyboard focus of their card. Touch screens
-  //                          cannot hover, so there the video plays once when it scrolls into view.
-  //   data-play-once="view"  once the whole video is in view (or it fills the screen, if taller than the screen).
+  // Videos marked data-play-once play through once, then rest on the last frame. When the video has scrolled
+  // completely out of view it rewinds, so it can play once more the next time (every time, not just the first).
+  //   data-play-once         (card thumbnails) plays on hover or keyboard focus of its card. Touch screens cannot
+  //                          hover, so there it plays once the whole thumbnail is in view.
+  //   data-play-once="view"  plays once the whole video is in view (or it fills the screen, if taller than it).
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('video[data-play-once]').forEach(function (video) {
     if (reduce) return;
@@ -48,19 +49,24 @@
       var p = video.play();
       if (p && p.catch) p.catch(function () { played = false; });
     };
-    var onView = video.dataset.playOnce === 'view';
-    if (!onView) {
+    var rewind = function () {
+      video.pause();
+      video.currentTime = 0;
+      played = false;
+    };
+    var onView = video.dataset.playOnce === 'view' || matchMedia('(hover: none)').matches;
+    if (video.dataset.playOnce !== 'view') {
       var card = video.closest('.group') || video;
       card.addEventListener('mouseenter', playOnce);
       card.addEventListener('focusin', playOnce);
     }
-    if ((onView || matchMedia('(hover: none)').matches) && 'IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        var e = entries[0];
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        var e = entries[entries.length - 1];
+        if (!e.isIntersecting) { rewind(); return; }
         var full = e.intersectionRatio >= 0.98 || (e.rootBounds && e.intersectionRect.height >= e.rootBounds.height * 0.9);
-        if (onView ? full : e.isIntersecting && e.intersectionRatio >= 0.6) { playOnce(); io.disconnect(); }
-      }, { threshold: [0.6, 0.8, 0.9, 0.98, 1] });
-      io.observe(video);
+        if (onView && full) playOnce();
+      }, { threshold: [0, 0.5, 0.9, 0.98, 1] }).observe(video);
     } else if (onView) { playOnce(); }
   });
 
