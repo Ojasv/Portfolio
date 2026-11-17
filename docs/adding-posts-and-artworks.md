@@ -9,7 +9,7 @@ Everything is plain HTML. Copy a file or block, edit the text, run `npm run buil
 3. Search for `EDIT` and replace each one: title, description, canonical URL, date, read time, tag, standfirst, cover image.
 4. Write the body inside the `POST BODY` block with plain tags: `<p>`, `<h2>`, `<h3>`, `<ul><li>`, `<a>`, `<img>`. `.prose-site` styles them. For a pull quote, copy the `<blockquote>` from the template.
 5. Put images in `assets/img/blog/` (about 2400px wide for covers) and reference them as `/assets/img/blog/name.jpg`.
-6. In `blog/index.html`, copy one `<li>…</li>` post card, paste it at the **top** of the list, and change the link, date, tag, title and summary.
+6. In `blog/index.html`, copy one `<li>…</li>` post card, paste it into the list by date (newest first; a new post normally goes at the **top**, an older republished one goes below newer posts), and change the link, date, tag, title and summary.
 7. `npm run build`, then commit and push.
 
 `blog/articulating-design-decisions/` is a real post you can copy from. Republished posts end with an "Originally published on …" box linking to the original.
