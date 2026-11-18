@@ -71,53 +71,68 @@
   });
 
   // Slide viewer: a figure link that points at an image opens in a modal instead of a new tab.
-  // Click outside the slide (or press Esc) to close. Zoom with the toolbar buttons, a click on the slide, or + and -.
+  // Click outside the slide (or press Esc) to close. Zoom 100-500% where you point: pinch, trackpad pinch or mouse
+  // wheel, a click/tap on the slide, the toolbar, or + and -. When zoomed, drag (or arrow keys) to pan.
   var slideLinks = document.querySelectorAll('figure a[href$=".webp"], figure a[href$=".jpg"], figure a[href$=".png"]');
   if (slideLinks.length && window.HTMLDialogElement) {
-    var levels = [1, 1.5, 2, 3, 4], level = 0, opener = null;
+    var MIN = 1, MAX = 5, opener = null;
     var icon = function (d) { return '<svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">' + d + '</svg>'; };
     var dlg = document.createElement('dialog');
     dlg.className = 'lightbox';
     dlg.setAttribute('aria-label', 'Slide viewer');
     dlg.innerHTML =
-      '<div class="lb-stage" data-lb-stage><img class="lb-img" alt="" data-lb-img></div>' +
+      '<div class="lb-stage" data-lb-stage><img class="lb-img" alt="" draggable="false" data-lb-img></div>' +
       '<div class="lb-bar">' +
         '<button type="button" class="lb-btn" data-lb="out" aria-label="Zoom out">' + icon('<path d="M5 12h14"/>') + '</button>' +
-        '<span class="lb-level" data-lb-level aria-live="polite">100%</span>' +
+        '<button type="button" class="lb-btn lb-level" data-lb="reset" aria-label="Reset zoom">100%</button>' +
         '<button type="button" class="lb-btn" data-lb="in" aria-label="Zoom in">' + icon('<path d="M5 12h14M12 5v14"/>') + '</button>' +
         '<span class="lb-sep" aria-hidden="true"></span>' +
         '<button type="button" class="lb-btn" data-lb="close" aria-label="Close">' + icon('<path d="M6 6l12 12M18 6L6 18"/>') + '</button>' +
       '</div>';
     document.body.appendChild(dlg);
     var stage = dlg.querySelector('[data-lb-stage]'), img = dlg.querySelector('[data-lb-img]');
-    var label = dlg.querySelector('[data-lb-level]');
+    var label = dlg.querySelector('[data-lb="reset"]');
     var btnIn = dlg.querySelector('[data-lb="in"]'), btnOut = dlg.querySelector('[data-lb="out"]');
-    var fitWidth = 0;
+    var s = 1, tx = 0, ty = 0;
 
-    var setLevel = function (next, cx, cy) {
-      next = Math.max(0, Math.min(levels.length - 1, next));
-      if (level === 0) fitWidth = img.getBoundingClientRect().width;     // the fitted size is the 100% reference
-      var r = stage.getBoundingClientRect();
-      cx = cx == null ? r.width / 2 : cx; cy = cy == null ? r.height / 2 : cy;
-      var fx = (stage.scrollLeft + cx) / Math.max(stage.scrollWidth, 1), fy = (stage.scrollTop + cy) / Math.max(stage.scrollHeight, 1);
-      level = next;
-      dlg.classList.toggle('is-zoomed', level > 0);
-      img.style.width = level > 0 ? Math.round(fitWidth * levels[level]) + 'px' : '';
-      label.textContent = Math.round(levels[level] * 100) + '%';
-      btnOut.disabled = level === 0; btnIn.disabled = level === levels.length - 1;
-      requestAnimationFrame(function () {                               // keep the point under the cursor in place
-        stage.scrollLeft = fx * stage.scrollWidth - cx;
-        stage.scrollTop = fy * stage.scrollHeight - cy;
-      });
+    // The slide's untransformed box: transforms scale around its centre, so the centre only moves by (tx, ty).
+    var box = function () {
+      // (offsets are layout values, so this is right even mid-animation; the dialog sits at the viewport origin)
+      return { cx: img.offsetLeft + img.offsetWidth / 2, cy: img.offsetTop + img.offsetHeight / 2, w: img.offsetWidth, h: img.offsetHeight };
     };
+    var render = function (animate) {
+      var b = box(), sr = stage.getBoundingClientRect();
+      // Keep the slide over the stage: no panning past its edges, and centred when it is smaller than the screen.
+      var mx = Math.max(0, (b.w * s - sr.width) / 2), my = Math.max(0, (b.h * s - sr.height) / 2);
+      var ox = sr.left + sr.width / 2 - b.cx, oy = sr.top + sr.height / 2 - b.cy;
+      tx = Math.min(ox + mx, Math.max(ox - mx, tx)); ty = Math.min(oy + my, Math.max(oy - my, ty));
+      if (s === 1) { tx = 0; ty = 0; }
+      img.classList.toggle('is-animating', !!animate);
+      img.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + s + ')';
+      dlg.classList.toggle('is-zoomed', s > 1.001);
+      label.textContent = Math.round(s * 100) + '%';
+      btnOut.disabled = s <= MIN; btnIn.disabled = s >= MAX;
+    };
+    // Zoom to `next`, keeping the screen point (px, py) fixed under the finger or cursor.
+    var zoomAt = function (next, px, py, animate) {
+      next = Math.max(MIN, Math.min(MAX, next));
+      var b = box();
+      if (px == null) { var sr = stage.getBoundingClientRect(); px = sr.left + sr.width / 2; py = sr.top + sr.height / 2; }
+      var k = next / s;
+      tx = px - b.cx - (px - b.cx - tx) * k;
+      ty = py - b.cy - (py - b.cy - ty) * k;
+      s = next;
+      render(animate);
+    };
+    var reset = function (animate) { s = 1; tx = 0; ty = 0; render(animate); };
+
     var open = function (link) {
       var thumb = link.querySelector('img');
       opener = link;
       img.src = link.getAttribute('href');
       img.alt = thumb ? thumb.alt : '';
-      level = 0; img.style.width = ''; dlg.classList.remove('is-zoomed');
-      label.textContent = '100%'; btnOut.disabled = true; btnIn.disabled = false;
       dlg.showModal();
+      reset(false);
       document.documentElement.style.overflow = 'hidden';
     };
     dlg.addEventListener('close', function () {
@@ -131,21 +146,67 @@
         e.preventDefault(); open(link);
       });
     });
-    btnIn.addEventListener('click', function () { setLevel(level + 1); });
-    btnOut.addEventListener('click', function () { setLevel(level - 1); });
+    btnIn.addEventListener('click', function () { zoomAt(s * 1.5, null, null, true); });
+    btnOut.addEventListener('click', function () { zoomAt(s / 1.5, null, null, true); });
+    label.addEventListener('click', function () { reset(true); });
     dlg.querySelector('[data-lb="close"]').addEventListener('click', function () { dlg.close(); });
-    img.addEventListener('click', function (e) {
-      var r = stage.getBoundingClientRect();
-      setLevel(level === levels.length - 1 ? 0 : level + 1, e.clientX - r.left, e.clientY - r.top);
+
+    // Pointers: one pointer drags (pans) a zoomed slide, two pointers pinch. A press that barely moves is a tap:
+    // on the slide it zooms in (or back out), outside the slide it closes the viewer.
+    var pts = new Map(), moved = 0, last = null, downOnImg = false;
+    var mid = function () { var a = Array.from(pts.values()); return a.length < 2 ? a[0] : { x: (a[0].x + a[1].x) / 2, y: (a[0].y + a[1].y) / 2, d: Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y) }; };
+    stage.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0 && e.pointerType === 'mouse') return;
+      stage.setPointerCapture(e.pointerId);
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pts.size === 1) { moved = 0; downOnImg = e.target === img; }
+      last = mid();
+      dlg.classList.add('is-dragging');
     });
-    // A click anywhere outside the slide and the toolbar closes the viewer.
-    dlg.addEventListener('click', function (e) {
-      if (e.target === stage || e.target === dlg) dlg.close();
+    stage.addEventListener('pointermove', function (e) {
+      if (!pts.has(e.pointerId)) return;
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      var m = mid();
+      moved += Math.hypot(m.x - last.x, m.y - last.y);
+      if (pts.size >= 2 && last.d) {
+        moved += 10;                                                    // a pinch is never a tap
+        zoomAt(s * m.d / last.d, last.x, last.y, false);
+        tx += m.x - last.x; ty += m.y - last.y; render(false);
+      } else if (s > 1) {
+        tx += m.x - last.x; ty += m.y - last.y; render(false);
+      }
+      last = m;
     });
+    var up = function (e) {
+      if (!pts.has(e.pointerId)) return;
+      pts.delete(e.pointerId);
+      if (pts.size) { last = mid(); return; }
+      dlg.classList.remove('is-dragging');
+      if (e.type === 'pointercancel' || moved > 6) return;
+      if (downOnImg) { if (s > 1.001) reset(true); else zoomAt(2.5, e.clientX, e.clientY, true); }
+      else dlg.close();
+    };
+    stage.addEventListener('pointerup', up);
+    stage.addEventListener('pointercancel', up);
+    // Wheel and trackpad pinch (which arrives as a ctrl+wheel) zoom at the cursor.
+    stage.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      var dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
+      if (s > 1.001 && !e.ctrlKey && Math.abs(e.deltaX) > Math.abs(dy)) { tx -= e.deltaX; render(false); return; }  // two-finger sideways swipe pans
+      zoomAt(s * Math.exp(-dy * (e.ctrlKey ? 0.01 : 0.0015)), e.clientX, e.clientY, false);
+    }, { passive: false });
+    addEventListener('resize', function () { if (dlg.open) render(false); });
     dlg.addEventListener('keydown', function (e) {
-      if (e.key === '+' || e.key === '=') { e.preventDefault(); setLevel(level + 1); }
-      else if (e.key === '-' || e.key === '_') { e.preventDefault(); setLevel(level - 1); }
-      else if (e.key === '0') { e.preventDefault(); setLevel(0); }
+      var k = e.key, step = 80;
+      if (k === '+' || k === '=') zoomAt(s * 1.5, null, null, true);
+      else if (k === '-' || k === '_') zoomAt(s / 1.5, null, null, true);
+      else if (k === '0') reset(true);
+      else if (s > 1 && k === 'ArrowLeft') { tx += step; render(true); }
+      else if (s > 1 && k === 'ArrowRight') { tx -= step; render(true); }
+      else if (s > 1 && k === 'ArrowUp') { ty += step; render(true); }
+      else if (s > 1 && k === 'ArrowDown') { ty -= step; render(true); }
+      else return;
+      e.preventDefault();
     });
   }
 
