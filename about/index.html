@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../assets/css/site.css?v=7c4f752c">
+  <link rel="stylesheet" href="../assets/css/site.css?v=1a7dfa20">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -61,7 +61,7 @@
   </div>
   <!-- /crumbs -->
   <!-- PAGE CONTENT START -->
-  <!-- Content from Ojasv's résumé (assets/files/Ojasv-Apurv-Resume.pdf). Update both together. -->
+  <!-- Content from Ojasv's résumé (visual: assets/files/Ojasv-Apurv-Resume.pdf, ATS: assets/files/Ojasv-Apurv-Resume-ATS.pdf). Update page and both PDFs together. -->
   <!-- Intro -->
   <section class="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-12">
     <div class="lg:col-span-7">
@@ -73,11 +73,33 @@
       <p class="mt-8 max-w-xl text-base leading-relaxed font-light text-mist-300 sm:text-lg">
         Lead UX Designer and Design Manager at PeepalDesign, based in Bangalore, India. I lead UX for complex enterprise and internal tools, most recently for Philips, SAP, TP Vision and Bosch.
       </p>
-      <a class="btn mt-8" href="../assets/files/Ojasv-Apurv-Resume.pdf" download="Ojasv-Apurv-Resume.pdf">
-        Download résumé
-        <svg aria-hidden="true" class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg>
-      </a>
-      <p class="mt-3 text-xs text-mist-600">PDF · 2.3 MB</p>
+      <!-- Résumé combo button: the main part downloads the ATS résumé (what recruiters want); the arrow opens a menu
+           with both versions. Menu behaviour is the [data-dropdown] block in assets/js/site.js. -->
+      <div class="relative mt-8 inline-flex" data-dropdown>
+        <a class="btn rounded-r-none" href="../assets/files/Ojasv-Apurv-Resume-ATS.pdf" download="Ojasv-Apurv-Resume.pdf">
+          Download résumé
+          <svg aria-hidden="true" class="size-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v9M4 7l4 4 4-4M3 14h10"/></svg>
+        </a>
+        <button type="button" class="btn rounded-l-none border-l-0 px-3" aria-haspopup="true" aria-expanded="false" aria-controls="resume-menu" aria-label="Choose résumé version" data-dropdown-toggle>
+          <svg aria-hidden="true" class="size-4 transition-transform duration-300 in-aria-expanded:rotate-180" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
+        </button>
+        <ul id="resume-menu" hidden data-dropdown-menu
+            class="absolute top-full left-0 z-30 mt-2 w-72 max-w-[calc(100vw-3rem)] rounded-lg border border-mist-800 bg-surface p-1.5 shadow-2xl shadow-black/40">
+          <li>
+            <a class="block rounded-md px-4 py-3 transition-colors hover:bg-mist-900 focus-visible:bg-mist-900" href="../assets/files/Ojasv-Apurv-Resume-ATS.pdf" download="Ojasv-Apurv-Resume.pdf">
+              <span class="flex items-center justify-between gap-3 text-sm text-paper">ATS résumé <span class="eyebrow text-[0.625rem] text-accent-300">Default</span></span>
+              <span class="mt-1 block text-xs text-mist-500">Plain text layout for job portals · 103 KB</span>
+            </a>
+          </li>
+          <li>
+            <a class="block rounded-md px-4 py-3 transition-colors hover:bg-mist-900 focus-visible:bg-mist-900" href="../assets/files/Ojasv-Apurv-Resume.pdf" download="Ojasv-Apurv-Resume-Visual.pdf">
+              <span class="block text-sm text-paper">Visual résumé</span>
+              <span class="mt-1 block text-xs text-mist-500">Designed layout · 2.3 MB</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <p class="mt-3 text-xs text-mist-600">ATS-friendly PDF · 103 KB. Use the arrow for the visual version.</p>
     </div>
 
     <figure class="lg:col-span-4 lg:col-start-9">
@@ -385,6 +407,6 @@
 </footer>
 <!-- /include:footer -->
 
-<script src="../assets/js/site.js?v=6f4b0f08" defer></script>
+<script src="../assets/js/site.js?v=e99956d8" defer></script>
 </body>
 </html>

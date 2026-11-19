@@ -18,6 +18,32 @@
     document.addEventListener('click', function (e) { if (header && !header.contains(e.target)) setOpen(false); });
   }
 
+  // Dropdowns (e.g. the résumé combo button on /about/): [data-dropdown] wraps a [data-dropdown-toggle] button and a
+  // [data-dropdown-menu] list. Opens on click; closes on Escape, a click outside, or choosing an item.
+  document.querySelectorAll('[data-dropdown]').forEach(function (root) {
+    var btn = root.querySelector('[data-dropdown-toggle]');
+    var list = root.querySelector('[data-dropdown-menu]');
+    if (!btn || !list) return;
+    var set = function (open) { btn.setAttribute('aria-expanded', String(open)); list.hidden = !open; };
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      set(open);
+      if (open) { var first = list.querySelector('a, button'); first && first.focus(); }
+    });
+    list.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !list.hidden) { set(false); btn.focus(); }
+      if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !list.hidden) {
+        var items = Array.prototype.slice.call(list.querySelectorAll('a, button'));
+        var i = items.indexOf(document.activeElement);
+        items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length].focus();
+        e.preventDefault();
+      }
+    });
+    document.addEventListener('click', function (e) { if (!root.contains(e.target)) set(false); });
+    root.addEventListener('focusout', function (e) { if (e.relatedTarget && !root.contains(e.relatedTarget)) set(false); });
+  });
+
   // Header gets a solid ground once the page has scrolled (pages can opt out with data-header="overlay" on <body>
   // to keep it transparent over a full-bleed hero until that hero has passed).
   if (header) {
