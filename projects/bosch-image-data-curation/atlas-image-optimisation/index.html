@@ -4,8 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Image Optimisation Workflow · Ojasv Apurv</title>
-  <meta name="description" content="Image Optimisation Workflow: case study by Ojasv Apurv, coming soon.">
-  <meta name="robots" content="noindex"><!-- remove once the case study is written -->
+  <meta name="description" content="ATLAS, an image optimisation workflow for Bosch that plots labelled crops as clusters to check labels, find anomalies and tune filter models. Case study by Ojasv Apurv.">
   <link rel="canonical" href="https://ojasvapurv.com/projects/bosch-image-data-curation/atlas-image-optimisation/">
   <meta name="theme-color" content="#161826">
   <link rel="icon" href="../../../assets/img/favicon-32.png" type="image/png" sizes="32x32">
@@ -14,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../../assets/css/site.css?v=1a7dfa20">
+  <link rel="stylesheet" href="../../../assets/css/site.css?v=b5137d99">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -63,16 +62,344 @@
     </nav>
   </div>
   <!-- /crumbs -->
-  <!-- PAGE CONTENT START: Image Optimisation Workflow. Placeholder: the case study goes here (see projects/case-study-template/ for the sections). -->
+  <!-- PAGE CONTENT START: Image Optimisation Workflow (ATLAS app, Bosch project 2 of 2). Figma slides link still to come from Ojasv. -->
   <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
-    <p class="eyebrow col-span-12 mb-8 self-start border-t border-current pt-4 lg:col-span-4 lg:mb-0">Bosch · ATLAS app</p>
+    <p class="eyebrow col-span-12 mb-8 self-start border-t border-current pt-4 lg:col-span-4 lg:mb-0">Bosch · ATLAS app · Project 2 of 2</p>
     <div class="col-span-12 lg:col-span-8">
       <h1 class="font-serif text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] tracking-tight">Image Optimisation <span class="italic font-light">Workflow</span></h1>
-      <p class="mt-8 max-w-3xl font-serif text-xl leading-snug text-mist-400 sm:text-2xl lg:text-3xl">Case study coming soon.</p>
+      <p class="mt-8 max-w-3xl font-serif text-xl leading-snug text-mist-300 sm:text-2xl lg:text-3xl">ATLAS lets Bosch teams see their image data. It plots thousands of labelled crops as clusters, so people can check labels, catch anomalies and tune the filter models that feed the rest of the pipeline.</p>
     </div>
   </section>
 
-  <div class="rule mt-24 lg:mt-36"></div>
+  <div class="rule mt-16 lg:mt-24"></div>
+  <dl class="grid grid-cols-2 gap-x-6 gap-y-8 pt-8 text-sm md:grid-cols-4 lg:gap-x-12">
+    <div><dt class="eyebrow text-mist-500">Client</dt><dd class="mt-2">Bosch, through PeepalDesign</dd></div>
+    <div><dt class="eyebrow text-mist-500">Product</dt><dd class="mt-2">ATLAS, an internal data visualisation and label optimisation app</dd></div>
+    <div><dt class="eyebrow text-mist-500">My part</dt><dd class="mt-2">Design lead: workshops, user journeys, wireframes, visual design</dd></div>
+    <div><dt class="eyebrow text-mist-500">Users</dt><dd class="mt-2">Labelling experts, model developers, data analysts</dd></div>
+  </dl>
+
+  <section aria-labelledby="glance" class="mt-16 rounded-lg bg-surface/60 p-6 ring-1 ring-accent-700 sm:p-10 lg:mt-24 lg:p-14">
+    <h2 id="glance" class="eyebrow text-accent-300">At a glance</h2>
+    <dl class="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-3 lg:gap-x-12">
+      <div>
+        <dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">5+</dt>
+        <dd class="mt-4 leading-relaxed text-mist-300">Ways to lay out the same crops: t-SNE, k-means t-SNE, grid, RasterFairy, UMAP and more.</dd>
+      </div>
+      <div>
+        <dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">360°</dt>
+        <dd class="mt-4 leading-relaxed text-mist-300">Camera frames from every angle, with LIDAR depth read together with each image.</dd>
+      </div>
+      <div>
+        <dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">0</dt>
+        <dd class="mt-4 leading-relaxed text-mist-300">Search boxes, by design. ATLAS starts from labels, and search comes later, in CLIFF.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <div class="space-y-24 py-24 lg:space-y-36 lg:py-36">
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">01 · The challenge</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <div class="prose-site">
+          <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">Many teams, many tools, one dataset.</p>
+          <p>Bosch curates huge sets of camera images to train the models behind its driver assistance (ADAS) features. Curation was spread across several separate applications, each run by a different team: one to bring data in, one to label it, one to build filter models, another to evaluate them. Every hand-over between tools was a place where time, context and data quality could leak away.</p>
+          <p>We were not starting from scratch. The job was to design an internal platform that streamlined curation at every touchpoint of the data pipeline, while also improving the quality of what the models put out.</p>
+        </div>
+        <ul class="mt-10 grid gap-6 sm:grid-cols-2">
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <p class="eyebrow text-accent-300">Efficiency</p>
+            <p class="mt-3 text-paper">Streamline the workflow</p>
+            <p class="mt-2 text-sm leading-relaxed text-mist-400">Cut repeated steps and hand-overs so the whole process moves faster.</p>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <p class="eyebrow text-accent-300">Transparency</p>
+            <p class="mt-3 text-paper">Make information flow visible</p>
+            <p class="mt-2 text-sm leading-relaxed text-mist-400">Show where each dataset is, who has worked on it and what state it is in.</p>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <p class="eyebrow text-accent-300">Motivation</p>
+            <p class="mt-3 text-paper">Help people finish tasks sooner</p>
+            <p class="mt-2 text-sm leading-relaxed text-mist-400">Give clear progress and a clear finish line, so tasks get closed, not parked.</p>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <p class="eyebrow text-accent-300">Every touchpoint</p>
+            <p class="mt-3 text-paper">Fix curation step by step</p>
+            <p class="mt-2 text-sm leading-relaxed text-mist-400">Find the key challenges at each stage of curation and solve them where they happen.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">02 · One pipeline, two apps</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <div class="prose-site">
+          <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">Operationally very similar. Functionally very different.</p>
+          <p>In the same data pipeline, the work was split into two applications. When I ran a workshop with the whole data-pipeline cohort, one idea kept coming back: do not confuse search ranking with label optimisation. In both, people look at crops of images and accept or reject them. But what that decision trains is completely different.</p>
+        </div>
+        <ul class="mt-10 grid gap-6 sm:grid-cols-2">
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <p class="eyebrow text-accent-300">ATLAS · Image optimisation</p>
+            <p class="mt-3 text-paper">Starts from labels. Asks: is this label right?</p>
+            <p class="mt-2 text-sm leading-relaxed text-mist-400">Data arrives grouped by label and is plotted as clusters. Accepting or rejecting a crop corrects labels, exposes anomalies and tunes the filter models. There is no search here, on purpose.</p>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <p class="eyebrow text-accent-300">CLIFF · Image search</p>
+            <p class="mt-3 text-paper">Starts from a query. Asks: is this what I searched for?</p>
+            <p class="mt-2 text-sm leading-relaxed text-mist-400">Later in the pipeline, an upvote or downvote on a search result trains the search model to rank the right images higher, before tickets go to preselection.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <figure class="rounded-lg bg-surface/40 p-6 ring-1 ring-mist-800 sm:p-10">
+      <ol class="flex flex-col items-center gap-2 md:flex-row md:flex-wrap md:justify-center md:gap-3">
+        <li class="flex flex-col items-center gap-2 md:flex-row md:gap-3"><span class="rounded-full px-4 py-2 text-sm ring-1 bg-surface/60 ring-mist-800 text-paper">Add data</span><span aria-hidden="true" class="hidden text-accent-500 md:inline">→</span><span aria-hidden="true" class="text-accent-500 md:hidden">↓</span></li><li class="flex flex-col items-center gap-2 md:flex-row md:gap-3"><span class="rounded-full px-4 py-2 text-sm ring-1 bg-surface/60 ring-mist-800 text-paper">Add filter model</span><span aria-hidden="true" class="hidden text-accent-500 md:inline">→</span><span aria-hidden="true" class="text-accent-500 md:hidden">↓</span></li><li class="flex flex-col items-center gap-2 md:flex-row md:gap-3"><span class="rounded-full px-4 py-2 text-sm ring-1 bg-surface/60 ring-mist-800 text-paper">Optimise model</span><span aria-hidden="true" class="hidden text-accent-500 md:inline">→</span><span aria-hidden="true" class="text-accent-500 md:hidden">↓</span></li><li class="flex flex-col items-center gap-2 md:flex-row md:gap-3"><span class="rounded-full px-4 py-2 text-sm ring-1 bg-surface/60 ring-mist-800 text-paper">Validate accuracy</span><span aria-hidden="true" class="hidden text-accent-500 md:inline">→</span><span aria-hidden="true" class="text-accent-500 md:hidden">↓</span></li><li class="flex flex-col items-center gap-2 md:flex-row md:gap-3"><span class="rounded-full px-4 py-2 text-sm ring-1 bg-surface/60 ring-mist-800 text-paper">Deployment and test</span><span aria-hidden="true" class="hidden text-accent-500 md:inline">→</span><span aria-hidden="true" class="text-accent-500 md:hidden">↓</span></li><li class="flex flex-col items-center gap-2 md:flex-row md:gap-3"><span class="rounded-full px-4 py-2 text-sm ring-1 bg-accent-900/50 ring-accent-500 text-paper">Production dataset</span></li>
+      </ol>
+      <p class="mt-6 flex items-center justify-center gap-2 text-center text-sm text-mist-400"><span aria-hidden="true" class="text-accent-300">↺</span> Every deployment and test feeds back into optimising the model.</p>
+      <figcaption class="mt-6 text-center text-xs text-mist-500">The data pipeline we mapped first: from raw image data to a production-ready dataset.</figcaption>
+    </figure>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">03 · How ATLAS works</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <p class="prose-site">ATLAS sits early in the data pipeline, where raw recordings become labelled crops and filter models are built. It is where people first see their data as a whole.</p>
+        <!-- Storyline: numbered nodes joined by a vertical line -->
+        <ol class="mt-12">
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center"><span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">1</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span></div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Bring in a recording run</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">Take one run recorded in Japan, by a vehicle with a 360° camera and LIDAR.</p>
+              <p class="mt-3 leading-relaxed text-mist-300">For ATLAS we analysed the camera frames from different angles, the crops taken from them, and the LIDAR depth output together with each image.</p>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center"><span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">2</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span></div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Label everything automatically</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">Frames from all the sources are labelled by an automatic labelling service.</p>
+              <p class="mt-3 leading-relaxed text-mist-300">Crops are generated for each label, so one frame can give a traffic light, a speed sign and a truck, each as its own crop.</p>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center"><span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">3</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span></div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Start from a label</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">Data is populated by label. A traffic sign dataset, for example, holds Stop, Right turn, Slow down, Speed limit 30 and more.</p>
+              <p class="mt-3 leading-relaxed text-mist-300">There is no search box, on purpose. Search comes later in the pipeline, in CLIFF.</p>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center"><span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">4</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span></div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Plot the distribution</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">Filter the traffic light label, and ATLAS plots every traffic light detected in every frame.</p>
+              <p class="mt-3 leading-relaxed text-mist-300">The same crops can be laid out as t-SNE, k-means t-SNE, a grid, RasterFairy or UMAP. Red lights fall into one cluster, green and amber into others.</p>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center"><span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">5</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span></div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Check the labels, find the anomalies</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">The plot shows at a glance whether crops sit where their label says they should.</p>
+              <p class="mt-3 leading-relaxed text-mist-300">It is not only a check on label correctness. Crops that land in the wrong cluster reveal anomalies in how the data was filtered.</p>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center"><span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">6</span></div>
+            <div class="max-w-[42rem]">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Improve the filter models and re-rank</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">Filter models are developed and optimised on this data.</p>
+              <p class="mt-3 leading-relaxed text-mist-300">Crops in the filtered subset are accepted or rejected, then re-ranked, which optimises the confidence scores of the crops for the next model.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <figure class="rounded-lg bg-surface/40 p-6 ring-1 ring-mist-800 sm:p-10">
+      <svg viewBox="0 0 640 320" role="img" aria-labelledby="scatter-title" class="h-auto w-full">
+        <title id="scatter-title">Illustration of a cluster plot of traffic light crops: red, amber and green lights form three separate clusters, with one red crop sitting inside the green cluster as an anomaly</title>
+        <g fill="#e05d5d" fill-opacity="0.85"><circle cx="169" cy="228" r="4.5"/><circle cx="123" cy="170" r="4.5"/><circle cx="78" cy="191" r="4.5"/><circle cx="81" cy="153" r="4.5"/><circle cx="128" cy="193" r="4.5"/><circle cx="141" cy="166" r="4.5"/><circle cx="120" cy="188" r="4.5"/><circle cx="63" cy="204" r="4.5"/><circle cx="132" cy="252" r="4.5"/><circle cx="128" cy="186" r="4.5"/><circle cx="167" cy="195" r="4.5"/><circle cx="155" cy="180" r="4.5"/><circle cx="128" cy="217" r="4.5"/><circle cx="146" cy="193" r="4.5"/><circle cx="79" cy="202" r="4.5"/><circle cx="123" cy="209" r="4.5"/><circle cx="128" cy="218" r="4.5"/><circle cx="118" cy="195" r="4.5"/><circle cx="145" cy="162" r="4.5"/><circle cx="105" cy="177" r="4.5"/><circle cx="195" cy="188" r="4.5"/><circle cx="145" cy="206" r="4.5"/><circle cx="109" cy="150" r="4.5"/><circle cx="157" cy="179" r="4.5"/><circle cx="147" cy="156" r="4.5"/><circle cx="103" cy="223" r="4.5"/><circle cx="174" cy="156" r="4.5"/><circle cx="69" cy="189" r="4.5"/><circle cx="148" cy="194" r="4.5"/><circle cx="132" cy="164" r="4.5"/><circle cx="142" cy="219" r="4.5"/><circle cx="103" cy="153" r="4.5"/><circle cx="91" cy="210" r="4.5"/><circle cx="54" cy="188" r="4.5"/></g>
+        <g fill="#e0b45d" fill-opacity="0.85"><circle cx="380" cy="125" r="4.5"/><circle cx="322" cy="143" r="4.5"/><circle cx="335" cy="109" r="4.5"/><circle cx="298" cy="123" r="4.5"/><circle cx="278" cy="121" r="4.5"/><circle cx="295" cy="134" r="4.5"/><circle cx="283" cy="149" r="4.5"/><circle cx="294" cy="70" r="4.5"/><circle cx="346" cy="131" r="4.5"/><circle cx="288" cy="146" r="4.5"/><circle cx="317" cy="141" r="4.5"/><circle cx="284" cy="144" r="4.5"/><circle cx="264" cy="172" r="4.5"/><circle cx="272" cy="135" r="4.5"/><circle cx="311" cy="145" r="4.5"/><circle cx="303" cy="151" r="4.5"/><circle cx="201" cy="135" r="4.5"/><circle cx="301" cy="128" r="4.5"/></g>
+        <g fill="#5dc48a" fill-opacity="0.85"><circle cx="504" cy="235" r="4.5"/><circle cx="461" cy="228" r="4.5"/><circle cx="489" cy="193" r="4.5"/><circle cx="580" cy="204" r="4.5"/><circle cx="498" cy="220" r="4.5"/><circle cx="547" cy="199" r="4.5"/><circle cx="525" cy="173" r="4.5"/><circle cx="485" cy="188" r="4.5"/><circle cx="444" cy="158" r="4.5"/><circle cx="432" cy="193" r="4.5"/><circle cx="493" cy="191" r="4.5"/><circle cx="503" cy="163" r="4.5"/><circle cx="497" cy="207" r="4.5"/><circle cx="532" cy="176" r="4.5"/><circle cx="483" cy="144" r="4.5"/><circle cx="479" cy="138" r="4.5"/><circle cx="440" cy="231" r="4.5"/><circle cx="408" cy="222" r="4.5"/><circle cx="514" cy="191" r="4.5"/><circle cx="519" cy="215" r="4.5"/><circle cx="544" cy="194" r="4.5"/><circle cx="475" cy="183" r="4.5"/><circle cx="459" cy="199" r="4.5"/><circle cx="467" cy="230" r="4.5"/><circle cx="421" cy="169" r="4.5"/><circle cx="460" cy="141" r="4.5"/><circle cx="580" cy="133" r="4.5"/><circle cx="488" cy="185" r="4.5"/><circle cx="570" cy="144" r="4.5"/><circle cx="545" cy="180" r="4.5"/><circle cx="493" cy="181" r="4.5"/><circle cx="527" cy="168" r="4.5"/><circle cx="497" cy="210" r="4.5"/><circle cx="577" cy="133" r="4.5"/><circle cx="564" cy="227" r="4.5"/><circle cx="480" cy="209" r="4.5"/><circle cx="480" cy="246" r="4.5"/><circle cx="509" cy="194" r="4.5"/></g>
+        <path d="M512 191 L566 128" stroke="#d2cefd" stroke-width="1"/>
+        <circle cx="505" cy="200" r="11" fill="none" stroke="#d2cefd" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <circle cx="505" cy="200" r="5" fill="#e05d5d"/>
+        <g font-family="Inter, sans-serif" font-size="13" fill="#9a9bb0">
+          <text x="120" y="300" text-anchor="middle">Red</text>
+          <text x="310" y="70" text-anchor="middle">Amber</text>
+          <text x="500" y="305" text-anchor="middle">Green</text>
+          <text x="575" y="120" fill="#d2cefd" text-anchor="middle">Anomaly</text>
+        </g>
+      </svg>
+      <figcaption class="mt-6 text-center text-xs text-mist-500">How a traffic light label separates in a cluster plot. One red crop sitting with the green lights is exactly what ATLAS helps people spot. Illustration, not real data.</figcaption>
+    </figure>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">04 · Why labels, not search</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <div class="prose-site">
+          <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">A narrow search optimises a narrow slice.</p>
+          <p>Why start from labels and not from a search? If someone searched for one specific sign and then visualised the results, they might get only a few crops, and the optimisation would have little to learn from.</p>
+          <p>Working from a broader label changes that. Optimising street lights as a whole, rather than only red lights, improves the ranks of the crops far more holistically, because the model sees the whole population and the differences inside it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">05 · The approach</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <div class="prose-site">
+          <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">From definition to delivery.</p>
+          <p>The process was much the same for ATLAS and CLIFF. Six phases, each one opening up to explore and then narrowing down to a decision, so every phase handed the next a clear result.</p>
+        </div>
+        <ol class="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <div class="flex items-baseline justify-between gap-4"><p class="font-serif text-2xl text-paper">Align</p><span class="eyebrow text-mist-500">01</span></div>
+            <dl class="mt-5 space-y-4 text-sm leading-relaxed">
+              <div><dt class="eyebrow text-accent-300">Activities</dt><dd class="mt-1 text-mist-300">Alignment workshop, stakeholder interviews</dd></div>
+              <div><dt class="eyebrow text-accent-300">Outcome</dt><dd class="mt-1 text-mist-300">Business vision, scope and UX challenges</dd></div>
+              <div><dt class="eyebrow text-accent-300">Led by</dt><dd class="mt-1 text-mist-300">UX architect</dd></div>
+            </dl>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <div class="flex items-baseline justify-between gap-4"><p class="font-serif text-2xl text-paper">Learn</p><span class="eyebrow text-mist-500">02</span></div>
+            <dl class="mt-5 space-y-4 text-sm leading-relaxed">
+              <div><dt class="eyebrow text-accent-300">Activities</dt><dd class="mt-1 text-mist-300">Benchmarking study, user research</dd></div>
+              <div><dt class="eyebrow text-accent-300">Outcome</dt><dd class="mt-1 text-mist-300">Best practices, user segments, personas</dd></div>
+              <div><dt class="eyebrow text-accent-300">Led by</dt><dd class="mt-1 text-mist-300">User research</dd></div>
+            </dl>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <div class="flex items-baseline justify-between gap-4"><p class="font-serif text-2xl text-paper">Ideate</p><span class="eyebrow text-mist-500">03</span></div>
+            <dl class="mt-5 space-y-4 text-sm leading-relaxed">
+              <div><dt class="eyebrow text-accent-300">Activities</dt><dd class="mt-1 text-mist-300">Ideation workshop, user stories</dd></div>
+              <div><dt class="eyebrow text-accent-300">Outcome</dt><dd class="mt-1 text-mist-300">A shared picture of the target users</dd></div>
+              <div><dt class="eyebrow text-accent-300">Led by</dt><dd class="mt-1 text-mist-300">UX team</dd></div>
+            </dl>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <div class="flex items-baseline justify-between gap-4"><p class="font-serif text-2xl text-paper">Plan</p><span class="eyebrow text-mist-500">04</span></div>
+            <dl class="mt-5 space-y-4 text-sm leading-relaxed">
+              <div><dt class="eyebrow text-accent-300">Activities</dt><dd class="mt-1 text-mist-300">User story document, prioritisation workshop</dd></div>
+              <div><dt class="eyebrow text-accent-300">Outcome</dt><dd class="mt-1 text-mist-300">Design framework</dd></div>
+              <div><dt class="eyebrow text-accent-300">Led by</dt><dd class="mt-1 text-mist-300">UX lead</dd></div>
+            </dl>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <div class="flex items-baseline justify-between gap-4"><p class="font-serif text-2xl text-paper">Execute</p><span class="eyebrow text-mist-500">05</span></div>
+            <dl class="mt-5 space-y-4 text-sm leading-relaxed">
+              <div><dt class="eyebrow text-accent-300">Activities</dt><dd class="mt-1 text-mist-300">Lo-fi and hi-fi prototypes, usability testing, developer handover</dd></div>
+              <div><dt class="eyebrow text-accent-300">Outcome</dt><dd class="mt-1 text-mist-300">Wireframes, visual design</dd></div>
+              <div><dt class="eyebrow text-accent-300">Led by</dt><dd class="mt-1 text-mist-300">All UX designers</dd></div>
+            </dl>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800">
+            <div class="flex items-baseline justify-between gap-4"><p class="font-serif text-2xl text-paper">Optimise</p><span class="eyebrow text-mist-500">06</span></div>
+            <dl class="mt-5 space-y-4 text-sm leading-relaxed">
+              <div><dt class="eyebrow text-accent-300">Activities</dt><dd class="mt-1 text-mist-300">Second round of testing, developer review, usage analysis</dd></div>
+              <div><dt class="eyebrow text-accent-300">Outcome</dt><dd class="mt-1 text-mist-300">Design edits, future proofing</dd></div>
+              <div><dt class="eyebrow text-accent-300">Led by</dt><dd class="mt-1 text-mist-300">All UX designers</dd></div>
+            </dl>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">06 · Who we designed for</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <div class="prose-site">
+          <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">Four roles, one pipeline, and each of them sees only their part of it.</p>
+          <p>Once we understood the product, we turned to the people using it and how they saw the task flow. We found four user segments: labelling experts, filter model developers, feature model developers and data analysts.</p>
+        </div>
+        <ul class="mt-10 grid gap-6 md:grid-cols-2">
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800 sm:p-8">
+            <p class="font-serif text-2xl text-paper">Jack</p>
+            <p class="eyebrow mt-2 text-mist-400">Data analyst</p>
+            <p class="mt-4 leading-relaxed text-mist-300">Curates datasets and runs the filter models with the highest confidence scores to validate the labels. Checks tags by eye in the visualisation to pick the right filter model for each dataset.</p>
+            <div class="mt-6 grid gap-6 border-t border-mist-800 pt-6 text-sm leading-relaxed sm:grid-cols-2">
+              <div><p class="eyebrow text-accent-300">Needs</p><ul class="mt-2 list-disc space-y-1.5 pl-4 text-mist-300"><li>A clear, high-level view of the whole pipeline, from raw data to final output</li><li>Reliable metrics to validate the accuracy and quality of curated data</li></ul></div>
+              <div><p class="eyebrow text-accent-300">Frustrations</p><ul class="mt-2 list-disc space-y-1.5 pl-4 text-mist-300"><li>No visibility into where the bottlenecks are</li><li>Checking and validating tags by hand is slow and tedious</li></ul></div>
+            </div>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800 sm:p-8">
+            <p class="font-serif text-2xl text-paper">Suyansh</p>
+            <p class="eyebrow mt-2 text-mist-400">Filter model developer</p>
+            <p class="mt-4 leading-relaxed text-mist-300">Develops the filter models that pull images out of large datasets. Models are compared, and the ones with the highest confidence scores are deployed for filtering sessions.</p>
+            <div class="mt-6 grid gap-6 border-t border-mist-800 pt-6 text-sm leading-relaxed sm:grid-cols-2">
+              <div><p class="eyebrow text-accent-300">Needs</p><ul class="mt-2 list-disc space-y-1.5 pl-4 text-mist-300"><li>A way to see a filter model's output and judge its performance quickly</li><li>Feedback on how models perform later in the pipeline</li></ul></div>
+              <div><p class="eyebrow text-accent-300">Frustrations</p><ul class="mt-2 list-disc space-y-1.5 pl-4 text-mist-300"><li>Hard to integrate new models into the existing application</li><li>Without good visualisation, it is hard to see why a model degrades on some data</li></ul></div>
+            </div>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800 sm:p-8">
+            <p class="font-serif text-2xl text-paper">Dennis</p>
+            <p class="eyebrow mt-2 text-mist-400">Labelling expert</p>
+            <p class="mt-4 leading-relaxed text-mist-300">Handles labelling for huge datasets. Manages the labelling sets, checks the labels marked for review, and adds or removes crops based on how relevant they are to each label.</p>
+          </li>
+          <li class="rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800 sm:p-8">
+            <p class="font-serif text-2xl text-paper">Rakshit</p>
+            <p class="eyebrow mt-2 text-mist-400">Feature model developer</p>
+            <p class="mt-4 leading-relaxed text-mist-300">Refines the dataset for one feature at a time. He looks at the feature, finds the right cluster of images and tags them to improve it.</p>
+            <div class="mt-6 grid gap-6 border-t border-mist-800 pt-6 text-sm leading-relaxed sm:grid-cols-2">
+              <div><p class="eyebrow text-accent-300">Needs</p><ul class="mt-2 list-disc space-y-1.5 pl-4 text-mist-300"><li>Query and extract exact subsets of data by tag and feature</li><li>Build and manage custom data streams for different ADAS applications</li></ul></div>
+              <div><p class="eyebrow text-accent-300">Frustrations</p><ul class="mt-2 list-disc space-y-1.5 pl-4 text-mist-300"><li>Limited search and filtering make the right data hard to find</li><li>No lineage: he cannot see which models or experts have touched the data</li></ul></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">07 · Workshops</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <div class="prose-site">
+          <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">Putting everyone in the same room, on the same map.</p>
+          <p>Each user type joined a series of workshops to describe their own workflow and the challenges at each step of curation and optimisation. Together we mapped one journey across the whole pipeline, and for every stage we noted what people do, what they need, what frustrates them, the tools they touch, how they feel and where the opportunities are.</p>
+        </div>
+        <ul class="mt-8 flex flex-wrap gap-2"><li class="rounded-full bg-surface/60 px-4 py-2 text-sm text-paper ring-1 ring-mist-800">Data selection</li><li class="rounded-full bg-surface/60 px-4 py-2 text-sm text-paper ring-1 ring-mist-800">Ingestion and quality check</li><li class="rounded-full bg-surface/60 px-4 py-2 text-sm text-paper ring-1 ring-mist-800">Sampling and filtering</li><li class="rounded-full bg-surface/60 px-4 py-2 text-sm text-paper ring-1 ring-mist-800">Curation for training</li><li class="rounded-full bg-surface/60 px-4 py-2 text-sm text-paper ring-1 ring-mist-800">Training the model</li><li class="rounded-full bg-surface/60 px-4 py-2 text-sm text-paper ring-1 ring-mist-800">Evaluating the model</li><li class="rounded-full bg-surface/60 px-4 py-2 text-sm text-paper ring-1 ring-mist-800">Model deployment</li></ul>
+        <p class="mt-3 text-xs text-mist-500">The stages of the journey map, with a feedback loop from evaluation back to the model.</p>
+        <div class="prose-site mt-10">
+          <p>Then we brought all the users together in common sessions, where each person walked through the others' workflows as role-play journeys against the clock. Seeing each other's work helped us remove repeated steps, and built empathy between people at different ends of the pipeline, so the whole process got quicker and worked towards one goal.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">08 · Design</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <div class="prose-site">
+          <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">Structure first, then the Bosch design language.</p>
+          <p>Wireframes gave stakeholders the base structure of each screen so they could give feedback early, before any visual design. Once the wireframes were agreed, we adapted them to the theming and components of the Bosch design system, so the new tools felt like part of the same family as everything else the teams used.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figma slides: Ojasv will add the share link. The slides are password protected in Figma's share settings.
+         Put only the share URL here (uncomment the button and the link around the preview). NEVER put the password in this repo. -->
+    <section id="slides" class="grid grid-cols-12 gap-x-6 gap-y-8 rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800 sm:p-10 lg:gap-x-12 lg:p-16">
+      <div class="col-span-12 lg:col-span-5">
+        <h2 class="eyebrow border-t border-current pt-4 font-normal">The screens</h2>
+        <p class="mt-6 font-serif text-2xl leading-snug sm:text-3xl">See the designs in Figma.</p>
+        <p class="mt-4 leading-relaxed text-mist-300">The screens are in a set of password protected Figma slides. Email me for access and I'll send the password.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <!-- <a class="btn" href="https://www.figma.com/deck/FILE_KEY/Slides-name" target="_blank" rel="noopener">Open slides in Figma <span aria-hidden="true">↗</span></a> -->
+          <a class="btn" href="mailto:ux@ojasvapurv.com?subject=Slides%20access%3A%20Bosch%20ATLAS%20image%20optimisation">Request access</a>
+        </div>
+      </div>
+      <div class="col-span-12 lg:col-span-7">
+        <div class="flex aspect-[16/10] flex-col items-center justify-center gap-3 rounded-lg bg-gradient-to-br from-ink via-mist-900 to-accent-900 text-center ring-1 ring-mist-800">
+          <img src="../../../assets/img/projects/bosch-image-data-curation/bosch-logo.svg" alt="" width="433" height="97" class="h-auto w-40 opacity-70 sm:w-52">
+          <span class="text-sm text-mist-500">Slides coming soon</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="rule"></div>
   <a href="../../../projects/bosch-image-data-curation/" class="group flex items-end justify-between gap-6 pt-16 lg:pt-24">
     <span>
       <span class="eyebrow block text-mist-500">Back to</span>
