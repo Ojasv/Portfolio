@@ -124,8 +124,10 @@
     if (!w || !h) return;
     var resized = el.width !== w || el.height !== h;
     if (resized) { el.width = w; el.height = h; gl.viewport(0, 0, w, h); }
-    var tg = progress(o); st.energy = Math.min(1, (st.energy || 0) * 0.95 + Math.abs(tg - (st.last == null ? tg : st.last)) * 14); st.last = tg;
-    st.p += (tg - st.p) * 0.08;
+    var ft = st.prevT ? Math.min(0.1, (now - st.prevT) / 1000) : 1 / 60; st.prevT = now;
+    var tg = progress(o); st.energy = Math.min(1, (st.energy || 0) * Math.pow(0.95, ft * 60) + Math.abs(tg - (st.last == null ? tg : st.last)) * 14); st.last = tg;
+    st.p += (tg - st.p) * (1 - Math.exp(-ft * 5));          // time-based, so slow devices keep up with the scroll (matches wave-scroll)
+    if (Math.abs(tg - st.p) < 0.0005) st.p = tg;
     // only render while the retreat is actually on screen and changing
     var idleFrame = st.has && !resized && !st.hideNext && st.drawn &&
       ((st.p < 0.002 && tg === 0) || (st.p > 0.998 && tg === 1)) && st.energy < 0.01;

@@ -12,6 +12,7 @@
  */
 (function () {
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var COARSE = window.matchMedia && matchMedia('(pointer: coarse)').matches;   // phones and tablets
   // palette sampled from the hero photograph
   var TINT = [[7, 85, 113], [10, 111, 135], [36, 116, 137]];   // far → near water body
   var FACE = 'rgba(4,72,86,', LIP = 'rgba(70,196,200,', FOAM = 'rgba(226,242,245,';   // foam: the photo's whitewater is a pale sea-tinted white, never pure white
@@ -71,25 +72,35 @@
     var o = st.o, cv = st.el, ctx = st.ctx;
     var W = cv.clientWidth, H = cv.clientHeight;
     if (!W || !H) return;
-    var dpr = Math.min(W < 768 ? 2 : 1.25, window.devicePixelRatio || 1);   // phones: small canvas, so draw it sharper
+    // resolution: phones draw sharper (small canvas, up to 2x). Touch devices also get a pixel budget, so a large iPad
+    // canvas isn't drawn at full retina size (that made it choppy). Desktop is unchanged.
+    var dpr = Math.min(W < 768 ? 2 : 1.25, window.devicePixelRatio || 1);
+    if (COARSE) dpr = Math.min(dpr, Math.sqrt(1.4e6 / (W * H)));
+    dpr = Math.max(0.5, dpr);
     if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) {
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     }
     if (!st.buf) st.buf = document.createElement('canvas');
     if (st.buf.width !== cv.width || st.buf.height !== cv.height) { st.buf.width = cv.width; st.buf.height = cv.height; }
     var out = ctx;
-    out.setTransform(1, 0, 0, 1, 0, 0); out.clearRect(0, 0, cv.width, cv.height);
+    var outTop = Math.max(0, Math.floor((st.outTop == null ? 0 : st.outTop) * dpr));
+    out.setTransform(1, 0, 0, 1, 0, 0); out.clearRect(0, outTop, cv.width, cv.height - outTop);
     ctx = st.buf.getContext('2d');
+    var bufTop = cv.height, frameTop = H;               // only the band of screen the waves occupy is cleared and redrawn
 
     var target = progress(st), dv = Math.abs(target - st.last); st.last = target;
-    st.energy = Math.min(1, st.energy * 0.94 + dv * 8);
-    st.p += (target - st.p) * 0.08;
+    var dt = st.prevT ? Math.min(0.1, (now - st.prevT) / 1000) : 1 / 60; st.prevT = now;
+    st.energy = Math.min(1, st.energy * Math.pow(0.94, dt * 60) + dv * 8);
+    // ease towards the scroll position by elapsed time, not per frame: on a slow device the waves still keep up with
+    // the scroll instead of trailing behind it (they used to linger over the About text)
+    st.p += (target - st.p) * (1 - Math.exp(-dt * 5));
+    if (Math.abs(target - st.p) < 0.0005) st.p = target;
     o.trigger.style.setProperty('--wave-p', st.p.toFixed(4));
     var p = st.p, ep = p * p * (3 - 2 * p);              // smoothstep for rise
     var t = o.idle ? now / 1000 : 0, n = o.layers, step = Math.max(4, W / 220);
     var fade = 1 - Math.min(1, Math.max(0, (p - 0.25) / 0.7)); fade = fade * fade * (3 - 2 * fade);
     var hi = H;
-    if (fade < 0.01) { if (!st.cleared) { out.setTransform(1, 0, 0, 1, 0, 0); out.clearRect(0, 0, cv.width, cv.height); st.cleared = true; } return; }
+    if (fade < 0.01) { if (!st.cleared) { out.setTransform(1, 0, 0, 1, 0, 0); out.clearRect(0, 0, cv.width, cv.height); st.cleared = true; st.outTop = H; } return; }
     st.cleared = false;
     var ft = fit(o, W, H), cDw = ft.w, cDh = ft.h;
     var fX = ft.x + o.focus[0] * cDw, sL = o.focus[1] * cDw * 1.4, sR = o.focus[2] * cDw * 1.2;
@@ -115,7 +126,10 @@
       }
       var top = Math.min.apply(null, ys);
 
-      ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height);
+      var fe = A * (0.5 + 0.5 * (1 - k)) + 4;
+      var r0 = Math.max(0, Math.floor((top - Math.max(fe, A * 1.2) - 24) * dpr));   // highest pixel row this layer can touch
+      var c0 = Math.min(r0, bufTop); bufTop = r0; if (r0 / dpr < frameTop) frameTop = r0 / dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, c0, cv.width, cv.height - c0);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       // body
       ctx.save();
@@ -150,8 +164,7 @@
       ctx.restore();
       // 4. feather the top edge so it melts into whatever is behind
       ctx.save(); ctx.globalCompositeOperation = 'destination-out'; ctx.lineJoin = 'round';
-      var fe = A * (0.5 + 0.5 * (1 - k)) + 4;
-      for (var q = 1; q <= 8; q++) strokeCrest(ctx, xs, ys, fe * 0.12 * q, 'rgba(0,0,0,0.13)', fe * q / 4);
+      for (var q = 1; q <= 4; q++) strokeCrest(ctx, xs, ys, fe * 0.24 * q - fe * 0.12, 'rgba(0,0,0,0.243)', fe * q / 2 - fe / 4);   // same soft edge as 8 thin strokes, half the work
       ctx.restore();
 
       ctx.save(); ctx.globalCompositeOperation = 'destination-out';
@@ -159,9 +172,10 @@
       tg.addColorStop(0, 'rgba(0,0,0,0.6)'); tg.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = tg; ctx.fillRect(0, top - 2, W, H - top + 4); ctx.restore();
       foam(st, ctx, xs, ys, f, ph, A, i, k, W, step);
-      out.globalAlpha = fade; out.drawImage(st.buf, 0, 0); out.globalAlpha = 1;
+      out.globalAlpha = fade; out.drawImage(st.buf, 0, r0, cv.width, cv.height - r0, 0, r0, cv.width, cv.height - r0); out.globalAlpha = 1;
       if (top < hi) hi = top;
     }
+    st.outTop = frameTop;
 
   }
 
@@ -237,9 +251,10 @@
       var br = breaking(n) * amt;
       if (br < 0.04) continue;
       for (var j = 0; j < per; j++) {
-        var r1 = hash(n * 13 + j, i), r2 = hash(j, n * 7 + i), r3 = hash(j * 3 + n, i * 5), r4 = hash(j * 5.3 + n * 2, i + 17);
+        var r1 = hash(n * 13 + j, i);
         var x = (TAU * n + Math.PI * (0.05 + 0.95 * r1) - ph) / f;
         if (x < -20 || x > W + 20) continue;
+        var r2 = hash(j, n * 7 + i), r3 = hash(j * 3 + n, i * 5), r4 = hash(j * 5.3 + n * 2, i + 17);
         var w = weight(x);
         var clump = vnoise(r1 * 9 + n * 3.1, i + 5) * 0.65 + vnoise(r1 * 31 + n, i + 7) * 0.35;   // foam gathers in patches
         if (r3 > w * 1.15 * (0.4 + 1.3 * clump)) continue;

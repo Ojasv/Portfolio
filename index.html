@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="./assets/css/site.css?v=d9c31b82">
+  <link rel="stylesheet" href="./assets/css/site.css?v=170b0540">
   <link rel="preload" as="image" href="./assets/img/home/hero-2400.jpg"
         imagesrcset="./assets/img/home/hero-1200.jpg 1200w, ./assets/img/home/hero-2400.jpg 2400w, ./assets/img/home/hero-3600.jpg 3600w" imagesizes="100vw">
 </head>
@@ -56,7 +56,9 @@
   <!-- Hero: 320vh of scroll drives the animation. 0–40% waves rise (wave-scroll.js), 30–100% the photo retreats like
        a wave sliding off sand (shore-scroll.js) and reveals the About block underneath. -->
   <section id="hero" data-header-until class="relative h-[320vh] bg-ink" aria-label="Introduction">
-    <div id="heroStage" class="sticky top-0 h-svh min-h-[35rem] overflow-hidden">
+    <!-- Stage is the large viewport height (address bar hidden), so no strip of dark page shows below it when a phone's
+         address bar slides away on the first scroll. Bottom-anchored text adds the bar's height so it stays visible. -->
+    <div id="heroStage" class="sticky top-0 h-screen h-lvh min-h-[35rem] overflow-hidden">
 
       <!-- Revealed as the photo retreats -->
       <div class="gutter wrap absolute inset-x-0 top-1/2 z-[1] -translate-y-1/2">
@@ -98,7 +100,7 @@
       <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-3/5 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent opacity-[calc(1-var(--wave-p,0)*1.8)] lg:hidden" aria-hidden="true"></div>
 
       <!-- Title: drifts up and fades as --wave-p (set by wave-scroll.js) goes 0 → 1 -->
-      <div class="hero-title gutter wrap pointer-events-none absolute inset-x-0 bottom-16 z-[4] text-white md:bottom-24">
+      <div class="hero-title gutter wrap pointer-events-none absolute inset-x-0 bottom-[calc(4rem+100lvh-100svh)] z-[4] text-white md:bottom-[calc(6rem+100lvh-100svh)]">
         <p class="mb-4 text-sm uppercase tracking-[0.2em]">UX Designer &amp; Tech Enthusiast</p>
         <h1 class="font-serif text-[clamp(2.5rem,14.3vw,3.5rem)] sm:text-[clamp(3.5rem,9vw,8rem)] leading-[0.9] font-normal tracking-tighter">
           Digital<br><span class="font-light italic opacity-90">Craftsmanship</span>
@@ -206,7 +208,7 @@
   })();
 </script>
 <script src="./assets/js/site.js?v=e99956d8" defer></script>
-<script src="./assets/js/wave-scroll.js?v=e9af375a" defer></script>
-<script src="./assets/js/shore-scroll.js?v=ce20cb14" defer></script>
+<script src="./assets/js/wave-scroll.js?v=ce4a3739" defer></script>
+<script src="./assets/js/shore-scroll.js?v=4413494f" defer></script>
 </body>
 </html>
