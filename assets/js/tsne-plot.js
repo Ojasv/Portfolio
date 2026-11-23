@@ -9,7 +9,7 @@
     { name: 'Orange', color: '#ff9a3c' },
     { name: 'Amber', color: '#ffc24a' },
     { name: 'Green', color: '#3ee6a8' },
-    null // blue crops sit inside the green cluster and get no label of their own
+    null // blue crops sit inside the green cluster; each gets its own 'Anomaly' tag
   ];
   var WORLD_W = 1000, WORLD_H = 620, CROP_W = 13, MAX_ZOOM = 14;
 
@@ -18,7 +18,7 @@
     var ctx = canvas.getContext('2d');
     var atlas = new Image();
     var data = null, cropH = 0, view = { s: 1, x: 0, y: 0 }, fit = 1, cw = 0, ch = 0, raf = 0;
-    var labels = [], B = { x: 0, y: 0, w: WORLD_W, h: WORLD_H };
+    var labels = [], anomalies = [], B = { x: 0, y: 0, w: WORLD_W, h: WORLD_H };
     var level = wrap.querySelector('[data-tsne-level]');
 
     function worldOf(p) { return [WORLD_W / 2 + p[0] * 460, WORLD_H / 2 - p[1] * 260.4]; }
@@ -31,6 +31,8 @@
         (groups[p[3]] = groups[p[3]] || []).push(p);
       });
       // draw in a stable shuffled order so no cluster sits entirely on top
+      anomalies = data.pts.filter(function (p) { return p[3] === 4; });
+      data.pts = data.pts.filter(function (p) { return p[3] !== 4; });
       data.pts.sort(function (a, b) { return ((a[2] * 7919 + a.wx * 31) % 97) - ((b[2] * 7919 + b.wx * 31) % 97); });
       var xs0 = data.pts.map(function (p) { return p.wx; }), ys0 = data.pts.map(function (p) { return p.wy; });
       var minx = Math.min.apply(null, xs0), maxx = Math.max.apply(null, xs0), miny = Math.min.apply(null, ys0), maxy = Math.max.apply(null, ys0);
@@ -82,6 +84,26 @@
         var v = p[2];
         ctx.drawImage(atlas, (v % cols) * tw, Math.floor(v / cols) * th, tw, th, x, y, w, h);
       }
+      // anomalies drawn last so they are never buried, each with a small tag
+      var afs = cw < 500 ? 9 : 11;
+      anomalies.forEach(function (p) {
+        var x = view.x + p.wx * s - w / 2, y = view.y + p.wy * s - h / 2, v = p[2];
+        ctx.drawImage(atlas, (v % cols) * tw, Math.floor(v / cols) * th, tw, th, x, y, w, h);
+      });
+      ctx.font = '500 ' + afs + 'px Inter, system-ui, sans-serif';
+      var placed = [];
+      anomalies.forEach(function (p) {
+        var cx = view.x + p.wx * s, top = view.y + p.wy * s - h / 2, ly = top - 14;
+        var t = 'Anomaly', tw2 = ctx.measureText(t).width, bx = cx - (tw2 + afs * 1.6) / 2;
+        var r = [bx - 4, ly - afs - 2, tw2 + afs * 1.6 + 8, afs + 7];
+        var hit = placed.some(function (q) { return r[0] < q[0] + q[2] && q[0] < r[0] + r[2] && r[1] < q[1] + q[3] && q[1] < r[1] + r[3]; });
+        ctx.strokeStyle = '#7fa8ff'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx, top - 1); ctx.lineTo(cx, hit ? top - 6 : ly + 3); ctx.stroke();
+        if (hit) { ctx.fillStyle = '#5b8cff'; ctx.beginPath(); ctx.arc(cx, top - 8, afs * 0.32, 0, Math.PI * 2); ctx.fill(); return; }
+        placed.push(r);
+        ctx.fillStyle = 'rgba(23,25,42,.85)'; ctx.fillRect(r[0], r[1], r[2], r[3]);
+        ctx.fillStyle = '#5b8cff'; ctx.beginPath(); ctx.arc(bx + afs * 0.35, ly - afs * 0.35, afs * 0.32, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#e9e9ed'; ctx.fillText(t, bx + afs * 1.1, ly);
+      });
       var fs = cw < 500 ? 10 : 13;
       ctx.font = '500 ' + fs + 'px Inter, system-ui, sans-serif'; ctx.textBaseline = 'alphabetic';
       labels.forEach(function (l) {
