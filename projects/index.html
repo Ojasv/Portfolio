@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../assets/css/site.css?v=e9e6aeb6">
+  <link rel="stylesheet" href="../assets/css/site.css?v=6daceb99">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -101,7 +101,13 @@
     <article class="group">
       <a href="../projects/healthasyst-clinic-management/" class="block">
         <div class="aspect-[4/3] overflow-hidden rounded-lg bg-surface">
-          <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-surface via-ink to-accent-900 px-6 transition duration-700 ease-tide group-hover:scale-[1.03]"><img src="../assets/img/about/logos/healthasyst.png" width="176" height="30" alt="HealthAsyst" loading="lazy" class="h-auto w-1/2 max-w-[16rem] brightness-0 invert opacity-90"></div>
+          <!-- Cover image with the dashboard video laid over the monitor screen; plays once on hover (site.js, data-play-once). -->
+          <div class="relative h-full w-full transition duration-700 ease-tide group-hover:scale-[1.03]">
+            <img src="../assets/img/projects/healthasyst-clinic-management/card.webp" width="1600" height="1200" alt="The HealthAsyst analytics dashboard on a front-desk monitor, beside a receptionist at a clinic counter" loading="lazy" class="absolute inset-0 h-full w-full">
+            <video data-play-once muted playsinline preload="metadata" width="1600" height="976" aria-hidden="true" class="absolute" style="left:5.699%;top:27.932%;width:54.602%;height:44.408%;object-fit:cover">
+              <source src="../assets/img/projects/healthasyst-clinic-management/dashboard-scroll.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
         <p class="eyebrow mt-6 text-mist-400">HealthAsyst</p>
         <h2 class="mt-2 slant font-serif text-2xl tracking-tight group-hover:text-accent-300 lg:text-4xl">Clinic Management System</h2>
