@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../assets/css/site.css?v=170b0540">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=f1e5b2cc">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -70,10 +70,12 @@
     </div>
   </section>
 
+  <!-- Cover (chosen by Ojasv 2026-11-23): his street photo with detections; crops lift out into labelled stacks. Counts other than Car 2,568 and Pedestrian 156 are illustrative. Source: /mnt/project-files/bosch/bosch-cover-gen.py -->
   <figure class="mt-16 lg:mt-24">
-    <div class="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-surface via-ink to-accent-900 ring-1 ring-mist-800 md:aspect-[21/9]">
-      <img src="../../assets/img/projects/bosch-image-data-curation/bosch-logo.svg" width="433" height="97" alt="Bosch" class="h-auto w-3/5 max-w-[34rem]">
-    </div>
+    <a href="../../assets/img/projects/bosch-image-data-curation/cover-2400.webp" class="block cursor-zoom-in overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="View larger: detection and extraction of image crops">
+      <img src="../../assets/img/projects/bosch-image-data-curation/cover-1200.webp" srcset="../../assets/img/projects/bosch-image-data-curation/cover-1200.webp 1200w, ../../assets/img/projects/bosch-image-data-curation/cover-2400.webp 2400w" sizes="(min-width: 100rem) 100rem, 100vw" width="2400" height="1350" alt="Detection on a city street: a recorded frame, tilted on a pile of frames, with boxes and confidence scores for cars, pedestrians, a cyclist, traffic lights, street signs and street markings. Crops of each detection lift out of the frame and flow into labelled stacks with counts, such as 2,568 cars and 156 pedestrians in 2,000 frames. Bosch logo top right" class="h-auto w-full">
+    </a>
+    <figcaption class="mt-3 text-xs text-mist-500">From one recorded frame to curated data: every detection becomes a labelled crop, sorted into its own set.</figcaption>
   </figure>
 
   <div class="space-y-24 py-24 lg:space-y-36 lg:py-36">
