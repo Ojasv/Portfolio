@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../../assets/css/site.css?v=c9225336">
+  <link rel="stylesheet" href="../../../assets/css/site.css?v=19598955">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -90,20 +90,111 @@
 
   <section aria-labelledby="glance" class="mt-16 rounded-lg bg-surface/60 p-6 ring-1 ring-accent-700 sm:p-10 lg:mt-24 lg:p-14">
     <h2 id="glance" class="eyebrow text-accent-300">At a glance</h2>
-    <dl class="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-3 lg:gap-x-12">
+    <dl class="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-2 lg:gap-x-12 2xl:grid-cols-4">
+      <div>
+        <dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">80%+</dt>
+        <dd class="mt-4 leading-relaxed text-mist-300">Less time to create a production dataset.</dd>
+      </div>
       <div>
         <dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">5+</dt>
-        <dd class="mt-4 leading-relaxed text-mist-300">Ways to lay out the same crops: t-SNE, k-means t-SNE, grid, RasterFairy, UMAP and more.</dd>
+        <dd class="mt-4 leading-relaxed text-mist-300">Visualisation options, which made anomalies in the data easy to find.</dd>
       </div>
       <div>
-        <dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">360°</dt>
-        <dd class="mt-4 leading-relaxed text-mist-300">Camera frames from every angle, with LIDAR depth read together with each image.</dd>
+        <dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">1 place</dt>
+        <dd class="mt-4 leading-relaxed text-mist-300">Objects, frames and video, linked together. Data analysts were happier with it, and said infinite scroll with lazy loading made huge datasets easy to go through.</dd>
       </div>
       <div>
-        <dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">0</dt>
-        <dd class="mt-4 leading-relaxed text-mist-300">Search boxes, by design. ATLAS starts from labels, and search comes later, in CLIFF.</dd>
+        <dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">3D + 2D</dt>
+        <dd class="mt-4 leading-relaxed text-mist-300">Point clouds and their images in one app. Feature model developers said it made creating feature datasets easier.</dd>
       </div>
     </dl>
+  </section>
+
+  <section aria-labelledby="usage" class="mt-6 rounded-lg bg-surface/60 p-6 ring-1 ring-mist-800 sm:p-10 lg:mt-8 lg:p-14">
+    <h2 id="usage" class="eyebrow text-accent-300">In use, 2023–24</h2>
+    <div class="mt-6 grid grid-cols-12 gap-x-6 gap-y-6 lg:gap-x-12">
+      <p class="col-span-12 font-serif text-2xl leading-snug text-paper sm:text-3xl lg:col-span-6">From 47,728 frames in July 2023 to 2.66 million in March 2024.</p>
+      <p class="col-span-12 leading-relaxed text-mist-300 lg:col-span-6">ATLAS went live with its new capabilities in July 2023. Word of how capable and easy to use it was spread inside Bosch and beyond, to customers in the VAG group, and more feature developers started building their feature datasets with it. Its popularity kept growing across feature teams.</p>
+    </div>
+      <dl class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-mist-800 pt-8 lg:grid-cols-4 lg:gap-x-12">
+        <div class="flex flex-col">
+          <dt class="order-2 mt-2 text-sm leading-relaxed text-mist-400">Frames handled by ATLAS, July 2023 to March 2024</dt>
+          <dd class="font-serif text-3xl leading-none text-paper sm:text-4xl">11.8M</dd>
+        </div>
+        <div class="flex flex-col">
+          <dt class="order-2 mt-2 text-sm leading-relaxed text-mist-400">More frames a month in March 2024 than at launch</dt>
+          <dd class="font-serif text-3xl leading-none text-paper sm:text-4xl">56×</dd>
+        </div>
+        <div class="flex flex-col">
+          <dt class="order-2 mt-2 text-sm leading-relaxed text-mist-400">ATLAS sessions in 2023–24</dt>
+          <dd class="font-serif text-3xl leading-none text-paper sm:text-4xl">1,762</dd>
+        </div>
+        <div class="flex flex-col">
+          <dt class="order-2 mt-2 text-sm leading-relaxed text-mist-400">CLIFF sessions in 2023–24, up from 25 sessions across the pipeline in 2022–23</dt>
+          <dd class="font-serif text-3xl leading-none text-paper sm:text-4xl">27,759</dd>
+        </div>
+      </dl>
+      <figure class="mt-12 lg:mt-16">
+        <figcaption class="eyebrow text-mist-500">Frames handled by ATLAS each month</figcaption>
+        <ol class="mt-6 flex h-56 items-end gap-1.5 border-b border-mist-700 sm:h-72 sm:gap-3 lg:h-80 lg:gap-5">
+          <li class="flex h-full min-w-0 flex-1 flex-col justify-end">
+            <span class="sr-only">July 2023: 47,728 frames</span>
+            <span aria-hidden="true" class="mb-1.5 text-center text-[0.625rem] tabular-nums text-mist-400 sm:text-xs">48K</span>
+            <span aria-hidden="true" class="block rounded-t-sm bg-accent-700" style="height:1.8%"></span>
+          </li>
+          <li class="flex h-full min-w-0 flex-1 flex-col justify-end">
+            <span class="sr-only">August 2023: 120,033 frames</span>
+            <span aria-hidden="true" class="mb-1.5 text-center text-[0.625rem] tabular-nums text-mist-400 sm:text-xs">120K</span>
+            <span aria-hidden="true" class="block rounded-t-sm bg-accent-700" style="height:4.5%"></span>
+          </li>
+          <li class="flex h-full min-w-0 flex-1 flex-col justify-end">
+            <span class="sr-only">September 2023: 279,992 frames</span>
+            <span aria-hidden="true" class="mb-1.5 text-center text-[0.625rem] tabular-nums text-mist-400 sm:text-xs">280K</span>
+            <span aria-hidden="true" class="block rounded-t-sm bg-accent-700" style="height:10.5%"></span>
+          </li>
+          <li class="flex h-full min-w-0 flex-1 flex-col justify-end">
+            <span class="sr-only">October 2023: 797,788 frames</span>
+            <span aria-hidden="true" class="mb-1.5 text-center text-[0.625rem] tabular-nums text-mist-400 sm:text-xs">798K</span>
+            <span aria-hidden="true" class="block rounded-t-sm bg-accent-700" style="height:30.0%"></span>
+          </li>
+          <li class="flex h-full min-w-0 flex-1 flex-col justify-end">
+            <span class="sr-only">November 2023: 1,435,943 frames</span>
+            <span aria-hidden="true" class="mb-1.5 text-center text-[0.625rem] tabular-nums text-mist-400 sm:text-xs">1.44M</span>
+            <span aria-hidden="true" class="block rounded-t-sm bg-accent-700" style="height:54.0%"></span>
+          </li>
+          <li class="flex h-full min-w-0 flex-1 flex-col justify-end">
+            <span class="sr-only">December 2023: 2,031,005 frames</span>
+            <span aria-hidden="true" class="mb-1.5 text-center text-[0.625rem] tabular-nums text-mist-400 sm:text-xs">2.03M</span>
+            <span aria-hidden="true" class="block rounded-t-sm bg-accent-700" style="height:76.4%"></span>
+          </li>
+          <li class="flex h-full min-w-0 flex-1 flex-col justify-end">
+            <span class="sr-only">January 2024: 2,218,945 frames</span>
+            <span aria-hidden="true" class="mb-1.5 text-center text-[0.625rem] tabular-nums text-mist-400 sm:text-xs">2.22M</span>
+            <span aria-hidden="true" class="block rounded-t-sm bg-accent-700" style="height:83.5%"></span>
+          </li>
+          <li class="flex h-full min-w-0 flex-1 flex-col justify-end">
+            <span class="sr-only">February 2024: 2,218,945 frames</span>
+            <span aria-hidden="true" class="mb-1.5 text-center text-[0.625rem] tabular-nums text-mist-400 sm:text-xs">2.22M</span>
+            <span aria-hidden="true" class="block rounded-t-sm bg-accent-700" style="height:83.5%"></span>
+          </li>
+          <li class="flex h-full min-w-0 flex-1 flex-col justify-end">
+            <span class="sr-only">March 2024: 2,658,959 frames</span>
+            <span aria-hidden="true" class="mb-1.5 text-center text-[0.625rem] tabular-nums text-paper sm:text-xs">2.66M</span>
+            <span aria-hidden="true" class="block rounded-t-sm bg-accent-400" style="height:100.0%"></span>
+          </li>
+        </ol>
+        <div aria-hidden="true" class="mt-2 flex gap-1.5 text-[0.625rem] uppercase tracking-wider text-mist-500 sm:gap-3 sm:text-xs lg:gap-5">
+          <span class="min-w-0 flex-1 text-center">Jul<br><span class="text-mist-600">2023</span></span>
+          <span class="min-w-0 flex-1 text-center">Aug</span>
+          <span class="min-w-0 flex-1 text-center">Sep</span>
+          <span class="min-w-0 flex-1 text-center">Oct</span>
+          <span class="min-w-0 flex-1 text-center">Nov</span>
+          <span class="min-w-0 flex-1 text-center">Dec</span>
+          <span class="min-w-0 flex-1 text-center">Jan<br><span class="text-mist-600">2024</span></span>
+          <span class="min-w-0 flex-1 text-center">Feb</span>
+          <span class="min-w-0 flex-1 text-center">Mar</span>
+        </div>
+      </figure>
   </section>
 
   <div class="space-y-24 py-24 lg:space-y-36 lg:py-36">
