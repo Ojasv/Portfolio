@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../assets/css/site.css?v=6daceb99">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=35f7b5cc">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -131,9 +131,9 @@
             </div>
             <div class="max-w-[42rem] pb-12 lg:pb-16">
               <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Information architecture and sitemap</h3>
-              <p class="mt-3 text-lg leading-relaxed text-paper/90">We plotted the information architecture over several iterations.</p>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We plotted the information architecture over several iterations, and it settled into three areas.</p>
               <div class="mt-3 leading-relaxed text-mist-300">
-                <p>One decision stood out: the Super-Admin only needs Web Connect, a dedicated feature for connecting data points to different data sources through API connections.</p><p class="mt-3">Once we knew how information should be segmented and flow through the app, we narrowed the sitemap down from it.</p><ul class="mt-4 flex flex-wrap gap-2 text-xs"><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Analytics</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Reports</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Web Connect</li></ul>
+                <dl class="mt-5 grid gap-3 sm:grid-cols-3"><div class="rounded-lg border border-paper/10 p-4"><dt class="font-serif text-lg text-paper">Analytics</dt><dd class="mt-1 text-sm leading-relaxed">Quick insights into each area of clinic management.</dd></div><div class="rounded-lg border border-paper/10 p-4"><dt class="font-serif text-lg text-paper">Reports</dt><dd class="mt-1 text-sm leading-relaxed">The historical data saved for every one of those data points.</dd></div><div class="rounded-lg border border-paper/10 p-4"><dt class="font-serif text-lg text-paper">Web Connect</dt><dd class="mt-1 text-sm leading-relaxed">Super-Admin only. Connects the clinic to its various data sources.</dd></div></dl><p class="mt-5">Web Connect is a specific tool for connecting data points to their sources through API connections, so only the Super-Admin needs it. Once we knew how information should be segmented and flow through the app, we narrowed the sitemap down from it.</p>
               </div>
             </div>
           </li>
@@ -163,11 +163,35 @@
           </li>
           <li class="flex gap-5 lg:gap-8">
             <div class="flex flex-col items-center">
-              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">7</span>
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">7</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
             </div>
-            <div class="max-w-[42rem] pb-0">
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
               <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Narrowing the insights</h3>
               <p class="mt-3 text-lg leading-relaxed text-paper/90">With the app's segments and sitemap settled, we narrowed down the insights.</p>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">8</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">A grayscale proof of concept</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We built the whole app in grayscale first, as a proof of concept.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>By this stage the sitemap was fully refined. The design system and colour palette did not exist yet, so every screen was judged on structure and flow alone.</p>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">9</span>
+            </div>
+            <div class="max-w-[42rem] pb-0">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">A palette and a bare-minimum design system</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">Then we created the colour palette and a bare-minimum design system for HealthAsyst's modern UI.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>HealthAsyst did not want to depend on any external design system, so we started fresh, with just enough foundation to build on: Lato type, a 4 pt spacing grid, a teal-led palette, and one icon set with a fixed colour and size for every state.</p><ul class="mt-4 flex flex-wrap gap-2 text-xs"><li class="flex items-center gap-2 rounded bg-mist-900 px-2 py-1 font-mono text-mist-300"><span aria-hidden="true" class="size-3 rounded-full" style="background:#027C6B"></span>#027C6B</li><li class="flex items-center gap-2 rounded bg-mist-900 px-2 py-1 font-mono text-mist-300"><span aria-hidden="true" class="size-3 rounded-full" style="background:#22A08E"></span>#22A08E</li><li class="flex items-center gap-2 rounded bg-mist-900 px-2 py-1 font-mono text-mist-300"><span aria-hidden="true" class="size-3 rounded-full" style="background:#5AD4AF"></span>#5AD4AF</li><li class="flex items-center gap-2 rounded bg-mist-900 px-2 py-1 font-mono text-mist-300"><span aria-hidden="true" class="size-3 rounded-full" style="background:#41E4DB"></span>#41E4DB</li><li class="flex items-center gap-2 rounded bg-mist-900 px-2 py-1 font-mono text-mist-300"><span aria-hidden="true" class="size-3 rounded-full" style="background:#6ACCEB"></span>#6ACCEB</li><li class="flex items-center gap-2 rounded bg-mist-900 px-2 py-1 font-mono text-mist-300"><span aria-hidden="true" class="size-3 rounded-full" style="background:#1C76FD"></span>#1C76FD</li><li class="flex items-center gap-2 rounded bg-mist-900 px-2 py-1 font-mono text-mist-300"><span aria-hidden="true" class="size-3 rounded-full" style="background:#902CDE"></span>#902CDE</li><li class="flex items-center gap-2 rounded bg-mist-900 px-2 py-1 font-mono text-mist-300"><span aria-hidden="true" class="size-3 rounded-full" style="background:#FF5556"></span>#FF5556</li><li class="flex items-center gap-2 rounded bg-mist-900 px-2 py-1 font-mono text-mist-300"><span aria-hidden="true" class="size-3 rounded-full" style="background:#F5AF8E"></span>#F5AF8E</li><li class="flex items-center gap-2 rounded bg-mist-900 px-2 py-1 font-mono text-mist-300"><span aria-hidden="true" class="size-3 rounded-full" style="background:#FEE792"></span>#FEE792</li></ul><figure class="mt-6"><a href="../../assets/img/projects/healthasyst-clinic-management/icon-system.webp" class="block overflow-hidden rounded-lg bg-white"><img src="../../assets/img/projects/healthasyst-clinic-management/icon-system-1000.webp" width="1029" height="1455" loading="lazy" alt="Icon specification sheet: side-navigation icons in unselected and selected states, plus trend, filter, export, share and reorder icons, each with its colour and size" class="w-full"></a><figcaption class="mt-3 text-xs text-mist-500">Part of the icon set: one colour and size for every state, from the side navigation to the trend markers.</figcaption></figure>
+              </div>
             </div>
           </li>
       </ol>
