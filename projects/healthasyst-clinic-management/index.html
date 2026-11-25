@@ -83,6 +83,97 @@
     <figcaption class="mt-3 text-xs text-mist-500">HealthAsyst: Better clinic management, better healthcare.</figcaption><!-- cover photo: Christiann Koepke on Unsplash -->
   </figure>
 
+  <section class="mt-24 grid grid-cols-12 gap-x-6 lg:mt-36 lg:gap-x-12">
+    <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">Design process</h2>
+    <div class="col-span-12 lg:col-span-8">
+      <p class="prose-site">Most people only ever opened the reports. So before designing anything new, we sorted out who needed what, and what only needed fixing.</p>
+      <!-- Storyline: numbered nodes joined by a vertical line (same pattern as the Vaska page) -->
+      <ol class="mt-12">
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">1</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Requirement gathering</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">I gathered requirements with stakeholders and the people already using the app.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>Most users only opened the reports. Only a few admins used their own personal dashboards.</p><p class="mt-3">So I split the requirements into two broad segments: what belongs in the new experience, and what is a refinement of the old one.</p><ul class="mt-4 flex flex-wrap gap-2 text-xs"><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">New experience</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Refinement of the old</li></ul>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">2</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Mapping every use case</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We laid out every possible use case of the app on a whiteboard, with sticky notes.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>In the session with me were the Product Owner, a Senior Admin and a Front-Desk Manager.</p><ul class="mt-4 flex flex-wrap gap-2 text-xs"><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Product Owner</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Senior Admin</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Front-Desk Manager</li></ul>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">3</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Choosing the roles</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">With every use case on the board, we decided at a broad level which roles the app would cater to.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>Then we quickly moved the stickies to line up under each role.</p>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">4</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Information architecture and sitemap</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We plotted the information architecture over several iterations.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>One decision stood out: the Super-Admin only needs Web Connect, a dedicated feature for connecting data points to different data sources through API connections.</p><p class="mt-3">Once we knew how information should be segmented and flow through the app, we narrowed the sitemap down from it.</p><ul class="mt-4 flex flex-wrap gap-2 text-xs"><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Analytics</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Reports</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Web Connect</li></ul>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">5</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Role-based access and handoffs</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">With the roles agreed, we mapped which features each role can access.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>We also marked the handoff points, where a workflow passes from one persona to the next.</p>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">6</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">KPIs and a dashboard for each persona</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We predicted the KPIs each persona cares about, and what the best dashboard for each of them would look like.</p>
+              <div class="mt-3 leading-relaxed text-mist-300">
+                <p>For each of those dashboards, we also defined the customisation options.</p>
+              </div>
+            </div>
+          </li>
+          <li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">7</span>
+            </div>
+            <div class="max-w-[42rem] pb-0">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Narrowing the insights</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">With the app's segments and sitemap settled, we narrowed down the insights.</p>
+            </div>
+          </li>
+      </ol>
+    </div>
+  </section>
+
   <div class="rule mt-24 lg:mt-36"></div>
   <a href="../../projects/" class="group flex items-end justify-between gap-6 pt-16 lg:pt-24">
     <span>
