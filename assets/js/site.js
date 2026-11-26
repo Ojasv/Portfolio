@@ -92,7 +92,7 @@
         if (!e.isIntersecting) { rewind(); return; }
         var full = e.intersectionRatio >= 0.98 || (e.rootBounds && e.intersectionRect.height >= e.rootBounds.height * 0.9);
         if (onView && full) playOnce();
-      }, { threshold: [0, 0.5, 0.9, 0.98, 1] }).observe(video);
+      }, { threshold: Array.from({ length: 51 }, function (_, i) { return i / 50; }) }).observe(video);  // fine steps, so a video taller than the screen is seen once it fills it
     } else if (onView) { playOnce(); }
   });
 
