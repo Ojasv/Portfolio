@@ -4,8 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Signage Display Management System · Ojasv Apurv</title>
-  <meta name="description" content="Signage Display Management System: case study by Ojasv Apurv, coming soon.">
-  <meta name="robots" content="noindex"><!-- remove once the case study is written -->
+  <meta name="description" content="Philips Wave: redesigning TP Vision's cloud portal for claiming, scheduling and monitoring Philips signage displays into one cohesive experience. Case study by Ojasv Apurv.">
   <link rel="canonical" href="https://ojasvapurv.com/projects/tp-vision-signage-display-management/">
   <meta name="theme-color" content="#161826">
   <link rel="icon" href="../../assets/img/favicon-32.png" type="image/png" sizes="32x32">
@@ -14,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../assets/css/site.css?v=f70be206">
+  <link rel="stylesheet" href="../../assets/css/site.css?v=17c4d045">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -62,16 +61,174 @@
     </nav>
   </div>
   <!-- /crumbs -->
-  <!-- PAGE CONTENT START: Signage Display Management System. Placeholder: the case study goes here (see projects/case-study-template/ for the sections). -->
+  <!-- PAGE CONTENT START: Signage Display Management System -->
   <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
     <p class="eyebrow col-span-12 mb-8 self-start border-t border-current pt-4 lg:col-span-4 lg:mb-0">TP Vision</p>
     <div class="col-span-12 lg:col-span-8">
       <h1 class="font-serif text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] tracking-tight">Signage Display Management <span class="italic font-light">System</span></h1>
-      <p class="mt-8 max-w-3xl font-serif text-xl leading-snug text-mist-400 sm:text-2xl lg:text-3xl">Case study coming soon.</p>
+      <p class="mt-8 max-w-3xl font-serif text-xl leading-snug text-mist-400 sm:text-2xl lg:text-3xl">One cloud portal to claim, schedule and look after every Philips signage display.</p>
     </div>
   </section>
+  <dl class="mt-16 grid gap-x-6 gap-y-8 border-t border-paper/10 pt-8 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-x-10"><div><dt class="eyebrow text-mist-500">Client</dt><dd class="mt-2 leading-relaxed text-paper/90">TP Vision, for Philips Wave</dd></div><div><dt class="eyebrow text-mist-500">Studio</dt><dd class="mt-2 leading-relaxed text-paper/90">PeepalDesign</dd></div><div><dt class="eyebrow text-mist-500">Platform</dt><dd class="mt-2 leading-relaxed text-paper/90">Web portal and the on-display Wave app</dd></div><div><dt class="eyebrow text-mist-500">Scope</dt><dd class="mt-2 leading-relaxed text-paper/90">Research, information architecture, visual design and design system</dd></div></dl>
 
-  <div class="rule mt-24 lg:mt-36"></div>
+    <figure class="mt-16 lg:mt-24">
+        <a href="../../assets/img/projects/tp-vision-signage-display-management/cover-full.webp" class="block overflow-hidden rounded-lg bg-surface" aria-label="Open full size: The Wave web portal login on a laptop, beside a Philips signage display showing the Welcome to Wave screen">
+          <img src="../../assets/img/projects/tp-vision-signage-display-management/cover-1440.webp" srcset="../../assets/img/projects/tp-vision-signage-display-management/cover-1440.webp 1440w, ../../assets/img/projects/tp-vision-signage-display-management/cover-full.webp 2822w" sizes="(min-width: 1440px) 1440px, 100vw" width="2822" height="977" alt="The Wave web portal login on a laptop, beside a Philips signage display showing the Welcome to Wave screen" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">Philips Wave: the web portal, and the app on the display itself.</figcaption>
+      </figure>
+
+  <!-- Impact card -->
+  <section aria-labelledby="impact" class="mt-16 rounded-lg bg-surface/60 p-6 ring-1 ring-accent-700 sm:p-10 lg:mt-24 lg:p-14">
+    <h2 id="impact" class="eyebrow text-accent-300">What changed</h2>
+    <dl class="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-3 lg:gap-x-12">
+      <div><dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">Zero touch</dt><dd class="mt-4 leading-relaxed text-mist-300">From factory to customer: a display shows a code when switched on, and is claimed from the portal in one step.</dd></div>
+      <div><dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">4 sections</dt><dd class="mt-4 leading-relaxed text-mist-300">Displays, Sites, Schedules and Playlists, the same for every customer, in place of a navigation that had grown piece by piece.</dd></div>
+      <div><dt class="font-serif text-5xl leading-none text-paper lg:text-6xl">1 system</dt><dd class="mt-4 leading-relaxed text-mist-300">A component library that keeps the portal and the display screens consistent as Wave grows.</dd></div>
+    </dl>
+  </section>
+
+  <div class="space-y-24 py-24 lg:space-y-36 lg:py-36">
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">01 · The brief</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <p class="font-serif text-2xl leading-snug text-paper sm:text-3xl">Wave had grown request by request, and it showed.</p><div class="prose-site mt-6"><p>Wave is TP Vision&#39;s cloud platform for managing Philips signage displays: claiming them, grouping them into sites, scheduling what they play and keeping an eye on their health. Its workflows had grown organically, one customer or admin request at a time, so moving between tasks felt disjointed.</p><p>Our job was to redesign those workflows into one cohesive experience that matched the brand, with features that are easy to understand.</p></div>
+      </div>
+    </section>
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">02 · The approach</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <p class="prose-site">Six phases took the project from definition to delivery, each one widening the problem and then narrowing it down.</p>
+      </div>
+    </section>
+    <figure class="">
+        <a href="../../assets/img/projects/tp-vision-signage-display-management/phases-full.webp" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Diagram of six project phases, Align, Learn, Ideate, Plan, Execute and Optimize, with the activities, deliverables and owners of each">
+          <img src="../../assets/img/projects/tp-vision-signage-display-management/phases-1440.webp" srcset="../../assets/img/projects/tp-vision-signage-display-management/phases-1440.webp 1440w, ../../assets/img/projects/tp-vision-signage-display-management/phases-full.webp 2880w" sizes="(min-width: 1440px) 1440px, 100vw" width="2880" height="1440" alt="Diagram of six project phases, Align, Learn, Ideate, Plan, Execute and Optimize, with the activities, deliverables and owners of each" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">From definition to delivery: activities, deliverables and owners for each phase.</figcaption>
+      </figure>
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">03 · How we got there</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <ol class="mt-12"><li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">1</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Align: agreeing on the problem</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We started by pulling together everything TP Vision already knew about Wave.</p>
+              <div class="mt-3 leading-relaxed text-mist-300"><p>An alignment workshop, the target users, a UX audit of the live portal and a study of competing products all pointed at the same three problems:</p><ul class="mt-4 list-disc space-y-2 pl-5 marker:text-accent-500"><li>Workflows that broke apart between tasks</li><li>Too many features to make sense of</li><li>No clear information hierarchy</li></ul><p class="mt-4">We turned these into north stars for every design decision that followed: a <strong class="font-medium text-paper">cohesive experience</strong>, <strong class="font-medium text-paper">feature prioritisation</strong> and a <strong class="font-medium text-paper">well-defined information hierarchy</strong>.</p></div>
+            </div>
+          </li><li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">2</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Learn: the competitor ecosystem</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We studied how other signage platforms handle the same jobs, across four lenses.</p>
+              <div class="mt-3 leading-relaxed text-mist-300"><p>Samsung MagicInfo, LG webOS, signageOS and Fugo, compared on visual structure, navigation, visual design and UX writing. What we took away:</p><ul class="mt-4 list-disc space-y-2 pl-5 marker:text-accent-500"><li>Left-aligned layouts and left-hand menus are what people in this space expect</li><li>Modals work well as the end point of a navigation path</li><li>The primary action has to be obvious, and has to stay in view</li><li>Scalable navigation is rare: most competitors struggle once the menu grows</li><li>Minimal colour, with two or three strong accents, and text over icons for anything important</li></ul></div>
+            </div>
+          </li><li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">3</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Learn: a design philosophy</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">The study became five rules the team could hold every screen against.</p>
+              <div class="mt-3 leading-relaxed text-mist-300"><ul class="mt-4 list-disc space-y-2 pl-5 marker:text-accent-500"><li>Use colour sparingly, to keep the cognitive load low</li><li>Give every task a linear path, so it is quick to learn</li><li>Make it clear when an action can apply to many items at once</li><li>Show system status at all times, for the navigation and for every display</li><li>Plan for scale: more displays, more menu items and more actions</li></ul></div>
+            </div>
+          </li><li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">4</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Ideate: proto-personas</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">Workshop notes were sorted into proto-personas for the two people who live in Wave.</p>
+              <div class="mt-3 leading-relaxed text-mist-300"><div class="mt-6 grid gap-4 md:grid-cols-2"><div class="rounded-lg border border-paper/10 bg-surface/40 p-6">
+            <p class="eyebrow text-accent-300">System integrator</p>
+            <h4 class="mt-2 font-serif text-2xl text-paper">Mark Rake</h4>
+            <p class="mt-2 text-sm text-mist-400">40+, US. An electrical engineer with 15 years in system integration, display administration and installation.</p>
+            <p class="mt-4 font-serif italic leading-snug text-paper/80">“I thrive on turning technological complexities into streamlined, integrated solutions.”</p>
+            <p class="mt-5 text-xs uppercase tracking-[0.2em] text-mist-500">Day to day</p><ul class="mt-4 list-disc space-y-2 pl-5 marker:text-accent-500"><li>Designs and installs integrated display systems</li><li>Administers displays across the wider architecture</li><li>Asks operators for reports on scheduled promos and campaigns</li></ul>
+            <p class="mt-5 text-xs uppercase tracking-[0.2em] text-mist-500">Pain points</p><ul class="mt-4 list-disc space-y-2 pl-5 marker:text-accent-500"><li>Seeing a large fleet and finding one device in it</li><li>Platform instability as new display types are added</li><li>Switching between different customers' views</li></ul>
+          </div><div class="rounded-lg border border-paper/10 bg-surface/40 p-6">
+            <p class="eyebrow text-accent-300">Day-to-day operator</p>
+            <h4 class="mt-2 font-serif text-2xl text-paper">Robin Grey</h4>
+            <p class="mt-2 text-sm text-mist-400">18 to 28, US. Five years in IT, from technical support to running displays every day.</p>
+            <p class="mt-4 font-serif italic leading-snug text-paper/80">“Success in IT operations is about ensuring problems don't arise in the first place.”</p>
+            <p class="mt-5 text-xs uppercase tracking-[0.2em] text-mist-500">Day to day</p><ul class="mt-4 list-disc space-y-2 pl-5 marker:text-accent-500"><li>Checks the health of the display fleet and reports issues</li><li>Troubleshoots, and escalates what he can't fix</li><li>Uploads and schedules customer promos and playlists</li></ul>
+            <p class="mt-5 text-xs uppercase tracking-[0.2em] text-mist-500">Pain points</p><ul class="mt-4 list-disc space-y-2 pl-5 marker:text-accent-500"><li>Slow, outdated tools in daily operations</li><li>Unclear procedures, and no clear path to escalate</li><li>User management sits outside his access</li></ul>
+          </div></div></div>
+            </div>
+          </li><li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">5</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Plan: information architecture</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">We mapped the whole portal to see how people move through it, and fixed the navigation at the level of the application.</p>
+              <div class="mt-3 leading-relaxed text-mist-300"><p>Everything a customer owns now sits under one customer, with the same four sections in the main navigation:</p><ul class="mt-4 flex flex-wrap gap-2 text-xs"><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Displays</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Sites</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Schedules</li><li class="rounded bg-mist-900 px-2 py-1 text-mist-300">Playlists</li></ul><p class="mt-4">Each display opens to a Summary (what is playing, status, power schedule, content) and its Settings, with the irreversible actions kept apart in a Danger zone. Organisation settings (users, customers, subscription, apps), alerts and a customer overview sit above, at the top level.</p></div>
+            </div>
+          </li><li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">6</span><span aria-hidden="true" class="w-px flex-1 bg-accent-700"></span>
+            </div>
+            <div class="max-w-[42rem] pb-12 lg:pb-16">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Execute: hi-fi screens</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">High-fidelity screens brought the structure and the philosophy together, for the web portal and for the display itself.</p>
+              <div class="mt-3 leading-relaxed text-mist-300"><p>They cover the whole life of a display, from the moment it is switched on in a customer's building to the day it is unclaimed.</p></div>
+            </div>
+          </li><li class="flex gap-5 lg:gap-8">
+            <div class="flex flex-col items-center">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent-500 font-serif text-lg text-accent-300">7</span>
+            </div>
+            <div class="max-w-[42rem] pb-0">
+              <h3 class="pt-1.5 font-serif text-2xl leading-snug text-paper">Optimize: a design system</h3>
+              <p class="mt-3 text-lg leading-relaxed text-paper/90">A component library of interaction patterns keeps the product consistent, and easy to improve and maintain.</p>
+              <div class="mt-3 leading-relaxed text-mist-300"><p>Gilroy for type, a restrained navy-and-white base, and one blue for the primary action, with three status colours that do the talking.</p><div class="mt-6 grid grid-cols-3 gap-4 sm:grid-cols-6"><div><div class="aspect-square rounded-full ring-1 ring-paper/10" style="background:#1D85E8"></div><p class="mt-2 text-xs text-mist-300">Primary</p><p class="text-xs text-mist-500">#1D85E8</p></div><div><div class="aspect-square rounded-full ring-1 ring-paper/10" style="background:#0A3761"></div><p class="mt-2 text-xs text-mist-300">Labels</p><p class="text-xs text-mist-500">#0A3761</p></div><div><div class="aspect-square rounded-full ring-1 ring-paper/10" style="background:#102A43"></div><p class="mt-2 text-xs text-mist-300">Text</p><p class="text-xs text-mist-500">#102A43</p></div><div><div class="aspect-square rounded-full ring-1 ring-paper/10" style="background:#65D6AD"></div><p class="mt-2 text-xs text-mist-300">Success</p><p class="text-xs text-mist-500">#65D6AD</p></div><div><div class="aspect-square rounded-full ring-1 ring-paper/10" style="background:#ED8936"></div><p class="mt-2 text-xs text-mist-300">Warning</p><p class="text-xs text-mist-500">#ED8936</p></div><div><div class="aspect-square rounded-full ring-1 ring-paper/10" style="background:#E12D39"></div><p class="mt-2 text-xs text-mist-300">Danger</p><p class="text-xs text-mist-500">#E12D39</p></div></div></div>
+            </div>
+          </li></ol>
+      </div>
+    </section>
+    <figure class="mx-auto max-w-5xl">
+        <a href="../../assets/img/projects/tp-vision-signage-display-management/competitors-full.webp" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Comparison chart of Samsung MagicInfo, LG webOS, signageOS and Fugo across visual structure, navigation, visual design and UX writing, with an insights column">
+          <img src="../../assets/img/projects/tp-vision-signage-display-management/competitors-1440.webp" srcset="../../assets/img/projects/tp-vision-signage-display-management/competitors-1440.webp 1440w, ../../assets/img/projects/tp-vision-signage-display-management/competitors-full.webp 2880w" sizes="(min-width: 1440px) 1440px, 100vw" width="2880" height="3150" alt="Comparison chart of Samsung MagicInfo, LG webOS, signageOS and Fugo across visual structure, navigation, visual design and UX writing, with an insights column" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">The competitor study, and what we took from it.</figcaption>
+      </figure>
+    <figure class="">
+        <a href="../../assets/img/projects/tp-vision-signage-display-management/ia-full.webp" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Information architecture of Wave: home, alerts, profile and settings, customer overview, and each customer&#39;s displays, sites, schedules, playlists and display detail">
+          <img src="../../assets/img/projects/tp-vision-signage-display-management/ia-1440.webp" srcset="../../assets/img/projects/tp-vision-signage-display-management/ia-1440.webp 1440w, ../../assets/img/projects/tp-vision-signage-display-management/ia-full.webp 4342w" sizes="(min-width: 1440px) 1440px, 100vw" width="4342" height="2379" alt="Information architecture of Wave: home, alerts, profile and settings, customer overview, and each customer&#39;s displays, sites, schedules, playlists and display detail" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">The information architecture.</figcaption>
+      </figure>
+    <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
+      <h2 class="eyebrow col-span-12 mb-6 self-start border-t border-current pt-4 font-normal lg:col-span-4 lg:mb-0">04 · What people see</h2>
+      <div class="col-span-12 lg:col-span-8">
+        <p class="prose-site">The screens follow a display through its whole life in Wave.</p><div class="mt-6 grid gap-4 sm:grid-cols-2"><div class="rounded-lg border border-paper/10 p-5"><h3 class="font-serif text-xl text-paper">Claiming a display</h3><p class="mt-2 text-sm leading-relaxed text-mist-300">Switched on for the first time, a display shows a six-digit code. Type it into the portal, or claim many displays at once with a bulk claim code.</p></div><div class="rounded-lg border border-paper/10 p-5"><h3 class="font-serif text-xl text-paper">Seeing the fleet</h3><p class="mt-2 text-sm leading-relaxed text-mist-300">Display and sensor overview: connectivity, sensor state and type at a glance, warnings like &quot;Playlist out of sync&quot; in the list, and a 3D view of where each display sits on a site.</p></div><div class="rounded-lg border border-paper/10 p-5"><h3 class="font-serif text-xl text-paper">One display</h3><p class="mt-2 text-sm leading-relaxed text-mist-300">What is playing now, whether it is connected and on, its power schedule and its content, with settings one tab away.</p></div><div class="rounded-lg border border-paper/10 p-5"><h3 class="font-serif text-xl text-paper">Scheduling</h3><p class="mt-2 text-sm leading-relaxed text-mist-300">A weekly timeline of power, apps, bookmarks, sources and playlists, colour-coded so clashes are easy to spot.</p></div><div class="rounded-lg border border-paper/10 p-5"><h3 class="font-serif text-xl text-paper">Many customers</h3><p class="mt-2 text-sm leading-relaxed text-mist-300">For integrators, a customer overview with each customer&#39;s displays, warnings and plan, one click from their portal.</p></div><div class="rounded-lg border border-paper/10 p-5"><h3 class="font-serif text-xl text-paper">Zero touch enrolment</h3><p class="mt-2 text-sm leading-relaxed text-mist-300">Organisation settings for users, customers, apps and the devices enrolled straight from the factory.</p></div></div>
+      </div>
+    </section>
+    <figure class="">
+        <a href="../../assets/img/projects/tp-vision-signage-display-management/screens-1-full.webp" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Hi-fi screens: a 3D site visualization with display status pins, the Welcome to Wave screen, and the on-display claim code">
+          <img src="../../assets/img/projects/tp-vision-signage-display-management/screens-1-1440.webp" srcset="../../assets/img/projects/tp-vision-signage-display-management/screens-1-1440.webp 1440w, ../../assets/img/projects/tp-vision-signage-display-management/screens-1-full.webp 2880w" sizes="(min-width: 1440px) 1440px, 100vw" width="2880" height="2080" alt="Hi-fi screens: a 3D site visualization with display status pins, the Welcome to Wave screen, and the on-display claim code" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">Visualizing a site, and claiming a display from the screen itself.</figcaption>
+      </figure>
+    <figure class="">
+        <a href="../../assets/img/projects/tp-vision-signage-display-management/screens-2-full.webp" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Hi-fi screens: playlists, the display and sensor overview, a single display summary, a weekly schedule and configurations">
+          <img src="../../assets/img/projects/tp-vision-signage-display-management/screens-2-1440.webp" srcset="../../assets/img/projects/tp-vision-signage-display-management/screens-2-1440.webp 1440w, ../../assets/img/projects/tp-vision-signage-display-management/screens-2-full.webp 2880w" sizes="(min-width: 1440px) 1440px, 100vw" width="2880" height="2170" alt="Hi-fi screens: playlists, the display and sensor overview, a single display summary, a weekly schedule and configurations" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">Playlists, the fleet overview, one display, and a week of schedules.</figcaption>
+      </figure>
+    <figure class="">
+        <a href="../../assets/img/projects/tp-vision-signage-display-management/screens-3-full.webp" class="block overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800" aria-label="Open full size: Hi-fi screens: playlist content rules, the customer overview with customer cards, and zero touch enrolment settings">
+          <img src="../../assets/img/projects/tp-vision-signage-display-management/screens-3-1440.webp" srcset="../../assets/img/projects/tp-vision-signage-display-management/screens-3-1440.webp 1440w, ../../assets/img/projects/tp-vision-signage-display-management/screens-3-full.webp 2880w" sizes="(min-width: 1440px) 1440px, 100vw" width="2880" height="1193" alt="Hi-fi screens: playlist content rules, the customer overview with customer cards, and zero touch enrolment settings" loading="lazy" class="h-auto w-full">
+        </a>
+        <figcaption class="mt-3 text-xs text-mist-500">Content rules, the customer overview and zero touch enrolment.</figcaption>
+      </figure>
+  </div>
+
+  <div class="rule"></div>
   <a href="../../projects/" class="group flex items-end justify-between gap-6 pt-16 lg:pt-24">
     <span>
       <span class="eyebrow block text-mist-500">More work</span>
