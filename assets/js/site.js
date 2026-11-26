@@ -66,6 +66,8 @@
   //                          hover, so there it plays once the whole thumbnail is in view.
   //   data-play-once="view"  plays once the whole video is in view (or it fills the screen, if taller than it).
   //   data-play-once="loop"  same trigger as "view", but loops for as long as it stays in view (short clips).
+  //   data-play-once="hover-loop"  starts like a card thumbnail (hover, or full view on touch), then loops until it
+  //                          leaves the view.
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('video[data-play-once]').forEach(function (video) {
     if (reduce) return;
@@ -82,7 +84,7 @@
       played = false;
     };
     var mode = video.dataset.playOnce;
-    if (mode === 'loop') video.loop = true;
+    if (mode === 'loop' || mode === 'hover-loop') video.loop = true;
     var onView = mode === 'view' || mode === 'loop' || matchMedia('(hover: none)').matches;
     if (mode !== 'view' && mode !== 'loop') {
       var card = video.closest('.group') || video;
