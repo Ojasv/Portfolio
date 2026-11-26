@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="../../../assets/css/site.css?v=17c4d045">
+  <link rel="stylesheet" href="../../../assets/css/site.css?v=b2f2e4d2">
 </head>
 <body>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2">Skip to content</a>
@@ -63,20 +63,39 @@
     </nav>
   </div>
   <!-- /crumbs -->
-  <!-- PAGE CONTENT START: Charcoal Desk Workflow Design. Placeholder: the case study goes here (see projects/case-study-template/ for the sections). -->
+  <!-- PAGE CONTENT START: Charcoal Desk Workflow Design (project 2 of 3). Cover + tagline only for now; Ojasv will send the case study. -->
   <section class="grid grid-cols-12 gap-x-6 lg:gap-x-12">
     <p class="eyebrow col-span-12 mb-8 self-start border-t border-current pt-4 lg:col-span-4 lg:mb-0">Charcoal Desk · Project 2 of 3</p>
     <div class="col-span-12 lg:col-span-8">
       <h1 class="font-serif text-[clamp(2.75rem,6vw,5.5rem)] leading-[0.95] tracking-tight">Charcoal Desk Workflow <span class="italic font-light">Design</span></h1>
-      <p class="mt-8 max-w-3xl font-serif text-xl leading-snug text-mist-400 sm:text-2xl lg:text-3xl">Case study coming soon.</p>
+      <p class="mt-8 max-w-3xl font-serif text-xl leading-snug text-mist-300 sm:text-2xl lg:text-3xl">How you work defines how you feel, how much you accomplish and how you feel about it. We built a desk around your work, so your work is at its best when you are at it.</p>
     </div>
   </section>
 
+  <!-- Cover: Task, Volant and n-Space side by side (stacked on phones), their activity lamps glowing in sync.
+       One composed video per layout, so the three lamps can never drift apart. Plays once when the whole cover is in
+       view, rewinds when it leaves (site.js, data-play-once="view"). Built from the charcoal.design site's videos. -->
+  <figure class="mt-16 lg:mt-24">
+    <div class="hidden aspect-[16/9] w-full overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800 md:block">
+      <video data-play-once="view" muted playsinline preload="auto" poster="../../../assets/img/projects/charcoal-desk/workflow-design/cover-poster.webp" width="1920" height="1080" aria-label="Three Charcoal desk tops, white, grey and oak, each with a row of five activity lamps glowing in sync" class="h-full w-full object-cover">
+        <source src="../../../assets/img/projects/charcoal-desk/workflow-design/cover.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="aspect-[1080/1824] w-full overflow-hidden rounded-lg bg-surface ring-1 ring-mist-800 md:hidden">
+      <video data-play-once="view" muted playsinline preload="auto" poster="../../../assets/img/projects/charcoal-desk/workflow-design/cover-mobile-poster.webp" width="1080" height="1824" aria-label="Three Charcoal desk tops, white, grey and oak, each with a row of five activity lamps glowing in sync" class="h-full w-full object-cover">
+        <source src="../../../assets/img/projects/charcoal-desk/workflow-design/cover-mobile.mp4" type="video/mp4">
+      </video>
+    </div>
+    <figcaption class="mt-3 text-xs text-mist-500">Task, Volant and n-Space. Five activity lamps on each desk, one goal for every slump you break.</figcaption>
+  </figure>
+
+  <p class="mt-16 font-serif text-xl text-mist-400 lg:mt-24">Case study coming soon.</p>
+
   <div class="rule mt-24 lg:mt-36"></div>
-  <a href="../../../projects/charcoal-desk/" class="group flex items-end justify-between gap-6 pt-16 lg:pt-24">
+  <a href="../../../projects/charcoal-desk/control-ux/" class="group flex items-end justify-between gap-6 pt-16 lg:pt-24">
     <span>
-      <span class="eyebrow block text-mist-500">Back to</span>
-      <span class="slant mt-3 block font-serif text-4xl tracking-tight group-hover:text-accent-300 sm:text-5xl lg:text-7xl">Charcoal Desk</span>
+      <span class="eyebrow block text-mist-500">Next at Charcoal</span>
+      <span class="slant mt-3 block font-serif text-4xl tracking-tight group-hover:text-accent-300 sm:text-5xl lg:text-7xl">Charcoal Desk Control UX (Hardware)</span>
     </span>
     <span aria-hidden="true" class="font-serif text-4xl transition group-hover:translate-x-2 lg:text-6xl">→</span>
   </a>
