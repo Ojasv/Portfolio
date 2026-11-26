@@ -65,6 +65,7 @@
   //   data-play-once         (card thumbnails) plays on hover or keyboard focus of its card. Touch screens cannot
   //                          hover, so there it plays once the whole thumbnail is in view.
   //   data-play-once="view"  plays once the whole video is in view (or it fills the screen, if taller than it).
+  //   data-play-once="loop"  same trigger as "view", but loops for as long as it stays in view (short clips).
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('video[data-play-once]').forEach(function (video) {
     if (reduce) return;
@@ -80,8 +81,10 @@
       video.currentTime = 0;
       played = false;
     };
-    var onView = video.dataset.playOnce === 'view' || matchMedia('(hover: none)').matches;
-    if (video.dataset.playOnce !== 'view') {
+    var mode = video.dataset.playOnce;
+    if (mode === 'loop') video.loop = true;
+    var onView = mode === 'view' || mode === 'loop' || matchMedia('(hover: none)').matches;
+    if (mode !== 'view' && mode !== 'loop') {
       var card = video.closest('.group') || video;
       card.addEventListener('mouseenter', playOnce);
       card.addEventListener('focusin', playOnce);
